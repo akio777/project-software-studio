@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LabReservation.Models
 {
-    public class User
+    public class Userinfo
     {
         public int id { get; set; }
         public string user { get; set; }

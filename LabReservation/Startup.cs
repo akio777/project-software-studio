@@ -9,6 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using LabReservation.Data;
+using Microsoft.EntityFrameworkCore;
+
+using System.Web.Mvc;
+
 namespace LabReservation
 {
     public class Startup
@@ -24,6 +29,17 @@ namespace LabReservation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<LabReservationContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("LabReservationContext")));
+
+            // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            // .AddCookie(options =>
+            // {
+            //     options.Cookie.HttpOnly = true;
+            //     options.Cookie.SecurePolicy = _environment.IsDevelopment()
+            //     ? CookieSecurePolicy.None : CookieSecurePolicy.Always;
+            //     options.Cookie.SameSite = SameSiteMode.Lax;
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
