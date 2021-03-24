@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using Controller = Microsoft.AspNetCore.Mvc.Controller;
 
 namespace LabReservation.Controllers
 {
@@ -22,7 +21,13 @@ namespace LabReservation.Controllers
         // GET: Userinfo
         public async Task<IActionResult> Index()
         {
-            Console.WriteLine(_context);
+            var token = Request.Headers["Authorization"];
+            // var token = Request.Cookies;
+            if (token.Count < 1)
+            {
+                return View("~/Views/NoPermission.cshtml");
+            }
+            
             return View(await _context.Userinfo.ToListAsync());
         }
 
@@ -53,9 +58,9 @@ namespace LabReservation.Controllers
         // POST: Userinfo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,user,password,role,update_by,created_by,created_date,update_date")] Userinfo userinfo)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Microsoft.AspNetCore.Mvc.Bind("id,user,password,role,update_by,created_by,created_date,update_date")] Userinfo userinfo)
         {
             Console.WriteLine(userinfo.id);
             Console.WriteLine(userinfo.password);
@@ -87,9 +92,9 @@ namespace LabReservation.Controllers
         // POST: Userinfo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,user,password,role,update_by,created_by,created_date,update_date")] Userinfo userinfo)
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Microsoft.AspNetCore.Mvc.Bind("id,user,password,role,update_by,created_by,created_date,update_date")] Userinfo userinfo)
         {
             if (id != userinfo.id)
             {
@@ -138,8 +143,8 @@ namespace LabReservation.Controllers
         }
 
         // POST: Userinfo/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [Microsoft.AspNetCore.Mvc.HttpPost, Microsoft.AspNetCore.Mvc.ActionName("Delete")]
+        [Microsoft.AspNetCore.Mvc.ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var userinfo = await _context.Userinfo.FindAsync(id);

@@ -20,6 +20,9 @@ namespace LabReservation.Controllers
 
         public IActionResult Index()
         {
+            var token = Request.Headers["Cookie"];
+            
+            // Console.WriteLine("LOG : "+User.Identity.Name);
             return View();
         }
 
