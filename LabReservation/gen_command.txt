@@ -1,0 +1,8 @@
+dotnet aspnet-codegenerator controller -name UserinfoController -m Userinfo -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator controller -name LabinfoController -m Labinfo -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator controller -name LabstoreController -m Labstore -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator controller -name ToolinfoController -m Toolinfo -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator controller -name ReserveController -m Reserve -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+
+
+
