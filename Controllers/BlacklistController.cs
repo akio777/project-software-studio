@@ -10,22 +10,22 @@ using LabReservation.Models;
 
 namespace LabReservation.Controllers
 {
-    public class LabstoreController : Controller
+    public class BlacklistController : Controller
     {
         private readonly LabReservationContext _context;
 
-        public LabstoreController(LabReservationContext context)
+        public BlacklistController(LabReservationContext context)
         {
             _context = context;
         }
 
-        // GET: Labstore
+        // GET: Blacklist
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Labstore.ToListAsync());
+            return View(await _context.Blacklist.ToListAsync());
         }
 
-        // GET: Labstore/Details/5
+        // GET: Blacklist/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var labstore = await _context.Labstore
+            var blacklist = await _context.Blacklist
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (labstore == null)
+            if (blacklist == null)
             {
                 return NotFound();
             }
 
-            return View(labstore);
+            return View(blacklist);
         }
 
-        // GET: Labstore/Create
+        // GET: Blacklist/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Labstore/Create
+        // POST: Blacklist/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,lad_id,tool_id,update_by,created_by,created_date,update_date")] Labstore labstore)
+        public async Task<IActionResult> Create([Bind("id,user_id")] Blacklist blacklist)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(labstore);
+                _context.Add(blacklist);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(labstore);
+            return View(blacklist);
         }
 
-        // GET: Labstore/Edit/5
+        // GET: Blacklist/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var labstore = await _context.Labstore.FindAsync(id);
-            if (labstore == null)
+            var blacklist = await _context.Blacklist.FindAsync(id);
+            if (blacklist == null)
             {
                 return NotFound();
             }
-            return View(labstore);
+            return View(blacklist);
         }
 
-        // POST: Labstore/Edit/5
+        // POST: Blacklist/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,lad_id,tool_id,update_by,created_by,created_date,update_date")] Labstore labstore)
+        public async Task<IActionResult> Edit(int id, [Bind("id,user_id")] Blacklist blacklist)
         {
-            if (id != labstore.id)
+            if (id != blacklist.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace LabReservation.Controllers
             {
                 try
                 {
-                    _context.Update(labstore);
+                    _context.Update(blacklist);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LabstoreExists(labstore.id))
+                    if (!BlacklistExists(blacklist.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace LabReservation.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(labstore);
+            return View(blacklist);
         }
 
-        // GET: Labstore/Delete/5
+        // GET: Blacklist/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var labstore = await _context.Labstore
+            var blacklist = await _context.Blacklist
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (labstore == null)
+            if (blacklist == null)
             {
                 return NotFound();
             }
 
-            return View(labstore);
+            return View(blacklist);
         }
 
-        // POST: Labstore/Delete/5
+        // POST: Blacklist/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var labstore = await _context.Labstore.FindAsync(id);
-            _context.Labstore.Remove(labstore);
+            var blacklist = await _context.Blacklist.FindAsync(id);
+            _context.Blacklist.Remove(blacklist);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LabstoreExists(int id)
+        private bool BlacklistExists(int id)
         {
-            return _context.Labstore.Any(e => e.id == id);
+            return _context.Blacklist.Any(e => e.id == id);
         }
     }
 }

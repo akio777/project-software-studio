@@ -1,4 +1,4 @@
-@model LabReservation.Models.Labinfo
+@model LabReservation.Models.Equipment
 
 @{
     ViewData["Title"] = "Create";
@@ -6,21 +6,21 @@
 
 <h1>Create</h1>
 
-<h4>Labinfo</h4>
+<h4>Equipment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="name" class="control-label"></label>
-                <input asp-for="name" class="form-control" />
-                <span asp-validation-for="name" class="text-danger"></span>
+                <label asp-for="lab_id" class="control-label"></label>
+                <input asp-for="lab_id" class="form-control" />
+                <span asp-validation-for="lab_id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="equip" class="control-label"></label>
-                <input asp-for="equip" class="form-control" />
-                <span asp-validation-for="equip" class="text-danger"></span>
+                <label asp-for="maximum" class="control-label"></label>
+                <input asp-for="maximum" class="form-control" />
+                <span asp-validation-for="maximum" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -1,4 +1,4 @@
-@model LabReservation.Models.Labinfo
+@model LabReservation.Models.Equipment
 
 @{
     ViewData["Title"] = "Details";
@@ -7,20 +7,20 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Labinfo</h4>
+    <h4>Equipment</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.lab_id)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.lab_id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.equip)
+            @Html.DisplayNameFor(model => model.maximum)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.equip)
+            @Html.DisplayFor(model => model.maximum)
         </dd>
     </dl>
 </div>

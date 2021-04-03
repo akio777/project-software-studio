@@ -11,9 +11,9 @@ namespace LabReservation.Data
         }
 
         public DbSet<Userinfo> Userinfo { get; set; }
-        public DbSet<Toolinfo> Toolinfo { get; set; }
-        public DbSet<Labstore> Labstore { get; set; }
+        public DbSet<Reserveinfo> Reserveinfo { get; set; }
         public DbSet<Labinfo> Labinfo { get; set; }
-        public DbSet<Reserve> Reserve { get; set; }
+        public DbSet<Blacklist> Blacklist { get; set; }
+        public DbSet<Equipment> Equipment { get; set; }
     }
 }

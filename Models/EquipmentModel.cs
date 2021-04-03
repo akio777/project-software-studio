@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LabReservation.Models
 {
-    public class Labinfo
+    public class Equipment
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public string equip { get; set; }
+        public int lab_id { get; set; }
+        public int maximum { get; set; }
 
     }
 }

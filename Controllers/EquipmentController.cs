@@ -10,22 +10,22 @@ using LabReservation.Models;
 
 namespace LabReservation.Controllers
 {
-    public class ReserveController : Controller
+    public class EquipmentController : Controller
     {
         private readonly LabReservationContext _context;
 
-        public ReserveController(LabReservationContext context)
+        public EquipmentController(LabReservationContext context)
         {
             _context = context;
         }
 
-        // GET: Reserve
+        // GET: Equipment
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reserve.ToListAsync());
+            return View(await _context.Equipment.ToListAsync());
         }
 
-        // GET: Reserve/Details/5
+        // GET: Equipment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var reserve = await _context.Reserve
+            var equipment = await _context.Equipment
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (reserve == null)
+            if (equipment == null)
             {
                 return NotFound();
             }
 
-            return View(reserve);
+            return View(equipment);
         }
 
-        // GET: Reserve/Create
+        // GET: Equipment/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Reserve/Create
+        // POST: Equipment/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,store_id,created_by,start_date,end_date")] Reserve reserve)
+        public async Task<IActionResult> Create([Bind("id,lab_id,maximum")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reserve);
+                _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(reserve);
+            return View(equipment);
         }
 
-        // GET: Reserve/Edit/5
+        // GET: Equipment/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var reserve = await _context.Reserve.FindAsync(id);
-            if (reserve == null)
+            var equipment = await _context.Equipment.FindAsync(id);
+            if (equipment == null)
             {
                 return NotFound();
             }
-            return View(reserve);
+            return View(equipment);
         }
 
-        // POST: Reserve/Edit/5
+        // POST: Equipment/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,store_id,created_by,start_date,end_date")] Reserve reserve)
+        public async Task<IActionResult> Edit(int id, [Bind("id,lab_id,maximum")] Equipment equipment)
         {
-            if (id != reserve.id)
+            if (id != equipment.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace LabReservation.Controllers
             {
                 try
                 {
-                    _context.Update(reserve);
+                    _context.Update(equipment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReserveExists(reserve.id))
+                    if (!EquipmentExists(equipment.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace LabReservation.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reserve);
+            return View(equipment);
         }
 
-        // GET: Reserve/Delete/5
+        // GET: Equipment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var reserve = await _context.Reserve
+            var equipment = await _context.Equipment
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (reserve == null)
+            if (equipment == null)
             {
                 return NotFound();
             }
 
-            return View(reserve);
+            return View(equipment);
         }
 
-        // POST: Reserve/Delete/5
+        // POST: Equipment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reserve = await _context.Reserve.FindAsync(id);
-            _context.Reserve.Remove(reserve);
+            var equipment = await _context.Equipment.FindAsync(id);
+            _context.Equipment.Remove(equipment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ReserveExists(int id)
+        private bool EquipmentExists(int id)
         {
-            return _context.Reserve.Any(e => e.id == id);
+            return _context.Equipment.Any(e => e.id == id);
         }
     }
 }

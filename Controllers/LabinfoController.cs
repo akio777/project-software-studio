@@ -54,7 +54,7 @@ namespace LabReservation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,tool_type,update_by,created_by,created_date,update_date")] Labinfo labinfo)
+        public async Task<IActionResult> Create([Bind("id,name,equip")] Labinfo labinfo)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace LabReservation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,tool_type,update_by,created_by,created_date,update_date")] Labinfo labinfo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,equip")] Labinfo labinfo)
         {
             if (id != labinfo.id)
             {

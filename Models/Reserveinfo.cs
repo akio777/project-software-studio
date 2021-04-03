@@ -3,15 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LabReservation.Models
 {
-    public class Reserve
+    public class Reserveinfo
     {
         public int id { get; set; }
-        public int store_id { get; set; }
-        public int created_by { get; set; }
-
+        public int lab_id { get; set; }
+        public int reserve_by { get; set; }
         [DataType(DataType.Date)]
-        public DateTime start_date { get; set; }
+        public DateTime start_time { get; set; }
         [DataType(DataType.Date)]
-        public DateTime end_date { get; set; }
+        public DateTime end_time { get; set; }
     }
 }

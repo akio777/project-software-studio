@@ -10,22 +10,22 @@ using LabReservation.Models;
 
 namespace LabReservation.Controllers
 {
-    public class ToolinfoController : Controller
+    public class ReserveinfoController : Controller
     {
         private readonly LabReservationContext _context;
 
-        public ToolinfoController(LabReservationContext context)
+        public ReserveinfoController(LabReservationContext context)
         {
             _context = context;
         }
 
-        // GET: Toolinfo
+        // GET: Reserveinfo
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Toolinfo.ToListAsync());
+            return View(await _context.Reserveinfo.ToListAsync());
         }
 
-        // GET: Toolinfo/Details/5
+        // GET: Reserveinfo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var toolinfo = await _context.Toolinfo
+            var reserveinfo = await _context.Reserveinfo
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (toolinfo == null)
+            if (reserveinfo == null)
             {
                 return NotFound();
             }
 
-            return View(toolinfo);
+            return View(reserveinfo);
         }
 
-        // GET: Toolinfo/Create
+        // GET: Reserveinfo/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Toolinfo/Create
+        // POST: Reserveinfo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,type,update_by,created_by,created_date,update_date")] Toolinfo toolinfo)
+        public async Task<IActionResult> Create([Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(toolinfo);
+                _context.Add(reserveinfo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(toolinfo);
+            return View(reserveinfo);
         }
 
-        // GET: Toolinfo/Edit/5
+        // GET: Reserveinfo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var toolinfo = await _context.Toolinfo.FindAsync(id);
-            if (toolinfo == null)
+            var reserveinfo = await _context.Reserveinfo.FindAsync(id);
+            if (reserveinfo == null)
             {
                 return NotFound();
             }
-            return View(toolinfo);
+            return View(reserveinfo);
         }
 
-        // POST: Toolinfo/Edit/5
+        // POST: Reserveinfo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,type,update_by,created_by,created_date,update_date")] Toolinfo toolinfo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
         {
-            if (id != toolinfo.id)
+            if (id != reserveinfo.id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace LabReservation.Controllers
             {
                 try
                 {
-                    _context.Update(toolinfo);
+                    _context.Update(reserveinfo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ToolinfoExists(toolinfo.id))
+                    if (!ReserveinfoExists(reserveinfo.id))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace LabReservation.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(toolinfo);
+            return View(reserveinfo);
         }
 
-        // GET: Toolinfo/Delete/5
+        // GET: Reserveinfo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace LabReservation.Controllers
                 return NotFound();
             }
 
-            var toolinfo = await _context.Toolinfo
+            var reserveinfo = await _context.Reserveinfo
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (toolinfo == null)
+            if (reserveinfo == null)
             {
                 return NotFound();
             }
 
-            return View(toolinfo);
+            return View(reserveinfo);
         }
 
-        // POST: Toolinfo/Delete/5
+        // POST: Reserveinfo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var toolinfo = await _context.Toolinfo.FindAsync(id);
-            _context.Toolinfo.Remove(toolinfo);
+            var reserveinfo = await _context.Reserveinfo.FindAsync(id);
+            _context.Reserveinfo.Remove(reserveinfo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ToolinfoExists(int id)
+        private bool ReserveinfoExists(int id)
         {
-            return _context.Toolinfo.Any(e => e.id == id);
+            return _context.Reserveinfo.Any(e => e.id == id);
         }
     }
 }

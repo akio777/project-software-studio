@@ -13,39 +13,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="user" class="control-label"></label>
-                <input asp-for="user" class="form-control"/>
-                <span asp-validation-for="user" class="text-danger"></span>
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="password" class="control-label"></label>
-                <input asp-for="password" class="form-control" type="password"/>
+                <input asp-for="password" class="form-control" />
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="role" class="control-label"></label>
                 <input asp-for="role" class="form-control" />
                 <span asp-validation-for="role" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="update_by" class="control-label"></label>
-                <input asp-for="update_by" class="form-control" />
-                <span asp-validation-for="update_by" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="created_by" class="control-label"></label>
-                <input asp-for="created_by" class="form-control" />
-                <span asp-validation-for="created_by" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="created_date" class="control-label"></label>
-                <input asp-for="created_date" class="form-control" />
-                <span asp-validation-for="created_date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="update_date" class="control-label"></label>
-                <input asp-for="update_date" class="form-control" />
-                <span asp-validation-for="update_date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

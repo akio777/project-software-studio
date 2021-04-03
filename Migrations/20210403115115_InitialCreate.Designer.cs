@@ -3,14 +3,16 @@ using System;
 using LabReservation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LabReservation.Migrations
 {
     [DbContext(typeof(LabReservationContext))]
-    partial class LabReservationContextModelSnapshot : ModelSnapshot
+    [Migration("20210403115115_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

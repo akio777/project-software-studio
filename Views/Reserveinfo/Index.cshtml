@@ -1,4 +1,4 @@
-@model IEnumerable<LabReservation.Models.Userinfo>
+@model IEnumerable<LabReservation.Models.Reserveinfo>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.email)
+                @Html.DisplayNameFor(model => model.lab_id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.password)
+                @Html.DisplayNameFor(model => model.reserve_by)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.role)
+                @Html.DisplayNameFor(model => model.start_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.end_time)
             </th>
             <th></th>
         </tr>
@@ -28,13 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.email)
+                @Html.DisplayFor(modelItem => item.lab_id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.password)
+                @Html.DisplayFor(modelItem => item.reserve_by)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.role)
+                @Html.DisplayFor(modelItem => item.start_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_time)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
