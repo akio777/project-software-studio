@@ -1,0 +1,17 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace LabReservation.Models
+{
+    public class AuthenModel
+    {
+        [RegularExpression("^(.+@.+[.].+|[aA]dmin)$", ErrorMessage = "รูปแบบ email ไม่ถูกต้อง")]
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
+        public string email { get; set; }
+
+        [DataType(DataType.Password)]
+        [StringLength(50, ErrorMessage = "6 ถึง 50 ตัวอักษร", MinimumLength = 6)]
+        [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
+        public string password { get; set; }
+    }
+}

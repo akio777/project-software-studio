@@ -99,8 +99,8 @@ namespace LabReservation.Migrations
                     b.Property<string>("password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("role")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("role")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 

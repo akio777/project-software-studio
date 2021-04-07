@@ -5,4 +5,5 @@ dotnet aspnet-codegenerator controller -name ToolinfoController -m Toolinfo -dc 
 dotnet aspnet-codegenerator controller -name ReserveController -m Reserve -dc LabReservationContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
 
 
-
+dotnet ef migrations add InitialCreate
+dotnet ef database update
