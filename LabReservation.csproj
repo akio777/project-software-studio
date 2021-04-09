@@ -26,4 +26,8 @@
     <_ContentIncludedByDefault Remove="JWTAuthentication\Properties\launchSettings.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Images\login-pic.png" />
+  </ItemGroup>
+
 </Project>

@@ -40,7 +40,7 @@ namespace LabReservation.Controllers
         [HttpPost]  
         public async Task<ActionResult> Login(AuthenModel data)
         {   
-            var temp = user_service.Check(data);
+            var temp = user_service.CheckLogin(data);
             if (temp.Error)
             {
                 ModelState.AddModelError(String.Empty, temp.Data);
@@ -61,11 +61,55 @@ namespace LabReservation.Controllers
             }
         }
         
+        [AllowAnonymous]
+        [Route("[action]")]
+        [HttpPost]  
+        public ActionResult Register(RegisterModel data)
+        {   
+            // Console.WriteLine(data.Email+", "+ data.Password+", "+ data.ConfirmPassword);
+            var temp = user_service.CheckRegister(data);
+            if (temp.Error)
+            {
+                ModelState.AddModelError(String.Empty, temp.Data);
+                return View(data);
+            }
+            else
+            {
+                return View();
+            }
+            // if (temp.Error)
+            // {
+            //     ModelState.AddModelError(String.Empty, temp.Data);
+            //     return View(data);
+            // }
+            // else
+            // {
+            //     var claims = new List<Claim>
+            //     {
+            //         new Claim("Id", temp.Data.id.ToString()),
+            //         new Claim(ClaimTypes.Role, temp.Data.role.ToString())
+            //     };
+            //     var claimsIdentity = new ClaimsIdentity(
+            //         claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            //     ClaimsPrincipal ReClaims = new ClaimsPrincipal(claimsIdentity);
+            //     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
+            //     return RedirectToAction("Index","Userinfo");   
+            // }
+            
+        }
+        
         [Route("[action]")]
         [HttpGet]  
         public ActionResult Login()  
         {
                 return View();  
+        }
+        
+        [Route("[action]")]
+        [HttpGet]  
+        public ActionResult Register()  
+        {
+            return View();  
         }
         
         [Route("[action]")]

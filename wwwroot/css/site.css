@@ -60,7 +60,8 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  background-color: #F8F9FA;
+  height: 100vh;
 }
 .footer {
   position: absolute;
@@ -75,6 +76,27 @@ body {
   font-size: 10px;
 }
 
-
 /* User CSS */
+.h-screen{
+  height: 100vh;
+}
+
+.w-screen{
+  width: 100%;
+}
+
+
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validation-summary-errors ul {
+  list-style: none;
+  color: #DC3545;
+  font-size: 0.8vw;
+  font-weight: 700;
+}
+
 

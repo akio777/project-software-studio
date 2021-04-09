@@ -13,13 +13,15 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Models;
 using LabReservation.Data;
 using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
+using RegisterModel = LabReservation.Models.RegisterModel;
 
 
 namespace LabReservation.Services
 {
     public interface IUserService
     {
-        Return Check(AuthenModel data);
+        Return CheckLogin(AuthenModel data);
+        Return CheckRegister(RegisterModel data);
     }
     
     public class UserService : IUserService
@@ -30,21 +32,28 @@ namespace LabReservation.Services
             db = context;
         }
 
-        public Return Check(AuthenModel data)
+        public Return CheckLogin(AuthenModel data)
         {
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.email);
             if (c_user != null)
             {
-                Console.WriteLine("FOUND");
+                if (c_user.password.Equals(data.password))
+                {
+                    return new Return
+                    {
+                        Error = false,
+                        Data = c_user
+                    };
+                    
+                }
                 return new Return
                 {
-                    Error = false,
-                    Data = c_user
+                    Error = true,
+                    Data = "รหัสผ่านไม่ถูกต้อง"
                 };
             }
             else
             {
-                Console.WriteLine("NOT FOUND");
                 return new Return
                 {
                     Error = true,
@@ -53,5 +62,24 @@ namespace LabReservation.Services
             }
         }
 
+        public Return CheckRegister(RegisterModel data)
+        {
+            // Console.WriteLine(data);
+            var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.Email);
+            if (c_user != null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "มีผู้ใช้นี้อยู่ในระบบอยู่แล้ว"
+                };
+            }
+            return new Return
+            {
+                Error = false,
+                Data = c_user
+            };
+            
+        }
     }
 }
