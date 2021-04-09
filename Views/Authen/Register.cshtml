@@ -47,13 +47,20 @@
         </div>
         
         <div class="sign-in">
+        
+            <div class="form-group signin-left">
+                <span class="material-icons">arrow_back</span>
+                <a asp-action="Login" class="btn text-white">Sign in</a>
+            </div>
+            
             <h1>Sign Up</h1>
+            
             <form asp-action="Register">
                 <div class="form-group">
                     <input asp-for="Email" class="form-control" placeholder="email"/>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                
+
                 <div class="alternative-form-group">
                     <div class="form-group">
                         <input asp-for="Password" class="form-control" placeholder="password"/>
@@ -64,11 +71,11 @@
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-                
-                
-            <div class="form-group login-left">
-                <input type="submit" value="Register" class="btn login-btn"/>
-            </div>
+
+
+                <div class="form-group login-left">
+                    <input type="submit" value="Register" class="btn login-btn"/>
+                </div>
             </form>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         </div>

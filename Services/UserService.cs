@@ -39,6 +39,7 @@ namespace LabReservation.Services
             {
                 if (c_user.password.Equals(data.password))
                 {
+                    
                     return new Return
                     {
                         Error = false,
@@ -71,14 +72,24 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "มีผู้ใช้นี้อยู่ในระบบอยู่แล้ว"
+                    Data = "ไม่สามารถใช้ email นี้ได้"
                 };
             }
-            return new Return
+            else
             {
-                Error = false,
-                Data = c_user
-            };
+                var new_user = new Userinfo
+                {
+                    email = data.Email, password = data.Password, role = 1
+                };
+                db.Userinfo.Add(new_user);
+                db.SaveChanges();
+                return new Return
+                {
+                    Error = false,
+                    Data = c_user
+                };
+            }
+            
             
         }
     }

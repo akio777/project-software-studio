@@ -75,7 +75,7 @@ namespace LabReservation.Controllers
             }
             else
             {
-                return View();
+                return RedirectToAction("Login","Authen");
             }
             // if (temp.Error)
             // {
