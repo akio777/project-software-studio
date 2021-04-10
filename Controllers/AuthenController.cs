@@ -1,21 +1,16 @@
 ﻿      
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
-using LabReservation.Data;
 using LabReservation.Models;
-using LabReservation.Controllers;
 using LabReservation.Services;
-using System.Security.Claims;
 
 namespace LabReservation.Controllers
 {
@@ -53,11 +48,16 @@ namespace LabReservation.Controllers
                     new Claim("Id", temp.Data.id.ToString()),
                     new Claim(ClaimTypes.Role, temp.Data.role.ToString())
                 };
+                // Console.WriteLine(claims[1].Value);
                 var claimsIdentity = new ClaimsIdentity(
                     claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal ReClaims = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
-                return RedirectToAction("Index","Userinfo");   
+                if (temp.Data.role==0) return RedirectToAction("Index", "Labinfo");
+                else return RedirectToAction("Index", "Labinfo");
+                
+                    
+                
             }
         }
         
@@ -66,7 +66,6 @@ namespace LabReservation.Controllers
         [HttpPost]  
         public ActionResult Register(RegisterModel data)
         {   
-            // Console.WriteLine(data.Email+", "+ data.Password+", "+ data.ConfirmPassword);
             var temp = user_service.CheckRegister(data);
             if (temp.Error)
             {
@@ -77,24 +76,6 @@ namespace LabReservation.Controllers
             {
                 return RedirectToAction("Login","Authen");
             }
-            // if (temp.Error)
-            // {
-            //     ModelState.AddModelError(String.Empty, temp.Data);
-            //     return View(data);
-            // }
-            // else
-            // {
-            //     var claims = new List<Claim>
-            //     {
-            //         new Claim("Id", temp.Data.id.ToString()),
-            //         new Claim(ClaimTypes.Role, temp.Data.role.ToString())
-            //     };
-            //     var claimsIdentity = new ClaimsIdentity(
-            //         claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            //     ClaimsPrincipal ReClaims = new ClaimsPrincipal(claimsIdentity);
-            //     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
-            //     return RedirectToAction("Index","Userinfo");   
-            // }
             
         }
         

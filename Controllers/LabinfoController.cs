@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace LabReservation.Controllers
 {
+    
     public class LabinfoController : Controller
     {
         private readonly LabReservationContext _context;
-
+        
         public LabinfoController(LabReservationContext context)
         {
             _context = context;
         }
-
+        
+        
         // GET: Labinfo
         public async Task<IActionResult> Index()
         {
@@ -26,6 +30,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Labinfo/Details/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +49,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Labinfo/Create
+        [Authorize(Roles = "0")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +58,7 @@ namespace LabReservation.Controllers
         // POST: Labinfo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,name,equip")] Labinfo labinfo)
@@ -66,6 +73,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Labinfo/Edit/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +92,7 @@ namespace LabReservation.Controllers
         // POST: Labinfo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,name,equip")] Labinfo labinfo)
@@ -117,6 +126,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Labinfo/Delete/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +145,7 @@ namespace LabReservation.Controllers
         }
 
         // POST: Labinfo/Delete/5
+        [Authorize(Roles = "0")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -148,6 +159,13 @@ namespace LabReservation.Controllers
         private bool LabinfoExists(int id)
         {
             return _context.Labinfo.Any(e => e.id == id);
+        }
+        
+        [AllowAnonymous]
+        [Route("{*url:regex(^(?!api).*$)}", Order = 999)]
+        public IActionResult CatchAll()
+        {
+            return RedirectToAction("Index", "NoPermission");
         }
     }
 }
