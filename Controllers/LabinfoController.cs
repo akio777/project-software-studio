@@ -155,14 +155,16 @@ namespace LabReservation.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
+        [Authorize(Roles = "0")]
         private bool LabinfoExists(int id)
         {
             return _context.Labinfo.Any(e => e.id == id);
         }
         
+        [Authorize(Roles = "1")]
         [AllowAnonymous]
-        [Route("{*url:regex(^(?!api).*$)}", Order = 999)]
+        [Route("")]
         public IActionResult CatchAll()
         {
             return RedirectToAction("Index", "NoPermission");
