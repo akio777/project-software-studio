@@ -25,4 +25,8 @@
     <_ContentIncludedByDefault Remove="JWTAuthentication\Properties\launchSettings.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations" />
+  </ItemGroup>
+
 </Project>
