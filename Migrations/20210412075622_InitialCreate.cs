@@ -72,7 +72,7 @@ namespace LabReservation.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     email = table.Column<string>(type: "TEXT", nullable: true),
                     password = table.Column<string>(type: "TEXT", nullable: true),
-                    role = table.Column<string>(type: "TEXT", nullable: true)
+                    role = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
