@@ -8,9 +8,9 @@ namespace LabReservation.Models
         public int id { get; set; }
         public int lab_id { get; set; }
         public int reserve_by { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime start_time { get; set; }
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime end_time { get; set; }
     }
 }

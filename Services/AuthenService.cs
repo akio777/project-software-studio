@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-
 using LabReservation.Models;
 using LabReservation.Data;
 
