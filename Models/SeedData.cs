@@ -14,6 +14,8 @@ namespace LabReservation.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<LabReservationContext>>()))
             {
+                Random r = new Random();
+                var dateNow = DateTime.Now;
                 // Look for any movies.
                 if (!context.Labinfo.Any())
                 {
@@ -61,7 +63,25 @@ namespace LabReservation.Models
                         new Equipment{id = 5, lab_id = 5, maximum = 50}
                     );
                 }
-                
+
+
+                for (var i = 0; i < 10; i++)
+                {
+                    context.Reserveinfo.AddRange(
+                        new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
+                            start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
+                            end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                        },
+                        new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
+                            start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
+                            end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                        },
+                        new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
+                            start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
+                            end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                        }
+                    );
+                }
                 
                 
                 context.SaveChanges();
