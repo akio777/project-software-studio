@@ -15,6 +15,13 @@
             }
         }
         console.log(result);
+        
+        result = [];
+        for (i = 0; i < checkbox_list.length; i++) {
+            if (checkbox_list[i].checked) {
+                document.getElementById(checkbox_list[i].id).checked = false;
+            }
+        }
     }
 
     function check_all() {
@@ -33,7 +40,7 @@
             for (i = 0; i < checkbox_list.length; i++) {
                 document.getElementById(checkbox_list[i].id).checked = true;
             }
-        } 
+        }
         else {
             for (i = 0; i < checkbox_list.length; i++) {
                 document.getElementById(checkbox_list[i].id).checked = false;

@@ -130,7 +130,9 @@ button.close {
 .select-cancel {
   max-height: 50vh;
   margin-top: 1rem;
+  overflow: auto;
 }
+
 .selected-list {
   max-height: 50vh;
   margin-top: 1rem;
