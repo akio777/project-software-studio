@@ -24,6 +24,7 @@ namespace LabReservation.Controllers
         
         
         // GET: Labinfo
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Labinfo.ToListAsync());
@@ -164,7 +165,7 @@ namespace LabReservation.Controllers
         
         [Authorize(Roles = "1")]
         [AllowAnonymous]
-        [Route("")]
+        [Route("[action]")]
         public IActionResult CatchAll()
         {
             return RedirectToAction("Index", "NoPermission");
