@@ -6,8 +6,8 @@ using LabReservation.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LabReservation.ViewComponents {
-  public class CancelSelectedReserveViewComponent : ViewComponent
-  {
+    public class CancelSelectedReserveViewComponent : ViewComponent
+    {
     private readonly LabReservationContext _context;
 
     public CancelSelectedReserveViewComponent(LabReservationContext context)
@@ -16,9 +16,7 @@ namespace LabReservation.ViewComponents {
         }
     public async Task<IViewComponentResult> InvokeAsync()
         {
-            
             return View();
         }
-  }
-
+    }
 }
