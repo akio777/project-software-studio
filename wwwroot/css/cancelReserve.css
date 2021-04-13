@@ -31,13 +31,11 @@
   justify-content: space-between;
   padding: 1rem;
   border-bottom: 1px solid #e9ecef;
-  border-top-left-radius: 0.3rem;
-  border-top-right-radius: 0.3rem;
 }
 
 .close {
   float: right;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
   color: #212529;
@@ -48,12 +46,10 @@
   color: #212529;
   opacity: 1.0;
 }
-
 .modal-header .close {
   padding: 1rem;
   margin: -1rem -1rem -1rem auto;
 }
-
 button.close {
   padding: 0;
   background-color: transparent;
@@ -79,7 +75,6 @@ button.close {
   padding: 1rem;
   border-top: 1px solid #e9ecef;
 }
-
 .modal-footer > :not(:first-child) {
   margin-left: 0.25rem;
 }
@@ -104,6 +99,7 @@ button.close {
 }
 
 .btn.btn-selectall {
+  padding: 0px;
   text-decoration: underline;
 }
 
