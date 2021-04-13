@@ -23,6 +23,14 @@ namespace LabReservation.Services
 
         public Return CheckLogin(AuthenModel data)
         {
+            if (data.email==null || data.password==null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "กรุณากรอกข้อมูล"
+                };
+            }
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.email);
             if (c_user != null)
             {
@@ -54,7 +62,30 @@ namespace LabReservation.Services
 
         public Return CheckRegister(RegisterModel data)
         {
-            // Console.WriteLine(data);
+            if (data.Email==null || data.Password==null || data.ConfirmPassword == null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "กรุณากรอกข้อมูล"
+                };
+            }
+            else if (data.Password.Length<6 || data.ConfirmPassword.Length<6)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "รหัสผ่าน ต้องมีความยาว ตั้งแต่ 6 ตัวขึ้นไป"
+                };
+            }
+            else if (!data.Password.Equals(data.ConfirmPassword))
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "รหัสผ่านไม่ตรงกัน"
+                };
+            }
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.Email);
             if (c_user != null)
             {
@@ -78,8 +109,7 @@ namespace LabReservation.Services
                     Data = c_user
                 };
             }
-            
-            
+
         }
         
         

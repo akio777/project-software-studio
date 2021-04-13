@@ -31,6 +31,17 @@ namespace LabReservation.Controllers
         {
             return RedirectToAction("Login");
         }
+        
+        [AllowAnonymous]
+        [Route("[action]")]
+        public IActionResult Login()
+        {
+            if(User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        
         [Route("[action]")]
         [HttpPost]  
         public async Task<ActionResult> Login(AuthenModel data)
@@ -55,9 +66,6 @@ namespace LabReservation.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
                 if (temp.Data.role==0) return RedirectToAction("Index", "Labinfo");
                 else return RedirectToAction("Index", "Labinfo");
-                
-                    
-                
             }
         }
         
@@ -81,13 +89,6 @@ namespace LabReservation.Controllers
         
         [Route("[action]")]
         [HttpGet]  
-        public ActionResult Login()  
-        {
-                return View();  
-        }
-        
-        [Route("[action]")]
-        [HttpGet]  
         public ActionResult Register()  
         {
             return View();  
@@ -100,5 +101,13 @@ namespace LabReservation.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
+        
+        // [Authorize(Roles = "1")]
+        // [AllowAnonymous]
+        // [Route("")]
+        // public IActionResult CatchAll()
+        // {
+        //     return RedirectToAction("Index", "NoPermission");
+        // }
     }
 }
