@@ -22,13 +22,9 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 a {
-  color: var(--dark);
+  color: var(--blue-500);
   text-decoration: none;
   transition: all ease-in-out 150ms;
-}
-
-a:hover {
-  color: var(--blue-500);
 }
 
 button {
