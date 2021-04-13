@@ -29,6 +29,7 @@ a {
 
 button {
   cursor: pointer;
+  border: none;
 }
 
 button:focus {
@@ -112,4 +113,11 @@ body {
   font-weight: 700;
 }
 
+input {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
 
