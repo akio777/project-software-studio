@@ -5,12 +5,13 @@ using System.Linq;
 using System.Net.Mime;
 using LabReservation.Models;
 using LabReservation.Data;
+using Newtonsoft.Json;
 
 namespace LabReservation.Services
 {
     public interface ILabService
     {
-        Return Read(int labid);
+        Return Read(int labid, int userid);
 
         Return Get();
     }
@@ -24,7 +25,7 @@ namespace LabReservation.Services
             db = context;
         }
 
-        public Return Read(int labid)
+        public Return Read(int labid, int userid)
         {
             var dateNow = DateTime.Now;
             var maxall = db.Equipment.Where(data => data.lab_id == labid).First().maximum;
@@ -47,28 +48,47 @@ namespace LabReservation.Services
                     {
                         lab_id = labres.labinfo.id,
                         equipment = labres.labinfo.equip,
-                        reserve_time = labres.reserveinfo.start_time
+                        reserve_time = labres.reserveinfo.start_time,
+                        reserve_by = labres.reserveinfo.reserve_by
                     }
-                );
-
-            List<dynamic> days = new List<dynamic>();
+                ).OrderBy(arg => arg.reserve_time);
+            
+            IDictionary<string, object> main_data = new Dictionary<string, object>();
             for (var day = 0; day < 7; day++)
             {
-                var this_day = temp.Where(data => data.reserve_time.Day == day + data.reserve_time.Day);
-                List<dynamic> tempday = new List<dynamic>();
+                int this_day = dateNow.Day + day;
+                var data_day = temp.Where(data => data.reserve_time.Day == this_day);
+                var reserved = temp.Where(data => data.reserve_by == userid);
+                var mine = from data in data_day where data.reserve_by == userid select data.reserve_time.Hour;
+                IDictionary<string, object> map_data = new Dictionary<string, object>();
+                map_data["reserved"] = mine;
                 foreach (var time in time_slot)
                 {
-                    tempday.Add(maxall-this_day.Where(data => data.reserve_time.Hour == time).Count());
+                    map_data[time.ToString()] = maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()); 
                 }
-                days.Add(tempday);
+
+                main_data[day.ToString()] = map_data;
             }
+            Console.WriteLine(JsonConvert.SerializeObject(main_data, Formatting.Indented));
             
-            List<dynamic> data = new List<dynamic>{maxall, days};
+            // List<dynamic> days = new List<dynamic>();
+            // for (var day = 0; day < 7; day++)
+            // {
+            //     var this_day = temp.Where(data => data.reserve_time.Day == day + data.reserve_time.Day);
+            //     List<dynamic> tempday = new List<dynamic>();
+            //     foreach (var time in time_slot)
+            //     {
+            //         tempday.Add(maxall-this_day.Where(data => data.reserve_time.Hour == time).Count());
+            //     }
+            //     days.Add(tempday);
+            // }
+            //
+            // List<dynamic> data = new List<dynamic>{maxall, days};
             
             return new Return
             {
                 Error = false,
-                Data = data,
+                Data = main_data,
             };
         }
 
@@ -77,7 +97,7 @@ namespace LabReservation.Services
             List<bool> lab = new List<bool> {false, false, false, false, false};
             for (var i = 0; i < 5; i++)
             {
-                var temp = Read(i + 1);
+                var temp = Read(i + 1, 1);
                 var data = temp.Data[1];
                 foreach (var days in data)
                 {

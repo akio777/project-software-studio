@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using LabReservation.Models;
 using LabReservation.Services;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 
 namespace LabReservation.Controllers
@@ -13,11 +14,9 @@ namespace LabReservation.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ILabService LAB;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public HomeController(ILabService lab, IHttpContextAccessor httpContextAccessor)
+        public HomeController(ILabService lab)
         {
             LAB = lab;
-            _httpContextAccessor = httpContextAccessor;
         }
         
 
@@ -31,7 +30,7 @@ namespace LabReservation.Controllers
         public IActionResult Test()
         {
             // var token = Request.Headers["Cookie"];
-            var temp = LAB.Get();
+            var temp = LAB.Read(1, 1);
             
             return RedirectToAction("Index");
         }
