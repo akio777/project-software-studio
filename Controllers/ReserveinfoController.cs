@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +27,26 @@ namespace LabReservation.Controllers
         }
         
         
-        [HttpPost]
-        [Route("[action]")]
-        public IActionResult Confirm(Reserve_confirm data)
+        // [HttpPost]
+        // public IActionResult Confirm(Reserve_confirm data)
+        public IResourceService Confirm(Reserve_confirm? data)
         {
-            return RedirectToAction("Index");
+            var temp = new Reserve_confirm
+            {
+                confirm = new DayTime[]
+                {
+                    new DayTime {day = 13, time = 8},
+                    new DayTime {day = 13, time = 9},
+                    new DayTime {day = 13, time = 10},
+                    new DayTime {day = 13, time = 11},
+                    new DayTime {day = 13, time = 12},
+                    new DayTime {day = 13, time = 13},
+                    new DayTime {day = 13, time = 14},
+                }
+            };
+            
+            
+            return null;
         }
         
         // GET: Reserveinfo/Details/5

@@ -12,8 +12,9 @@ namespace LabReservation.Services
     public interface ILabService
     {
         Return Read(int labid, int userid);
-
         Return Get();
+
+        Return Reserved(Reserve_confirm data);
     }
 
     public class LabService : ILabService
@@ -73,7 +74,7 @@ namespace LabReservation.Services
                 all.Add(map_data);
             }
             
-            Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
             return new Return
             {
                 Error = false,
@@ -121,5 +122,17 @@ namespace LabReservation.Services
                 Data = lab_info
             };
         }
+
+        public Return Reserved(Reserve_confirm data)
+        {
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
+        
+        
+        
     }
 }

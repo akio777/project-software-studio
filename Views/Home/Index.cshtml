@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using LabReservation.Models;
+@using LabReservation.Controllers;
 @{
     ViewData["Title"] = "Home Page";
-    
 }
 
 
@@ -14,4 +15,11 @@
     
     <a href="https://docs.microsoft.com/aspnet/core">
     </a>
+    
+    @* <form asp-controller="Reserveinfo" asp-action="Confirm" style="width: 100px; height: 100px; background-color: red"> *@
+    @* <button asp-controller="Reserveinfo" style="width: 100px; height: 100px; background-color: red" *@
+    @*  onclick="location.href='@Url.Action("Confirm","Reserveinfo", temp)'" *@
+    @* /> *@
+    @Html.ActionLink("Confirm", "Confirm", "Reserveinfo", "", "")
+    @* </form> *@
 </div>
