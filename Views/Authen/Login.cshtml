@@ -2,28 +2,24 @@
 
 @section Scripts
 {
-  <link href="~/css/signin.css" rel="stylesheet" />
+    <link href="~/css/signin.css" rel="stylesheet" />
 }
 
 @{
     ViewData["Title"] = "Sign in";
 }
 
-@* <h1>Index</h1> *@
-@* *@
 <div class="w-screen h-screen flex-center">
     <div class="sign-box">
         <div class="sign-in">
-            <h1>Sign in</h1>
+            <h1>Sign In</h1>
             <form asp-action="Login">
                 <div class="form-group">
-                    @* <label asp-for="email" class="control-label"></label> *@
-                    <input asp-for="email" class="form-control" placeholder="email"/>
+                    <input asp-for="email" class="form-control" placeholder="Email"/>
                     <span asp-validation-for="email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    @* <label asp-for="password" class="control-label"></label> *@
-                    <input asp-for="password" class="form-control" placeholder="password"/>
+                    <input asp-for="password" class="form-control" placeholder="Password"/>
                     <span asp-validation-for="password" class="text-danger"></span>
                 </div>
                 <div class="form-group login-left">
@@ -34,7 +30,7 @@
             
             <form asp-action="Register">
                 <div class="form-group register-right">
-                    <a asp-action="Register" class="btn text-white">Create account</a>
+                    <a asp-action="Register" class="btn text-white">Create Account</a>
                     <span class="material-icons">arrow_forward</span>
                 </div>
             </form>
@@ -48,21 +44,61 @@
             
             <div class="sm-box">
                 <div class="sm-logo">
-                    <span>location</span>
+                    <span>Location</span>
                     <span class="material-icons">place</span>
                 </div>
                 <span class="sm-desc">ECC Building</span>
             </div>
             <div class="sm-box">
                 <div class="sm-logo">
-                    <span>location</span>
+                    <span>Opening Hours</span>
                     <span class="material-icons">watch_later</span>
                 </div>
                 <span class="sm-desc">08:00 - 18:00</span>
             </div>
-            <img src='@Url.Content("~/Images/login-pic.png")' alt="Image">
+            <img src='@Url.Content("~/Images/login.svg")' alt="Image">
         </div>
-        
     </div>
 </div>
+@* <div class="login-container">
+    <div class="login-left">
+        <a asp-action="Register">
+            <button type="button" class="register-btn">
+                Create Account
+                <span class="material-icons">arrow_forward</span>
+            </button>
+        </a>
+        <h1>Sign In</h1>
+        <form asp-action="Login">
+            <div class="form-group">
+                <input asp-for="email" class="form-control" placeholder="Email"/>
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="password" class="form-control" placeholder="Password"/>
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <button type="button" class="login-btn">
+                Login
+            </button>
+        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    <div class="login-right">
+        <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
+        <div class="sm-box">
+            <div class="sm-logo">
+                <span>Location</span>
+                <span class="material-icons">place</span>
+            </div>
+            <span class="sm-desc">ECC Building</span>
+            <div class="sm-logo">
+                <span>Opening Hours</span>
+                <span class="material-icons">watch_later</span>
+            </div>
+            <span class="sm-desc">08:00 - 18:00</span>
+        </div>
+        <img src='@Url.Content("~/Images/login.svg")' alt="logo" class="login-pic">
+    </div>
+</div> *@
 
