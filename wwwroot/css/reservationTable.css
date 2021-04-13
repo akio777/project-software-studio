@@ -1,11 +1,13 @@
 .reservation-table-container {
   table-layout: fixed;
   empty-cells: show;
-  width: 100%;
+  width: 80vw;
   box-shadow: 2px 2px 10px 0 #00000025;
   border-radius: 5px;
   overflow: hidden;
   text-align: center;
+  border: none;
+  border-collapse: collapse;
 }
 
 .reservation-table-container th {
@@ -32,8 +34,8 @@
 
 .reservation-table-header {
   height: 60px;
-  background-color: #0d6efd;
-  color: #f8f9fa;
+  background-color: var(--blue-500);
+  color: var(--light);
 }
 
 .reservation-table-content td {
@@ -45,17 +47,17 @@
 }
 
 .reservation-table-content tr td:first-of-type {
-  border-bottom: 1px solid #bdbdbd;
-  border-right: 1px solid #bdbdbd;
+  border-bottom: 1px solid var(--grey-400);
+  border-right: 1px solid var(--grey-400);
 }
 
 .reservation-table-content tr td {
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid var(--grey-400);
 }
 
 .reservation-table-content tr:last-of-type td:first-of-type {
   border-bottom: none;
-  border-right: 1px solid #bdbdbd;
+  border-right: 1px solid var(--grey-400);
 }
 
 .reservation-table-content tr:last-of-type td {

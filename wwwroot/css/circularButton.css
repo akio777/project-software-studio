@@ -5,6 +5,7 @@
   font-size: 18px;
   font-weight: 500;
   background: transparent;
+  cursor: pointer;
   outline: none;
   -webkit-appearance: none;
 }
@@ -14,10 +15,16 @@
 }
 
 .success-btn {
-  color: #198754;
-  border: 2px solid #198754;
+  color: var(--success);
+  border: 2px solid var(--success);
 }
 
 .success-btn:hover {
-  background-color: #198754;
+  color: var(--white);
+  background-color: var(--success);
+}
+
+.check-btn {
+  color: var(--white);
+  background-color: var(--blue-500);
 }

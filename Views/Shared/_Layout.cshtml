@@ -2,7 +2,7 @@
 @using System;
 @using System.Collections.Generic;
 @{
-    string[] hidenav = {"/authen", "/", "/login", "/register"};
+    string[] hidenav = { "/authen", "/", "/login", "/register" };
     bool isAdmin = Context.User.Clone().IsInRole("0");
 }
 
@@ -14,41 +14,43 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LabReservation</title>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/navbar.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     @if (!hidenav.Contains(Context.Request.Path.ToString().ToLower()))
     {
-    <header>
-        <nav>
-            <div class="navbar">
-                <img src=@Url.Content("~/Images/Logo_Nav.svg") alt="logo" class="logo">
-                @if(isAdmin)
-                {
-                <div class="links">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+        <header>
+            <nav>
+                <div class="navbar">
+                    <img src=@Url.Content("~/Images/Logo_Nav.svg") alt="logo" class="logo">
+                    @if (isAdmin)
+                    {
+                        <div class="links">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="links">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">My Reservation</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Reserveinfo" asp-action="Index">Reserve
+                                info</a>
+                        </div>
+                    }
+                    <div class="user">
+                        <a href="">Admin Boi</a>
+                        <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256"
+                        alt="profile-pic" class="profile-pic">
+                        <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+                    </div>
                 </div>
-                }
-                else 
-                {
-                <div class="links">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">My Reservation</a>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserveinfo" asp-action="Index">Reserve info</a>
-                </div>
-                }
-                <div class="user">
-                    <a href="">Admin Boi</a>
-                    <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256" alt="profile-pic" class="profile-pic">
-                    <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
-                </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
     }
     <div class="container">
         <main role="main" class="pb-3">

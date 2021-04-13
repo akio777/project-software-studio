@@ -1,18 +1,19 @@
+@model LabReservation.Models.CircularButton
+
 @{
-    var successBtn = true;
-    var warningBtn = false;
+
 }
 
 <link rel="stylesheet" type="text/css" href="css/circularButton.css">
 
-<button id="circular-btn" class="circular-btn-container">20</button>
+<button id="@Model.key" class="circular-btn-container" onClick="onClickHandler(this.id)">20</button>
 
 <script type="text/javascript">
-    document.getElementById("circular-btn").addClass("success-btn");
-    var element = $("#circular-btn").addClass("success-btn")
-    function myFunction() {
-        var element = document.getElementById("circular-btn");
-        element.classList.add("success-btn");
-    }
-    myFunction()
+    @* document.getElementById("circular-btn").classList.add("success-btn"); *@
+
+        function onClickHandler(id) {
+            document.getElementById(id).classList.add("check-btn");
+            document.getElementById(id).innerHTML = "ch"
+        }
+
 </script>

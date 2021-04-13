@@ -15,9 +15,11 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string? key)
         {
-            return View();
+            var circularButtonProps = new CircularButton();
+            circularButtonProps.key = key;
+            return View(circularButtonProps);
         }
     }
 }
