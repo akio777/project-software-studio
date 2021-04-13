@@ -13,12 +13,10 @@ namespace LabReservation.Models
         [DataType(DataType.DateTime)]
         public DateTime end_time { get; set; }
     }
-
-
     public class Reserve_page
     {
         public int day { get; set; }
-        public Int32[] reserved { get; set; }
-        public Int32[] timeslot { get; set; }
+        public int[] reserved { get; set; }
+        public int[] timeslot { get; set; }
     }
 }

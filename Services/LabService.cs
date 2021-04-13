@@ -54,26 +54,26 @@ namespace LabReservation.Services
                 ).OrderBy(arg => arg.reserve_time);
             
             // IDictionary<string, object> main_data = new Dictionary<string, object>();
+            List<Reserve_page> all = new List<Reserve_page>();
             for (var day = 0; day < 7; day++)
             {
                 int this_day = dateNow.Day + day;
                 var data_day = temp.Where(data => data.reserve_time.Day == this_day);
                 var reserved = temp.Where(data => data.reserve_by == userid);
-                var mine = (from data in data_day where data.reserve_by == userid select data.reserve_time.Hour).ToArray();
+                var mine = (from data in data_day where data.reserve_by == userid select time_slot.ToList().IndexOf(data.reserve_time.Hour)).ToArray();
                 // IDictionary<string, object> map_data = new Dictionary<string, object>();
-                Reserve_page map_data = new Reserve_page {};
-                map_data.day = day;
-                Console.WriteLine(mine.GetType());
-                map_data.reserved = mine;
+                List<int> tempINT = new List<int>();
                 foreach (var time in time_slot)
                 {
-                    map_data.timeslot.Append(time);
-                    // map_data[time.ToString()] = maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()); 
+                    // map_data.timeslot.Append(time);
+                    tempINT.Add(maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()));
                 }
-
-                // main_data[day.ToString()] = map_data;
+                Reserve_page map_data = new Reserve_page {day = day, reserved = mine,  timeslot = tempINT.ToArray()};
+                
+                all.Add(map_data);
             }
-            // Console.WriteLine(JsonConvert.SerializeObject(main_data, Formatting.Indented));
+            
+            Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
             return new Return
             {
                 Error = false,

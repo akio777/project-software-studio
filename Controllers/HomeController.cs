@@ -24,7 +24,6 @@ namespace LabReservation.Controllers
         {
             var token = Request.Headers["Cookie"];
             var temp = LAB.Read(1, 1);
-            ViewData["data"] = temp.Data;
             return View();
         }
         public IActionResult Test()
