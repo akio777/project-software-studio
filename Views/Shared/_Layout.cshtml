@@ -14,6 +14,7 @@
     <title>@ViewData["Title"] - LabReservation</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/navbar.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
                 <div class="user">
                     <a href="">Admin Boi</a>
                     <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256" alt="profile-pic" class="profile-pic">
-                    <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
+                    <a class="logout" asp-controller="Authen" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
                 </div>
             </div>
         </nav>
@@ -49,8 +50,8 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
-        @* </main> *@
-    @* </div> *@
+        </main>
+    </div>
 
     @* <footer class="border-top footer text-muted"> *@
     @*     <div class="container"> *@
