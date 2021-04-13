@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabReservation.Migrations
 {
     [DbContext(typeof(LabReservationContext))]
-    [Migration("20210412064709_InitialCreate")]
+    [Migration("20210412075622_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -101,8 +101,8 @@ namespace LabReservation.Migrations
                     b.Property<string>("password")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("role")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("role")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("id");
 

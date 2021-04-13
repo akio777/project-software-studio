@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using System;
+@using System.Collections.Generic;
+@{
+    string[] hidenav = {"/authen", "/", "/login", "/register"};
+    bool isAdmin = Context.User.Clone().IsInRole("0");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
@@ -6,41 +14,42 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LabReservation</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/navbar.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    @if (!hidenav.Contains(Context.Request.Path.ToString().ToLower()))
+    {
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LabReservation</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home"
-                                asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Reserveinfo"
-                                asp-action="Index">Reserve info</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Equipment"
-                                asp-action="Index">Equipment</a>
-                        </li>
-                    </ul>
+        <nav>
+            <div class="navbar">
+                <img src=@Url.Content("~/Images/Logo_Nav.svg") alt="logo" class="logo">
+                @if(isAdmin)
+                {
+                <div class="links">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+                </div>
+                }
+                else 
+                {
+                <div class="links">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">My Reservation</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Reserveinfo" asp-action="Index">Reserve info</a>
+                </div>
+                }
+                <div class="user">
+                    <a href="">Admin Boi</a>
+                    <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256" alt="profile-pic" class="profile-pic">
+                    <button class="logout"><i class="fas fa-sign-out-alt"></i></button>
                 </div>
             </div>
         </nav>
     </header>
+    }
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -53,7 +62,6 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
