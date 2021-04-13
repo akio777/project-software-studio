@@ -1,0 +1,158 @@
+@{
+    var currentDateTime = DateTime.Now;
+    var mockList = new List<string>(new string[] { "test1", "test2", "test3", "test3", "test3", "test3", "test3" });
+}
+
+<script>
+    document.getElementById("demo").innerHTML = "My First JavaScript";
+</script>
+
+<link rel="stylesheet" type="text/css" href="css/reservationTable.css">
+
+<table class="reservation-table-container">
+    <thead class="reservation-table-header">
+        <tr>
+            <th></th>
+            <th>
+                <div>@currentDateTime.ToString("ddd")</div>
+                <div>Today</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="reservation-table-content">
+        <tr>
+            <td>08:00<br>-<br>09:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>09:00<br>-<br>10:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>10:00<br>-<br>11:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>11:00<br>-<br>12:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>12:00<br>-<br>13:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>13:00<br>-<br>14:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>14:00<br>-<br>15:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>15:00<br>-<br>16:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>16:00<br>-<br>17:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>17:00<br>-<br>18:00</td>
+            @foreach (var item in @mockList)
+            {
+                <td>
+                    <div>
+                        @await Component.InvokeAsync("CircularButton")
+                    </div>
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

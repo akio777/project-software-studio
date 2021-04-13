@@ -1,0 +1,18 @@
+@{
+    var successBtn = true;
+    var warningBtn = false;
+}
+
+<link rel="stylesheet" type="text/css" href="css/circularButton.css">
+
+<button id="circular-btn" class="circular-btn-container">20</button>
+
+<script type="text/javascript">
+    document.getElementById("circular-btn").addClass("success-btn");
+    var element = $("#circular-btn").addClass("success-btn")
+    function myFunction() {
+        var element = document.getElementById("circular-btn");
+        element.classList.add("success-btn");
+    }
+    myFunction()
+</script>

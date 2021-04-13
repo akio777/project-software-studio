@@ -1,0 +1,23 @@
+.circular-btn-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 500;
+  background: transparent;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.circular-btn-container:focus {
+  outline: none;
+}
+
+.success-btn {
+  color: #198754;
+  border: 2px solid #198754;
+}
+
+.success-btn:hover {
+  background-color: #198754;
+}
