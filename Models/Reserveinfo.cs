@@ -18,5 +18,18 @@ namespace LabReservation.Models
         public int day { get; set; }
         public int[] reserved { get; set; }
         public int[] timeslot { get; set; }
+        public int maximum { get; set; }
     }
+
+    public class DayTime
+    {
+        public int day { get; set; }
+        public int time { get; set; }
+    }
+    
+    public class Reserve_confirm
+    {
+        public DayTime[] confirm { get; set; }
+    }
+    
 }

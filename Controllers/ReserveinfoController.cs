@@ -24,7 +24,15 @@ namespace LabReservation.Controllers
         {
             return View(await _context.Reserveinfo.ToListAsync());
         }
-
+        
+        
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Confirm(Reserve_confirm data)
+        {
+            return RedirectToAction("Index");
+        }
+        
         // GET: Reserveinfo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -64,7 +72,7 @@ namespace LabReservation.Controllers
             }
             return View(reserveinfo);
         }
-
+        
         // GET: Reserveinfo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

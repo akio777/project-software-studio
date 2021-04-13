@@ -68,7 +68,7 @@ namespace LabReservation.Services
                     // map_data.timeslot.Append(time);
                     tempINT.Add(maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()));
                 }
-                Reserve_page map_data = new Reserve_page {day = day, reserved = mine,  timeslot = tempINT.ToArray()};
+                Reserve_page map_data = new Reserve_page {day = day, reserved = mine,  timeslot = tempINT.ToArray(), maximum = maxall};
                 
                 all.Add(map_data);
             }
