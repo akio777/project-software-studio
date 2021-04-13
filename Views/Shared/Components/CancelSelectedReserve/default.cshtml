@@ -1,0 +1,59 @@
+<link rel="stylesheet" type="text/css" href="css/cancelReserve.css" />
+
+
+<h1>Hello from view components</h1>
+<div id="modal-main" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title">Cancel Selected Reservation</h2>
+      <button type="button" class="close">
+        <span>×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to cancel these reservation</p>
+      <ul class="selected-list">
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+      </ul>
+    </div>
+    <div class="modal-footer2">
+      <div>
+        <button type="button" id="btn-cancel" class="btn btn-cancel">Cancel</button>
+        <button type="button" id="btn-confirm" class="btn btn-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  var modal = document.getElementById("modal-main");
+
+  var btn = document.getElementById("myBtn");
+
+  var span = document.getElementsByClassName("close")[0];
+
+  var cancel = document.getElementById("btn-cancel");
+
+  var confirm = document.getElementById("btn-confirm");
+
+  btn.onclick = function () {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  cancel.onclick = function () {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
