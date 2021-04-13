@@ -23,14 +23,14 @@ namespace LabReservation.Controllers
         public IActionResult Index()
         {
             var token = Request.Headers["Cookie"];
-            
-            // Console.WriteLine("LOG : "+User.Identity.Name);
+            var temp = LAB.Read(1, 1);
+            ViewData["data"] = temp.Data;
             return View();
         }
         public IActionResult Test()
         {
             // var token = Request.Headers["Cookie"];
-            var temp = LAB.Read(1, 1);
+            // var temp = LAB.Read(1, 1);
             
             return RedirectToAction("Index");
         }

@@ -53,42 +53,31 @@ namespace LabReservation.Services
                     }
                 ).OrderBy(arg => arg.reserve_time);
             
-            IDictionary<string, object> main_data = new Dictionary<string, object>();
+            // IDictionary<string, object> main_data = new Dictionary<string, object>();
             for (var day = 0; day < 7; day++)
             {
                 int this_day = dateNow.Day + day;
                 var data_day = temp.Where(data => data.reserve_time.Day == this_day);
                 var reserved = temp.Where(data => data.reserve_by == userid);
-                var mine = from data in data_day where data.reserve_by == userid select data.reserve_time.Hour;
-                IDictionary<string, object> map_data = new Dictionary<string, object>();
-                map_data["reserved"] = mine;
+                var mine = (from data in data_day where data.reserve_by == userid select data.reserve_time.Hour).ToArray();
+                // IDictionary<string, object> map_data = new Dictionary<string, object>();
+                Reserve_page map_data = new Reserve_page {};
+                map_data.day = day;
+                Console.WriteLine(mine.GetType());
+                map_data.reserved = mine;
                 foreach (var time in time_slot)
                 {
-                    map_data[time.ToString()] = maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()); 
+                    map_data.timeslot.Append(time);
+                    // map_data[time.ToString()] = maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()); 
                 }
 
-                main_data[day.ToString()] = map_data;
+                // main_data[day.ToString()] = map_data;
             }
-            Console.WriteLine(JsonConvert.SerializeObject(main_data, Formatting.Indented));
-            
-            // List<dynamic> days = new List<dynamic>();
-            // for (var day = 0; day < 7; day++)
-            // {
-            //     var this_day = temp.Where(data => data.reserve_time.Day == day + data.reserve_time.Day);
-            //     List<dynamic> tempday = new List<dynamic>();
-            //     foreach (var time in time_slot)
-            //     {
-            //         tempday.Add(maxall-this_day.Where(data => data.reserve_time.Hour == time).Count());
-            //     }
-            //     days.Add(tempday);
-            // }
-            //
-            // List<dynamic> data = new List<dynamic>{maxall, days};
-            
+            // Console.WriteLine(JsonConvert.SerializeObject(main_data, Formatting.Indented));
             return new Return
             {
                 Error = false,
-                Data = main_data,
+                Data = "",
             };
         }
 

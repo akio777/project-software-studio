@@ -10,4 +10,5 @@ namespace LabReservation.Models
         public string equip { get; set; }
 
     }
+    
 }
