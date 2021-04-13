@@ -8,59 +8,7 @@
 @{
     ViewData["Title"] = "Sign in";
 }
-
-<div class="w-screen h-screen flex-center">
-    <div class="sign-box">
-        <div class="sign-in">
-            <h1>Sign In</h1>
-            <form asp-action="Login">
-                <div class="form-group">
-                    <input asp-for="email" class="form-control" placeholder="Email"/>
-                    <span asp-validation-for="email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="password" class="form-control" placeholder="Password"/>
-                    <span asp-validation-for="password" class="text-danger"></span>
-                </div>
-                <div class="form-group login-left">
-                    <input type="submit" value="Login" class="btn login-btn"/>
-                </div>
-            </form>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <form asp-action="Register">
-                <div class="form-group register-right">
-                    <a asp-action="Register" class="btn text-white">Create Account</a>
-                    <span class="material-icons">arrow_forward</span>
-                </div>
-            </form>
-        </div>
-        <div class="detail">
-            <div class="Logo">
-                <img src='@Url.Content("~/Images/Ellipse 10.svg")' alt="Image">
-                <h1 class="front">LAB</h1>
-                <h1 class="back">RESERVE</h1>
-            </div>
-            
-            <div class="sm-box">
-                <div class="sm-logo">
-                    <span>Location</span>
-                    <span class="material-icons">place</span>
-                </div>
-                <span class="sm-desc">ECC Building</span>
-            </div>
-            <div class="sm-box">
-                <div class="sm-logo">
-                    <span>Opening Hours</span>
-                    <span class="material-icons">watch_later</span>
-                </div>
-                <span class="sm-desc">08:00 - 18:00</span>
-            </div>
-            <img src='@Url.Content("~/Images/login.svg")' alt="Image">
-        </div>
-    </div>
-</div>
-@* <div class="login-container">
+<div class="login-container">
     <div class="login-left">
         <a asp-action="Register">
             <button type="button" class="register-btn">
@@ -78,9 +26,7 @@
                 <input asp-for="password" class="form-control" placeholder="Password"/>
                 <span asp-validation-for="password" class="text-danger"></span>
             </div>
-            <button type="button" class="login-btn">
-                Login
-            </button>
+            <button type="submit" class="btn login-btn">Login</button>
         </form>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     </div>
@@ -100,5 +46,5 @@
         </div>
         <img src='@Url.Content("~/Images/login.svg")' alt="logo" class="login-pic">
     </div>
-</div> *@
+</div>
 

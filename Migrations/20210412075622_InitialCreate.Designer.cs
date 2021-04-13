@@ -9,11 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LabReservation.Migrations
 {
     [DbContext(typeof(LabReservationContext))]
-<<<<<<< HEAD:Migrations/20210407093630_InitialCreate.Designer.cs
-    [Migration("20210407093630_InitialCreate")]
-=======
     [Migration("20210412075622_InitialCreate")]
->>>>>>> 01580721124836b45687e13ed7be01ca6eff4149:Migrations/20210412075622_InitialCreate.Designer.cs
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
