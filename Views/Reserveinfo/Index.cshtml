@@ -5,7 +5,7 @@
 }
 
 <h1>Index</h1>
-
+@* 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -50,11 +50,11 @@
         </tr>
 }
     </tbody>
-</table>
+</table> *@
 
 <button id="myBtn">Open Modal</button>
 
 <div>
-    @await Component.InvokeAsync("CancelReserve", new {id = 1})
+    @await Component.InvokeAsync("CancelReserve")
 </div>
 

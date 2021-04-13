@@ -83,12 +83,6 @@ button.close {
 }
 
 .btn {
-  display: inline-block;
-  font-weight: 400;
-  color: #212529;
-  text-align: center;
-  vertical-align: middle;
-  user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
   padding: .375rem .75rem;
@@ -123,4 +117,10 @@ button.close {
 .btn.btn-confirm:hover {
   color: #ffffff;
   background-color: #DC3545;
+}
+
+.select-cancel {
+  max-height: 50vh;
+  margin-top: 1rem;
+  overflow: auto;
 }
