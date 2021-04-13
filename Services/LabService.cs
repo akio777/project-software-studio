@@ -10,7 +10,9 @@ namespace LabReservation.Services
 {
     public interface ILabService
     {
-        Return Read();
+        Return Read(int labid);
+
+        Return Get();
     }
 
     public class LabService : ILabService
@@ -22,12 +24,10 @@ namespace LabReservation.Services
             db = context;
         }
 
-        public Return Read()
+        public Return Read(int labid)
         {
-            
-            
             var dateNow = DateTime.Now;
-            var maxall = db.Equipment.Select(e => e.maximum).ToList();
+            var maxall = db.Equipment.Where(data => data.lab_id == labid).First().maximum;
             var temp = db.Labinfo
                 .Join(
                     db.Reserveinfo,
@@ -35,8 +35,9 @@ namespace LabReservation.Services
                     reserveinfo => reserveinfo.lab_id,
                     (labinfo, reserveinfo) => new {labinfo, reserveinfo}
                 ).Where(x =>
-                    (dateNow.Day - x.reserveinfo.start_time.Day) >= 0 &&
-                    (dateNow.Day - x.reserveinfo.start_time.Day) <= 7
+                    (x.reserveinfo.start_time.Day - dateNow.Day) >= 0 &&
+                    (x.reserveinfo.start_time.Day - dateNow.Day) <= 6 &&
+                    x.labinfo.id == labid
                 )
                 .Join(
                     db.Equipment,
@@ -50,44 +51,65 @@ namespace LabReservation.Services
                     }
                 );
 
-            List<dynamic>[,] count = new List<dynamic>[5,18];
-            List<dynamic> lab = new List<dynamic>
+            List<dynamic> days = new List<dynamic>();
+            for (var day = 0; day < 7; day++)
             {
-                temp.Where(data => data.lab_id == 1),
-                temp.Where(data => data.lab_id == 2),
-                temp.Where(data => data.lab_id == 3),
-                temp.Where(data => data.lab_id == 4),
-                temp.Where(data => data.lab_id == 5),
-            };
+                var this_day = temp.Where(data => data.reserve_time.Day == day + data.reserve_time.Day);
+                List<dynamic> tempday = new List<dynamic>();
+                foreach (var time in time_slot)
+                {
+                    tempday.Add(maxall-this_day.Where(data => data.reserve_time.Hour == time).Count());
+                }
+                days.Add(tempday);
+            }
             
-           
-            
-            // foreach (var i in count)
-            // {
-            //     Console.WriteLine("1D : "+i.ToString());
-            //     foreach (var j in i)
-            //     {
-            //         Console.WriteLine("2D : "+j.ToString());
-            //     }
-            // }
-            // foreach (var time in time_slot)
-            // {
-            //     foreach (var data in temp)
-            //     {
-            //         if (data.reserve_time.Hour == time)
-            //         {
-            //             
-            //         }
-            //     }
-            // }
-            // var nowTime = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day, 9, 0, 0);
-            
-
+            List<dynamic> data = new List<dynamic>{maxall, days};
             
             return new Return
             {
                 Error = false,
-                Data = "xxxxx"
+                Data = data,
+            };
+        }
+
+        public Return Get()
+        {
+            List<bool> lab = new List<bool> {false, false, false, false, false};
+            for (var i = 0; i < 5; i++)
+            {
+                var temp = Read(i + 1);
+                var data = temp.Data[1];
+                foreach (var days in data)
+                {
+                    foreach (var day in days)
+                    {
+                        if (day <= 0)
+                        {
+                            lab[i] = true;
+                            break;
+                        }
+                    }
+                    if (lab[i]) break;
+                }
+            }
+
+            var lab_info = db.Labinfo
+                .Join(
+                    db.Equipment,
+                    labinfo => labinfo.id,
+                    equipment => equipment.lab_id,
+                    (labinfo, equipment) => new
+                    {
+                        status = lab[labinfo.id - 1],
+                        name = labinfo.name,
+                        equip = labinfo.equip,
+                        lab_id = labinfo.id
+                    }
+                );
+            return new Return
+            {
+                Error = false,
+                Data = lab_info
             };
         }
     }

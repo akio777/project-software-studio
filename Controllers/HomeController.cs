@@ -31,7 +31,8 @@ namespace LabReservation.Controllers
         public IActionResult Test()
         {
             // var token = Request.Headers["Cookie"];
-            var temp = LAB.Read();
+            var temp = LAB.Get();
+            
             return RedirectToAction("Index");
         }
 
