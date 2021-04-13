@@ -46,6 +46,12 @@
   color: #212529;
 }
 
+.reservation-table-content td div:first-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .reservation-table-content tr td:first-of-type {
   border-bottom: 1px solid var(--grey-400);
   border-right: 1px solid var(--grey-400);

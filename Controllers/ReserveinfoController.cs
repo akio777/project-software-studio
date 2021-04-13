@@ -22,6 +22,7 @@ namespace LabReservation.Controllers
         // GET: Reserveinfo
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Reserveinfo.ToListAsync());
         }
 

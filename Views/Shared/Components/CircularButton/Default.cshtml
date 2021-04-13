@@ -6,14 +6,18 @@
 
 <link rel="stylesheet" type="text/css" href="css/circularButton.css">
 
-<button id="@Model.key" class="circular-btn-container" onClick="onClickHandler(this.id)">20</button>
+<label class="circular-container" tabindex="0">
+    <input id="@Model.key" onClick="onClickHandler(this.id)" type="checkbox">
+    <span class="checkmark">
+        <p>20</p>
+    </span>
+</label>
 
 <script type="text/javascript">
-    @* document.getElementById("circular-btn").classList.add("success-btn"); *@
 
-        function onClickHandler(id) {
-            document.getElementById(id).classList.add("check-btn");
-            document.getElementById(id).innerHTML = "ch"
-        }
+    function onClickHandler(id) {
+        var checkBox = document.getElementById(id);
+    @* console.log(checkBox.checked) *@
+    }
 
 </script>
