@@ -1,13 +1,15 @@
+@model LabReservation.Models.LabManageCard
+
 <link rel="stylesheet" type="text/css" href="~/css/labmanageCard.css">
 
 <div class="card">
-    <div class="card-main">
+    <div class="card-main" tabindex="0">
         <div class="card-header">
-            <h3 class="lab-name">LAB001</h3>
+            <h3 class="lab-name">@Model.labinfo.name</h3>
         </div>
         <div class="card-detail">
-            <p>equipment : Router</p>
-            <p>current amount : 20</p>
+            <p>equipment : @Model.labinfo.equip</p>
+            <p>current amount : @Model.equipinfo.maximum</p>
         </div>
     </div>
 </div>
