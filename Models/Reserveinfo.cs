@@ -21,15 +21,12 @@ namespace LabReservation.Models
         public int maximum { get; set; }
     }
 
-    public class DayTime
+    public class Reserved
     {
         public int day { get; set; }
         public int time { get; set; }
+        public int lab_id { get; set; }
     }
     
-    public class Reserve_confirm
-    {
-        public DayTime[] confirm { get; set; }
-    }
     
 }
