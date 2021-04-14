@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.Controllers
 {
+    [Authorize(Roles = "0")]
     public class UserinfoController : Controller
     {
         private readonly LabReservationContext _context;
@@ -22,8 +24,10 @@ namespace LabReservation.Controllers
         // GET: Userinfo
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Userinfo.ToListAsync());
         }
+        
 
         // GET: Userinfo/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -149,5 +153,13 @@ namespace LabReservation.Controllers
         {
             return _context.Userinfo.Any(e => e.id == id);
         }
+        
+        [AllowAnonymous]
+        [Route("{*url:regex(^(?!api).*$)}", Order = 999)]
+        public IActionResult CatchAll()
+        {
+            return RedirectToAction("Index", "NoPermission");
+        }
     }
+    
 }
