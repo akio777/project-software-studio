@@ -26,9 +26,8 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            // var test = LAB.Read(,)
             return View();
         }
 
