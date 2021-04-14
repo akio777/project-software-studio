@@ -15,9 +15,9 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(ReserveConfirm model)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(model);
+            return View();
         }
     }
 }

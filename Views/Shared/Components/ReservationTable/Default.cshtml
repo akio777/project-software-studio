@@ -1,5 +1,3 @@
-@model LabReservation.Models.ReserveConfirm
-
 @{
     var currentDateTime = DateTime.Now;
 }
@@ -17,7 +15,7 @@
 
 <form id="myAnchor" asp-action="Confirm" method="post">
     <button type="submit" onclick="confirmHandler()">Confirm</button>
-    <input name="test" type="number" asp-for="test" />
+    @* <input name="test" type="number" asp-for="test" /> *@
 </form>
 
 <table class="reservation-table-container">
