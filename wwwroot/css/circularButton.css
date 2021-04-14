@@ -44,8 +44,7 @@
 
 /* On mouse-over, add a grey background color */
 .circular-container:hover input ~ .checkmark {
-  color: var(--white);
-  background-color: var(--blue-500);
+  box-shadow: 0 0 10px 0 var(--blue-500);
 }
 
 /* When the checkbox is checked, add a blue background */

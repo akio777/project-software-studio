@@ -1,5 +1,5 @@
-@model IEnumerable<LabReservation.Models.Reserveinfo>
-
+@* @model IEnumerable<LabReservation.Models.Reserveinfo> *@
+@model LabReservation.Models.ReserveConfirm
 @{
     ViewData["Title"] = "Index";
 }
@@ -52,6 +52,9 @@
     }
     </tbody>
     </table> *@
+<p>@Html.DisplayFor(model => model.test)</p>
+
+
 
 <div style="display: flex; padding: 50px; justify-content: center 50px;">
     @await Component.InvokeAsync("ReservationTable")

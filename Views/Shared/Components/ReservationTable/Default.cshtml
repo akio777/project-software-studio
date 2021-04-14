@@ -1,19 +1,23 @@
+@model LabReservation.Models.ReserveConfirm
+
 @{
     var currentDateTime = DateTime.Now;
 }
 
 <script type="text/javascript">
-    function confirmHandler() {
-        var allCircularCheckbox = document.querySelectorAll(".circular-container > input")
-        console.log(Array.prototype.slice.call(allCircularCheckbox).filter(cb => cb.checked))
-    }
+    @* function confirmHandler() {
+        document.getElementById("myAnchor").addEventListener("click", function (event) {
+        event.preventDefault()
+        });
+        } *@
 </script>
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <link rel="stylesheet" type="text/css" href="css/reservationTable.css">
 
-<form>
-    <button type="submit" onClick={confirmHandler()}>Confirm</button>
+<form id="myAnchor" asp-action="Confirm" method="post">
+    <button type="submit" onclick="confirmHandler()">Confirm</button>
+    <input name="test" type="number" asp-for="test" />
 </form>
 
 <table class="reservation-table-container">

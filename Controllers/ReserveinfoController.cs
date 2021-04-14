@@ -20,11 +20,21 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ReserveConfirm data)
         {
-
-            return View(await _context.Reserveinfo.ToListAsync());
+            // return View(await _context.Reserveinfo.ToListAsync());
+            return View(data);
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Confirm([Bind("test")] ReserveConfirm reserveConfirm)
+        {
+            // reserveConfirm.test = 1;
+            Console.WriteLine(reserveConfirm.test);
+            return RedirectToAction("Index", reserveConfirm);
+        }
+
 
         // GET: Reserveinfo/Details/5
         public async Task<IActionResult> Details(int? id)
