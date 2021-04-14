@@ -13,14 +13,16 @@ namespace LabReservation.Services
     {
         Return Read(int labid, int userid);
         Return Get();
-
-        Return Reserved(Reserve_confirm data);
+        
+        Return Confirm(Reserved[] data, int userid);
+        // Return Confirm(Reserve_confirm data, int userid);
     }
 
     public class LabService : ILabService
     {
         private readonly LabReservationContext db;
-        public int[] time_slot = Enumerable.Range(0+8, 11).ToArray();
+        public int[] time_slot = Enumerable.Range(0+8, 10).ToArray();
+        public int[] day_slot = Enumerable.Range(0, 7).ToArray();
         public LabService(LabReservationContext context)
         {
             db = context;
@@ -78,7 +80,7 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = "",
+                Data = all,
             };
         }
 
@@ -88,29 +90,27 @@ namespace LabReservation.Services
             for (var i = 0; i < 5; i++)
             {
                 var temp = Read(i + 1, 1);
-                var data = temp.Data[1];
-                foreach (var days in data)
+                foreach (Reserve_page data in temp.Data)
                 {
-                    foreach (var day in days)
+                    var check = data.timeslot.Contains(0);
+                    if (check)
                     {
-                        if (day <= 0)
-                        {
-                            lab[i] = true;
-                            break;
-                        }
+                        lab[i] = true;
+                        break;
                     }
-                    if (lab[i]) break;
                 }
-            }
 
+                if (lab[i]) break;
+            }
+            
             var lab_info = db.Labinfo
                 .Join(
                     db.Equipment,
                     labinfo => labinfo.id,
                     equipment => equipment.lab_id,
-                    (labinfo, equipment) => new
+                    (labinfo, equipment) => new LabCardInfo
                     {
-                        status = lab[labinfo.id - 1],
+                        notAvailable = lab[labinfo.id - 1],
                         name = labinfo.name,
                         equip = labinfo.equip,
                         lab_id = labinfo.id
@@ -119,12 +119,24 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = lab_info
+                Data = ""
             };
         }
 
-        public Return Reserved(Reserve_confirm data)
+        public Return Confirm(Reserved[] data, int userid)
         {
+            var dateNow = DateTime.Now;
+            // var dateMock = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + 1, 23,0,0);
+            foreach (var i in data)
+            {
+                var start_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time],0,0);
+                var end_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time]+1,0,0);
+                var reserved = db.Reserveinfo.Add(new Reserveinfo
+                {
+                    lab_id = i.lab_id, reserve_by = userid, start_time = start_date, end_time = end_date
+                });
+                db.SaveChanges();
+            }
             return new Return
             {
                 Error = false,
