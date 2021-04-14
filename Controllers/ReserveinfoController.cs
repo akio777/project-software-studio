@@ -25,7 +25,7 @@ namespace LabReservation.Controllers
             if (id == null) {
                 return NotFound();
             }
-            var labinfo = _context.Labinfo.Find(id);
+            var labinfo = await _context.Labinfo.FindAsync(id);
             if (labinfo == null) {
                 return NotFound();
             }
