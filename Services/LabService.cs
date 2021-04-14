@@ -239,10 +239,39 @@ namespace LabReservation.Services
 
         public Return LabManage(int lab_id)
         {
+            var dateNow = DateTime.Now;
+            var data = db.Labinfo
+                .Where(labinfo => labinfo.id == lab_id)
+                .Join(db.Equipment, labinfo => labinfo.id, equipment => equipment.lab_id,
+                    (labinfo, equipment) => new
+                    {
+                        lab_id = labinfo.id, name = labinfo.name, equipment = labinfo.equip, maximum = equipment.maximum
+                    });
+            var maxi = data.Select(a => a.maximum).FirstOrDefault();
+            var pull_data = db.Reserveinfo
+                .Where(x => (x.start_time.Day - dateNow.Day) >= 0 &&
+                            (x.start_time.Day - dateNow.Day) <= 6 &&
+                            x.lab_id == lab_id
+                ).OrderBy(x => x.lab_id).OrderBy(x=>x.id);
+            List<Reserve_page> days = new List<Reserve_page>();
+            for (var day = 0; day < 7; day++)
+            {
+                var dayN = from x in pull_data where x.start_time.Day - dateNow.Day == day select x;
+                var temp_day = new Reserve_page {day = day, maximum = maxi};
+                List<int> timeslot = new List<int>();
+                foreach (var time in time_slot)
+                {
+                    var n_time = from x in dayN where x.start_time.Hour == time select x;
+                    timeslot.Add(maxi - n_time.Count());
+                }
+
+                temp_day.timeslot = timeslot.ToArray();
+                days.Add(temp_day);
+            }
             return new Return
             {
                 Error = false,
-                Data = ""
+                Data = days.ToArray()
             };
         }
         
