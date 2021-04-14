@@ -1,14 +1,19 @@
 ﻿.login-container {
   height: 100vh;
-  display: flex;
-  flex-direction: row;
+  width: fit-content;
+  margin: auto;
+  display: grid;
+  grid-template-areas: 
+  "login-left login-right";
   align-items: center;
-  justify-content: center;
 }
 
 .login-left {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas: 
+  "top"
+  "mid"
+  "bot";
   height: 80vh;
   width: 300px;
   background-color: var(--blue-400);
@@ -20,10 +25,22 @@
 .login-left>h1 {
   color: white;
   margin: 4rem 0;
+  grid-area: "mid";
 }
 
 .login-left input {
   margin-top: 1rem;
+}
+
+.login-left .login-form {
+  grid-area: "bot";
+}
+
+.login-left>.login-top {
+  grid-area: "top";
+  height: fit-content;
+  width: fit-content;
+  justify-self: end;
 }
 
 .login-left .register-btn {
@@ -60,24 +77,29 @@
 }
 
 .login-right {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas: 
+  "top"
+  "mid"
+  "bot";
   height: 80vh;
   padding-left: 4rem;
-  justify-content: space-between;
 }
 
 .login-right>.logo {
   height: 4rem;
-  align-self: flex-end;
+  justify-self: end;
+  grid-area: "top";
 }
 
 .login-right>.login-pic {
-  align-self: flex-end;
+  align-self: end;
+  grid-area: "bot";
 }
 
 .sm-box{
   margin-bottom: 25px;
+  grid-area: "mid";
 }
 
 .sm-box>span, .sm-logo{
