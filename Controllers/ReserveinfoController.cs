@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,34 +8,50 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using LabReservation.Services;
 
 namespace LabReservation.Controllers
 {
     public class ReserveinfoController : Controller
     {
+        private readonly ILabService LAB;
         private readonly LabReservationContext _context;
 
-        public ReserveinfoController(LabReservationContext context)
+        public ReserveinfoController(ILabService labservice, LabReservationContext context)
         {
             _context = context;
+            LAB = labservice;
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index(ReserveConfirm data)
+        public async Task<IActionResult> Index()
         {
-            // return View(await _context.Reserveinfo.ToListAsync());
-            return View(data);
+            return View();
         }
 
-        [HttpPost]
-        [Route("[action]")]
-        public IActionResult Confirm([Bind("test")] ReserveConfirm reserveConfirm)
-        {
-            // reserveConfirm.test = 1;
-            Console.WriteLine(reserveConfirm.test);
-            return RedirectToAction("Index", reserveConfirm);
-        }
 
+        // [HttpPost]
+        // public IActionResult Confirm(Reserve_confirm data)
+        public IResourceService Confirm(Reserved[] data)
+        {
+            // int userid = 1;
+            // var mock = new Reserve_confirm
+            // {
+            //     confirm = new Reserved[]
+            //     {
+            //         new Reserved {time = 0, day = 0, lab_id = 1},
+            //         new Reserved {time = 1, day = 2, lab_id = 1},
+            //         new Reserved {time = 2, day = 3, lab_id = 1},
+            //         new Reserved {time = 3, day = 4, lab_id = 1},
+            //         new Reserved {time = 4, day = 5, lab_id = 1},
+            //         new Reserved {time = 5, day = 6, lab_id = 1},
+            //         
+            //     }
+            // };
+            // var temp = LAB.Confirm(mock, userid);
+            var temp = LAB.ReadCancel(1);
+            return null;
+        }
 
         // GET: Reserveinfo/Details/5
         public async Task<IActionResult> Details(int? id)

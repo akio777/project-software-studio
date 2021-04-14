@@ -6,10 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using LabReservation.Data;
+using LabReservation.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace LabReservation
 {
     public class Startup
@@ -27,6 +28,22 @@ namespace LabReservation
             services.AddControllersWithViews();
             services.AddDbContext<LabReservationContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("LabReservationContext")));
+
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    // x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    // x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddCookie(opts =>
+                {
+                    opts.LoginPath = "/login";
+                    opts.AccessDeniedPath = "/home";
+                });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ILabService, LabService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,9 +72,9 @@ namespace LabReservation
 
             app.UseRouting();
 
-            app.UseAuthorization();
-            app.UseAuthentication();
+            app.UseCookiePolicy();
 
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
