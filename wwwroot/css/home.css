@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    border: solid black 2px;
+    justify-content: center;
+}
+
+.card{
+    width: 240px;
+    height: 240px;
+    background-color: #0D6EFD;
+}
+
+.status{
+    width: 240px;
+    height: 80px;
+    background-color: white;
+}
