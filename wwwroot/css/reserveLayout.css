@@ -1,0 +1,18 @@
+.layout {
+  display: flex;
+  margin: auto;
+  padding: 2rem 1rem; 
+  width: 60%;
+}
+
+.layout_main {
+    margin: auto;
+}
+
+.lab-name {
+    color: var(--blue-500);
+}
+
+.equiment-name {
+    margin: 0.75rem 0;
+}

@@ -1,12 +1,13 @@
 @{
+  var labName = "Lab001";
+  var currentDate =  DateTime.Now;
   var mockList = new List<string>(new string[] { "test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",
 "test9", "test10","test11", "test12", "test13", "test14", "test15", "test16", "test17", "test18", "test19", "test20", "test21",
 "test22", "test23", "test24", "test25", "test26", "test27", "test28", "test29", "test30" });
 }
 
-<link rel="stylesheet" type="text/css" href="css/cancelReserve.css" />
+<link rel="stylesheet" type="text/css" href="~/css/cancelReserve.css" />
 
-<h1>Hello from view components</h1>
 <div id="modal-main" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -17,6 +18,7 @@
     </div>
     <div class="modal-body">
       <p>Select user to cancel reservation in</p>
+      <p class="detail-reserve">@labName @currentDate</p>
       <form>
         <div class="select-cancel">
           @foreach (var item in @mockList)
@@ -34,7 +36,7 @@
       </div>
       <div>
         <button type="button" id="btn-cancel" class="btn btn-cancel">Cancel</button>
-        <button type="button" id="btn-confirm" class="btn btn-confirm">Confirm</button>
+        <button type="submit" id="btn-confirm" class="btn btn-confirm">Confirm</button>
       </div>
     </div>
   </div>
@@ -44,7 +46,7 @@
 <script>
   var modal = document.getElementById("modal-main");
 
-  var btn = document.getElementById("myBtn");
+  var btn = document.getElementById("btn-open-modal");
 
   var span = document.getElementsByClassName("close")[0];
 
@@ -67,11 +69,14 @@
   }
 
   confirm.onclick = function () {
+    // get function from checkbox viewcomponent
     confirm_checkbox();
+    // submit and close modal
     modal.style.display = "none";
   };
 
   select_all.onclick = function () {
+    // get function from checkbox viewcomponent
     check_all();
   }
 

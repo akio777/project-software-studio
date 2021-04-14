@@ -1,8 +1,8 @@
 @model LabReservation.Models.CheckBox
 
-<link rel="stylesheet" type="text/css" href="css/checkbox.css">
+<link rel="stylesheet" type="text/css" href="~/css/checkbox.css">
 
-<input type="checkbox" id="@Model.key" name="@Model.key" value="@Model.key"> @Model.key<br>
+<input type="checkbox" class="check-box" id="@Model.key" name="@Model.key" value="@Model.key"> @Model.key<br>
 
 <script>
     function confirm_checkbox() {
@@ -15,13 +15,6 @@
             }
         }
         console.log(result);
-        
-        result = [];
-        for (i = 0; i < checkbox_list.length; i++) {
-            if (checkbox_list[i].checked) {
-                document.getElementById(checkbox_list[i].id).checked = false;
-            }
-        }
     }
 
     function check_all() {
