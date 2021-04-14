@@ -21,6 +21,9 @@
   background-color: transparent;
   color: rgba(0, 0, 0, 0.3);
 }
+.lab-name button:hover {
+  color: rgba(0, 0, 0, 0.5);
+}
 
 .equipment {
   padding-top: 1rem;
@@ -33,6 +36,9 @@
   padding-left: 1rem;
   background-color: transparent;
   color: rgba(0, 0, 0, 0.3);
+}
+.equipment button:hover {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .detail {
