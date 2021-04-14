@@ -27,6 +27,13 @@ namespace LabReservation.Models
         public int time { get; set; }
         public int lab_id { get; set; }
     }
+
+    public class CancelMap
+    {
+        public int reserve_id { get; set; }
+        public int day { get; set; }
+        public int time { get; set; }
+    }
     
     
 }
