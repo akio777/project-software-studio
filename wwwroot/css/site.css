@@ -29,6 +29,7 @@ a {
 
 button {
   cursor: pointer;
+  border: none;
 }
 
 button:focus {
@@ -71,6 +72,8 @@ html {
 
 body {
   /* Margin bottom by footer height */
+  background-color: #F8F9FA;
+  height: 100vh;
   margin: 0;
 }
 
@@ -87,8 +90,36 @@ body {
   font-size: 10px;
 }
 
-
 /* User CSS */
+.h-screen{
+  height: 100vh;
+}
+
+.w-screen{
+  width: 100%;
+}
+
+
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validation-summary-errors ul {
+  list-style: none;
+  color: #DC3545;
+  font-size: 0.8vw;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
 
 *::-webkit-scrollbar {
   position: absolute;

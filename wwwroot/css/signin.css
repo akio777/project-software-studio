@@ -1,0 +1,106 @@
+﻿.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 300px;
+  background-color: var(--blue-400);
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+.login-left>h1 {
+  color: white;
+  margin: 4rem 0;
+}
+
+.login-left input {
+  margin-top: 1rem;
+}
+
+.login-left .register-btn {
+  background-color: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
+  float: right;
+}
+
+.login-left .login-btn {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-600);
+  border-radius: 5px;
+  padding: 10px;
+  width: fit-content;
+  font-weight: bold;
+  margin-top: 1rem;
+  float: right;
+}
+
+.register-btn>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.login-right {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  padding-left: 4rem;
+  justify-content: space-between;
+}
+
+.login-right>.logo {
+  height: 4rem;
+  align-self: flex-end;
+}
+
+.login-right>.login-pic {
+  align-self: flex-end;
+}
+
+.sm-box{
+  margin-bottom: 25px;
+}
+
+.sm-box>span, .sm-logo{
+  font-size: 1vw;
+}
+
+.sm-logo{
+  color: #0A58CA;
+  display: flex;
+  flex-direction: row-reverse;
+  font-weight: 700;
+  font-size: 21px;
+  align-items: center;
+}
+
+.sm-logo>.material-icons{
+  margin: 0 10px 0 10px;
+}
+
+.sm-desc{
+  display: flex;
+  flex-direction: row-reverse;
+  color: #0D6EFD;
+  font-weight: 400;
+  font-size: 18px;
+}
