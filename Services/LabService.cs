@@ -12,12 +12,13 @@ namespace LabReservation.Services
     public interface ILabService
     {
         Return Read(int labid, int userid);
-        Return Get();
-        
+        Return LabInfo();
+        Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
+        Return ReadCancel(int userid);
         // Return Confirm(Reserve_confirm data, int userid);
     }
-
+    // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
     {
         private readonly LabReservationContext db;
@@ -84,7 +85,7 @@ namespace LabReservation.Services
             };
         }
 
-        public Return Get()
+        public Return LabInfo()
         {
             List<bool> lab = new List<bool> {false, false, false, false, false};
             for (var i = 0; i < 5; i++)
@@ -143,8 +144,66 @@ namespace LabReservation.Services
                 Data = ""
             };
         }
-        
-        
-        
+
+        public Return LabManageInfo()
+        {
+            var temp = db.Labinfo
+                .Join(
+                    db.Equipment,
+                    labinfo => labinfo.id,
+                    equipment => equipment.lab_id,
+                    (labinfo, equipment) => new LabManageInfo
+                        {id = labinfo.id, name = labinfo.name, equip = labinfo.equip, amount = equipment.maximum}
+                );
+            return new Return
+            {
+                Error = false,
+                Data = temp
+            };
+        }
+
+        public Return ReadCancel(int userid)
+        {
+            var dateNow = DateTime.Now;
+            var temp = db.Labinfo
+                .Join(
+                    db.Reserveinfo,
+                    labinfo => labinfo.id,
+                    reserveinfo => reserveinfo.lab_id,
+                    (labinfo, reserveinfo) => new {labinfo, reserveinfo}
+                ).Where(x =>
+                    (x.reserveinfo.start_time.Day - dateNow.Day) >= 0 &&
+                    (x.reserveinfo.start_time.Day - dateNow.Day) <= 6 &&
+                    x.reserveinfo.reserve_by == userid
+                )
+                .Join(
+                    db.Equipment,
+                    labres => labres.labinfo.id,
+                    equipment => equipment.lab_id,
+                    (labres, equipment) => new
+                    {
+                        reserve_id = labres.reserveinfo.id,
+                        name = labres.labinfo.name,
+                        start_time = labres.reserveinfo.start_time,
+                        end_time = labres.reserveinfo.end_time,
+                    }
+                ).OrderBy(arg => arg.reserve_id);
+            List<CancelMap> output = new List<CancelMap>();
+            foreach (var data in temp)
+            {
+                // Console.WriteLine(day_slot.ToList().IndexOf(data.start_time.Day-dateNow.Day)+" :   "+time_slot.ToList().IndexOf(data.start_time.Hour));
+                output.Add(new CancelMap
+                {
+                    reserve_id = data.reserve_id,
+                    day = day_slot.ToList().IndexOf(data.start_time.Day-dateNow.Day),
+                    time = time_slot.ToList().IndexOf(data.start_time.Hour)
+                });
+            }
+            return new Return
+            {
+                Error = false,
+                Data = output
+            };
+        }
     }
 }
