@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="~/css/labmanageCard.css">
 
 <div class="card">
-    <div class="card-main" tabindex="0">
+    <div class="card-main" tabindex="0" id="@Model.labinfo.id" onclick=clickTest(this.id)>
         <div class="card-header">
             <h3 class="lab-name">@Model.labinfo.name</h3>
         </div>
@@ -13,3 +13,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    function clickTest(id) {
+        var url = 'Reserveinfo/index/' + id;
+        window.location.href = url;
+    }
+</script>
