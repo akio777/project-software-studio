@@ -1,0 +1,67 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem 1rem;
+  width: 60%;
+}
+
+.lab-name {
+  padding-top: 5px;
+  display: flex;
+  align-items: flex-start;
+}
+.lab-name h1 {
+  color: var(--blue-500);
+}
+.lab-name button {
+  margin-top: 14px;
+  margin-bottom: auto;
+  padding-left: 1rem;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.equipment {
+  padding-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+.equipment button {
+  margin-top: 3px;
+  margin-bottom: auto;
+  padding-left: 1rem;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.detail {
+  padding-top: 1rem;
+}
+
+.back-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 5px;
+}
+
+.back-content button {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 0;
+  background-color: transparent;
+  color: var(--blue-500);
+  font-size: 1.25rem;
+}
+
+.back-content p {
+  color: var(--blue-500);
+  font-size: 1.25rem;
+}
+
+.back-content:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}

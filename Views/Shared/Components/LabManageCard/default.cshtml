@@ -3,9 +3,8 @@
 <link rel="stylesheet" type="text/css" href="~/css/labmanageCard.css">
 
 <div class="card">
-
     <div class="card-main" tabindex="0" id="@Model.labinfo.id">
-        <a asp-controller="Reserveinfo" asp-action="Index" asp-route-id="@Model.labinfo.id">
+        <a asp-controller="LabManage" asp-action="EditCancel" asp-route-id="@Model.labinfo.id">
             <div class="card-header">
                 <h3 class="lab-name">@Model.labinfo.name</h3>
             </div>

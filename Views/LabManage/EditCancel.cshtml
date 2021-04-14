@@ -1,0 +1,36 @@
+@model LabReservation.Models.LabManageCard
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/css/labmanageCancelLayout.css">
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> *@
+
+
+
+<div class="layout">
+    <div tabindex="0">
+        <a asp-controller="LabManage" asp-action="Index">
+            <div class="back-content">
+                <button><i class="fa fa-chevron-left"></i></button>
+                <p>Back</p>
+            </div>
+        </a>
+    </div>
+    <div class="layout-main">
+        <div class="lab-name">
+            <h1>@Model.labinfo.name</h1>
+            <button><i class="fa fa-edit"></i></button>
+        </div>
+        <div class="equipment">
+            <h3>Maximum Equipment : @Model.equipinfo.maximum</h3>
+            <button><i class="fa fa-edit"></i></button>
+        </div>
+        <div class="detail">
+            <h3 class="equiment-name">Cancel Reservation</h3>
+            <p>Select time slot to cancel reservation</p>
+        </div>
+    </div>
+</div>
