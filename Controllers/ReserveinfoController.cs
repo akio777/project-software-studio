@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using LabReservation.Services;
 
 namespace LabReservation.Controllers
 {
     public class ReserveinfoController : Controller
     {
+        private readonly ILabService LAB;
         private readonly LabReservationContext _context;
 
-        public ReserveinfoController(LabReservationContext context)
+        public ReserveinfoController(ILabService labservice, LabReservationContext context)
         {
             _context = context;
+            LAB = labservice;
         }
 
         // GET: Reserveinfo
@@ -29,23 +32,24 @@ namespace LabReservation.Controllers
         
         // [HttpPost]
         // public IActionResult Confirm(Reserve_confirm data)
-        public IResourceService Confirm(Reserve_confirm? data)
+        public IResourceService Confirm(Reserved[] data)
         {
-            var temp = new Reserve_confirm
-            {
-                confirm = new DayTime[]
-                {
-                    new DayTime {day = 13, time = 8},
-                    new DayTime {day = 13, time = 9},
-                    new DayTime {day = 13, time = 10},
-                    new DayTime {day = 13, time = 11},
-                    new DayTime {day = 13, time = 12},
-                    new DayTime {day = 13, time = 13},
-                    new DayTime {day = 13, time = 14},
-                }
-            };
-            
-            
+            // int userid = 1;
+            // var mock = new Reserve_confirm
+            // {
+            //     confirm = new Reserved[]
+            //     {
+            //         new Reserved {time = 0, day = 0, lab_id = 1},
+            //         new Reserved {time = 1, day = 2, lab_id = 1},
+            //         new Reserved {time = 2, day = 3, lab_id = 1},
+            //         new Reserved {time = 3, day = 4, lab_id = 1},
+            //         new Reserved {time = 4, day = 5, lab_id = 1},
+            //         new Reserved {time = 5, day = 6, lab_id = 1},
+            //         
+            //     }
+            // };
+            // var temp = LAB.Confirm(mock, userid);
+            var temp = LAB.Get();
             return null;
         }
         
