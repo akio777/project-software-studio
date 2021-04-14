@@ -135,6 +135,9 @@ button.close {
   margin-top: 1rem;
   overflow: auto;
 }
+.select-cancel input {
+  width: fit-content;
+}
 
 .selected-list {
   max-height: 50vh;
