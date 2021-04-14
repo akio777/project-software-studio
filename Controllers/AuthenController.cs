@@ -44,7 +44,7 @@ namespace LabReservation.Controllers
         
         [Route("[action]")]
         [HttpPost]  
-        public async Task<ActionResult> Login(AuthenModel data)
+        public async Task<ActionResult> Login(LoginModel data)
         {   
             var temp = user_service.CheckLogin(data);
             if (temp.Error)

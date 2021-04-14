@@ -9,7 +9,7 @@ namespace LabReservation.Services
 {
     public interface IUserService
     {
-        Return CheckLogin(AuthenModel data);
+        Return CheckLogin(LoginModel data);
         Return CheckRegister(RegisterModel data);
     }
     
@@ -21,7 +21,7 @@ namespace LabReservation.Services
             db = context;
         }
 
-        public Return CheckLogin(AuthenModel data)
+        public Return CheckLogin(LoginModel data)
         {
             if (data.email==null || data.password==null)
             {

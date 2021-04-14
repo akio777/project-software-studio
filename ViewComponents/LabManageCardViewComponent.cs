@@ -17,12 +17,9 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int? id)
+        public async Task<IViewComponentResult> InvokeAsync(LabManageInfo? lab_info)
         {
-            var labmanage_info = new LabManageCard();
-            labmanage_info.labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
-            labmanage_info.equipinfo = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
-            return View(labmanage_info);
+            return View(lab_info);
         }
     }
 }
