@@ -49,7 +49,7 @@ namespace LabReservation.Controllers
             //     }
             // };
             // var temp = LAB.Confirm(mock, userid);
-            var temp = LAB.Get();
+            var temp = LAB.ReadCancel( 1);
             return null;
         }
         
