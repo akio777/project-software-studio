@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Home Page";
+    var listLabID = new List<int>() {1, 2, 3, 4, 5};
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/labmanageLayout.css">
+
+<div>
+    <div>
+        <h1 class="h-lab-manage"> Lab Management </h1>
+    </div>  
+    <div>
+        @foreach (var item in listLabID)
+        {
+            <div>
+                @await Component.InvokeAsync("LabManageCard", new {id = @item})
+            </div>
+        }
+    </div>
+</div>
+

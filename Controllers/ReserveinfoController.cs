@@ -20,9 +20,17 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.Reserveinfo.ToListAsync());
+            if (id == null) {
+                return NotFound();
+            }
+            var labinfo = await _context.Labinfo.FindAsync(id);
+            if (labinfo == null) {
+                return NotFound();
+            }
+            
+            return View(labinfo);
         }
 
         // GET: Reserveinfo/Details/5

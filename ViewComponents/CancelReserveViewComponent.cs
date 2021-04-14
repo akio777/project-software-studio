@@ -16,23 +16,9 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int? id)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            if (id == null)
-            {
-                string model = "<strong>some custom html</strong>";
-                return View("", model);
-            }
-
-            var reserveinfo = await _context.Reserveinfo
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (reserveinfo == null)
-            {
-                string model = "<strong>some custom html</strong>";
-                return View("", model);
-            }
-
-            return View(reserveinfo);
+            return View();
         }
     }
 }

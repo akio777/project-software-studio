@@ -1,60 +1,21 @@
-@model IEnumerable<LabReservation.Models.Reserveinfo>
+@model LabReservation.Models.Labinfo
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<link rel="stylesheet" type="text/css" href="~/css/reserveLayout.css">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.lab_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.reserve_by)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.start_time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.end_time)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.lab_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.reserve_by)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.start_time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.end_time)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-
-<button id="myBtn">Open Modal</button>
-
-<div>
-    @await Component.InvokeAsync("CancelSelectedReserve")
+<div class="layout">
+    <div class="layout-main">
+        <h1 class="lab-name">@Model.name</h1>
+        <h2 class="equiment-name">@Model.equip</h2>
+        <p>Select time slot to reserve the equipment</p>
+    </div>
 </div>
 
+<button id="btn-open-modal">Open Modal</button>
+
+<div>
+    @await Component.InvokeAsync("CancelReserve")
+</div>

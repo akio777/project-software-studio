@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @{
     ViewData["Title"] = "Home Page";
+    var listLabID = new List<int>() { 1, 2, 3, 4, 5 };
 }
 
 
@@ -14,4 +15,14 @@
     @await Component.InvokeAsync("LabCard")
 
     @* <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+</div>
+<div>
+    @foreach (var item in listLabID)
+    {
+        <div>
+            @await Component.InvokeAsync("LabManageCard", new {id = @item})
+        </div>
+    }
+</div>
+
 </div>
