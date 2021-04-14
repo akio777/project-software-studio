@@ -16,7 +16,8 @@ namespace LabReservation.Services
         Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
         Return ReadCancel(int userid);
-        // Return Confirm(Reserve_confirm data, int userid);
+        Return Cancel(CancelReserved[] data);
+        Return LabManage(int labid);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
@@ -205,5 +206,45 @@ namespace LabReservation.Services
                 Data = output
             };
         }
+
+        public Return Cancel(CancelReserved[] data)
+        {
+            bool error = false;
+            foreach (var i in data)
+            {
+                var check = db.Reserveinfo.Where(x => x.id == i.reserve_id).FirstOrDefault();
+                if (check == null)
+                {
+                    error = true;
+                    break;
+                }
+                db.Reserveinfo.Remove(new Reserveinfo {id = i.reserve_id});
+            }
+            if (error)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ไม่สามารถยกเลิกได้ ข้อมูลไม่ถูกต้อง กรุณา refresh"
+                };
+            }
+            db.SaveChanges();
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
+
+
+        public Return LabManage(int lab_id)
+        {
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
+        
     }
 }
