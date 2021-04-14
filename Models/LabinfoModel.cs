@@ -18,4 +18,12 @@ namespace LabReservation.Models
         public string equip { get; set; }
         public int lab_id { get; set; }
     }
+
+    public class LabManageInfo
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string equip { get; set; }
+        public int amount { get; set; }
+    }
 }
