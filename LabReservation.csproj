@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-*" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0-*" />
@@ -23,6 +24,10 @@
     <_ContentIncludedByDefault Remove="JWTAuthentication\appsettings.Development.json" />
     <_ContentIncludedByDefault Remove="JWTAuthentication\appsettings.json" />
     <_ContentIncludedByDefault Remove="JWTAuthentication\Properties\launchSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\login-pic.png" />
   </ItemGroup>
 
 </Project>
