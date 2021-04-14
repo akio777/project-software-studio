@@ -1,11 +1,10 @@
 ﻿.login-container {
   height: 100vh;
-  width: fit-content;
-  margin: auto;
   display: grid;
   grid-template-areas: 
   "login-left login-right";
   align-items: center;
+  justify-content: center;
 }
 
 .login-left {
@@ -25,7 +24,7 @@
 .login-left>h1 {
   color: white;
   margin: 4rem 0;
-  grid-area: "mid";
+  grid-area: mid;
 }
 
 .login-left input {
@@ -33,11 +32,11 @@
 }
 
 .login-left .login-form {
-  grid-area: "bot";
+  grid-area: bot;
 }
 
 .login-left>.login-top {
-  grid-area: "top";
+  grid-area: top;
   height: fit-content;
   width: fit-content;
   justify-self: end;
@@ -89,17 +88,17 @@
 .login-right>.logo {
   height: 4rem;
   justify-self: end;
-  grid-area: "top";
+  grid-area: top;
 }
 
 .login-right>.login-pic {
   align-self: end;
-  grid-area: "bot";
+  grid-area: bot;
 }
 
 .sm-box{
   margin-bottom: 25px;
-  grid-area: "mid";
+  grid-area: mid;
 }
 
 .sm-box>span, .sm-logo{
