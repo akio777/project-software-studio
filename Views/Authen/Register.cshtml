@@ -33,14 +33,14 @@
         </div>
     </div>
     <div class="register-right">
-        <a asp-action="Login">
+        <a asp-action="Login" class="register-top">
             <button type="button" class="login-btn">
                 <span class="material-icons">arrow_back</span>
                 Sign In
             </button>
         </a>
         <h1>Sign Up</h1>
-        <form asp-action="Register">
+        <form asp-action="Register" class="register-form">
             <p class="register-label">Email</p>
             <div class="form-group">
                 <input asp-for="Email" class="form-control" placeholder="Email"/>
