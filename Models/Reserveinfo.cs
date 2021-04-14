@@ -34,6 +34,11 @@ namespace LabReservation.Models
         public int day { get; set; }
         public int time { get; set; }
     }
+
+    public class CancelReserved
+    {
+        public int reserve_id { get; set; }
+    }
     
     
 }
