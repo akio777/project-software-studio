@@ -1,8 +1,10 @@
+@model LabReservation.Models.ReservedInput
+
 @{
     var currentDateTime = DateTime.Now;
 }
 
-<script type="text/javascript">
+<script type="text/javascript">s
     @* function confirmHandler() {
         document.getElementById("myAnchor").addEventListener("click", function (event) {
         event.preventDefault()
@@ -12,156 +14,205 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <link rel="stylesheet" type="text/css" href="css/reservationTable.css">
-
+<link rel="stylesheet" type="text/css" href="css/circularButton.css">
 <form id="myAnchor" asp-action="Confirm" method="post">
-    <button type="submit" onclick="confirmHandler()">Confirm</button>
-    @* <input name="test" type="number" asp-for="test" /> *@
-</form>
+    <button type="submit">Confirm</button>
 
-<table class="reservation-table-container">
-    <thead class="reservation-table-header">
-        <tr>
-            <th></th>
-            <th>
-                <div>@currentDateTime.ToString("ddd")</div>
-                <div>Today</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
-            </th>
-            <th>
-                <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
-                <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
-            </th>
-        </tr>
-    </thead>
-    <tbody class="reservation-table-content">
-        <tr>
-            <td>08:00<br>-<br>09:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"0" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>09:00<br>-<br>10:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"1" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>10:00<br>-<br>11:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"2" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>11:00<br>-<br>12:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"3" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>12:00<br>-<br>13:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"4" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>13:00<br>-<br>14:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"5" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>14:00<br>-<br>15:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"6" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>15:00<br>-<br>16:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"7" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>16:00<br>-<br>17:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"8" })
-                    </div>
-                </td>
-            }
-        </tr>
-        <tr>
-            <td>17:00<br>-<br>18:00</td>
-            @for (int i = 0; i < 7; i++)
-            {
-                <td>
-                    <div>
-                        @await Component.InvokeAsync("CircularButton", new { key = i+"9" })
-                    </div>
-                </td>
-            }
-        </tr>
-    </tbody>
-</table>
+    <table class="reservation-table-container">
+        <thead class="reservation-table-header">
+            <tr>
+                <th></th>
+                <th>
+                    <div>@currentDateTime.ToString("ddd")</div>
+                    <div>Today</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="reservation-table-content">
+            <tr>
+                <td>08:00<br>-<br>09:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_0[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>09:00<br>-<br>10:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_1[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>10:00<br>-<br>11:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_2[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>11:00<br>-<br>12:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_3[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>12:00<br>-<br>13:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_4[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>13:00<br>-<br>14:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_5[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>14:00<br>-<br>15:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_6[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>15:00<br>-<br>16:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_7[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>16:00<br>-<br>17:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_8[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>17:00<br>-<br>18:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+                    <td>
+                        <div>
+                            <label class="circular-container" tabindex="0">
+                                <input asp-for="time_9[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>20</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</form>

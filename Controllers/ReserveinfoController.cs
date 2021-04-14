@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
@@ -31,9 +33,35 @@ namespace LabReservation.Controllers
 
 
         // [HttpPost]
-        // public IActionResult Confirm(Reserve_confirm data)
-        public IResourceService Confirm(Reserved[] data)
+        public IActionResult Confirm(ReservedInput reservedInput)
         {
+            var reservedList = new List<Reserved>();
+            var mapReservedInput = new List<dynamic>();
+            foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
+            {
+                mapReservedInput.Add(propertyInfo.GetValue(reservedInput, null));
+            }
+
+            for (var i = 0; i < mapReservedInput.Count(); i++)
+            {
+                for (var j = 0; j < mapReservedInput[i].Length; j++)
+                {
+                    Console.WriteLine(mapReservedInput[i][j]);
+                    if (mapReservedInput[i][j])
+                    {
+                        var reservedObject = new Reserved();
+                        reservedObject.day = j;
+                        reservedObject.time = i;
+                        reservedObject.lab_id = 0;
+                        reservedList.Add(reservedObject);
+                    }
+                }
+            }
+
+            Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
+
+            return RedirectToAction("Index");
+
             // int userid = 1;
             // var mock = new Reserve_confirm
             // {
@@ -49,8 +77,8 @@ namespace LabReservation.Controllers
             //     }
             // };
             // var temp = LAB.Confirm(mock, userid);
-            var temp = LAB.ReadCancel(1);
-            return null;
+            // var temp = LAB.ReadCancel(1);
+            // return null;
         }
 
         // GET: Reserveinfo/Details/5
