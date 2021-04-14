@@ -82,7 +82,7 @@ namespace LabReservation
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Authen}/{action=Login}/{id?}");
+                    pattern: "{controller=Authen}/{action=Index}/{id?}");
             });
             
 
