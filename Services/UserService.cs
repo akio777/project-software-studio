@@ -75,7 +75,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data =  "รหัสผ่าน ต้องมีความยาว ตั้งแต่ 6 ตัวขึ้นไป"
+                    Data =  "รหัสผ่านต้องมีความยาวตั้งแต่ 6 ตัวขึ้นไป"
                 };
             }
             else if (!data.Password.Equals(data.ConfirmPassword))
@@ -92,7 +92,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ไม่สามารถใช้ email นี้ได้"
+                    Data = "ไม่สามารถใช้ Email นี้ได้"
                 };
             }
             else

@@ -1,4 +1,4 @@
-﻿.sign-box{
+﻿/* .sign-box{
   display: flex;
   flex-direction: row;
   width: 50vw;
@@ -10,8 +10,6 @@
 .sign-in{
   width: 15vw;
   background: #3D8BFD;
-  /*padding-left: 33px;*/
-  /*padding-right: 33px;*/
   padding: 0px 33px 0px 33px;
   border-radius: 20px;
   position: relative;
@@ -25,7 +23,6 @@
 }
 
 .detail{
-  /*background-color: #0c5460;*/
   width: 28vw;
   position: relative;
 }
@@ -96,7 +93,6 @@
 }
 
 .sm-logo>.material-icons{
-  /*margin: 0 10px 0 10px;*/
 }
 
 .sm-desc{
@@ -138,4 +134,119 @@ ul{
 .signin-left>.material-icons{
   padding-left: 10px;
   color: white;
+} */
+
+.register-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-right {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 300px;
+  background-color: var(--blue-400);
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+.register-right>h1 {
+  color: white;
+  margin: 3rem 0;
+}
+
+.register-right input {
+  /* margin-bottom: 1rem; */
+}
+
+.register-right .login-btn {
+  background-color: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
+  float: left;
+}
+
+.register-right .register-btn {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-600);
+  border-radius: 5px;
+  padding: 10px;
+  width: fit-content;
+  font-weight: bold;
+  float: right;
+  margin-top: 1rem;
+}
+
+.register-btn>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.register-left {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  padding-right: 4rem;
+  justify-content: space-between;
+}
+
+.register-left>.rules>.logo {
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.sm-box{
+  
+}
+
+.sm-box>span, .sm-logo{
+  font-size: 1vw;
+}
+
+.sm-logo{
+  color: #0A58CA;
+  display: flex;
+  font-weight: 700;
+  font-size: 21px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sm-box>span {
+  font-size: larger;
+}
+
+.sm-logo>.material-icons{
+  margin: 0 10px 0 10px;
+}
+
+.sm-desc{
+  display: flex;
+  color: #0D6EFD;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.register-label {
+  color: white;
+  margin-top: 1rem;
+}
+
+ol {
+  padding: 0;
 }

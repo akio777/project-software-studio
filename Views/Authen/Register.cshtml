@@ -1,84 +1,68 @@
 @model LabReservation.Models.RegisterModel
 
 @{
-    ViewData["Title"] = "Sign up";
+    ViewData["Title"] = "Sign Up";
 }
 
 @section Scripts
 {
-  <link href="~/css/register.css" rel="stylesheet" />
+    <link href="~/css/register.css" rel="stylesheet" />
 }
 
-@* <h1>Index</h1> *@
-@* *@
-<div class="w-screen h-screen flex-center">
-    <div class="sign-box">
-        
-        <div class="detail">
-            <div class="Logo">
-                <img src='@Url.Content("~/Images/Ellipse 10.svg")' alt="Image">
-                <h1 class="front">LAB</h1>
-                <h1 class="back">RESERVE</h1>
-            </div>
-            
+<div class="register-container">
+    <div class="register-left">
+        <div class="rules">
+            <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
             <div class="sm-box">
-                <div class="sm-logo">
-                    <span>Reservation Rule</span>
-                    @* <span class="material-icons">place</span> *@
-                </div>
-                <ul>
+                <span style="font-weight: bold; color: var(--blue-600); font-size: 22px;">Reservation Rule</span>
+                <ol>
                     <li class="sm-desc">1. จองได้เป็นช่วง ช่วงละ 1 ชั่วโมง และจองได้ล่วงหน้า 7 วัน</li>
                     <li class="sm-desc">2. สามารถจองได้ตั้งแต่ 08:00 ถึง 18:00 น. ทุกวัน</li>
                     <li class="sm-desc">3. ผู้ใช้สามารถจองได้ 1 ชิ้น/ห้อง</li>
                     <li class="sm-desc">4. การยกเลิกจะต้องยกเลิกก่อนเวลาที่จองไว้ได้ 1 ชั่วโมง</li>
-                </ul>
+                </ol>
             </div>
-            <div class="contact">
-                <div class="sm-logo">
-                    <span class="material-icons">phone_in_talk</span>
-                    <span>Contact us</span>
-                </div>
-                <div style="margin-top: 10px">
-                    08X-XXX-XXXX<br/>
-                    admin@labreserv.com
-                </div>
-            </div>
-            @* <img src='@Url.Content("~/Images/login-pic.png")' alt="Image"> *@
         </div>
-        
-        <div class="sign-in">
-        
-            <div class="form-group signin-left">
+        <div class="sm-box">
+            <div class="sm-logo">
+                <span class="material-icons" style="margin: 0;">phone</span>
+                <span style="margin-left: 0.5rem;">Contact Us</span>
+            </div>
+            <span class="sm-desc">08xxxxxxxx</span>
+            <span class="sm-desc">admin@labreserv.com</span>
+        </div>
+    </div>
+    <div class="register-right">
+        <a asp-action="Login">
+            <button type="button" class="login-btn">
                 <span class="material-icons">arrow_back</span>
-                <a asp-action="Login" class="btn text-white">Sign in</a>
+                Sign In
+            </button>
+        </a>
+        <h1>Sign Up</h1>
+        <form asp-action="Register">
+            <p class="register-label">Email</p>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="Email"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            
-            <h1>Sign Up</h1>
-            
-            <form asp-action="Register">
+
+            <div class="alternative-form-group">
+                <p class="register-label">Password</p>
                 <div class="form-group">
-                    <input asp-for="Email" class="form-control" placeholder="email"/>
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <input asp-for="Password" class="form-control" placeholder="Password"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-
-                <div class="alternative-form-group">
-                    <div class="form-group">
-                        <input asp-for="Password" class="form-control" placeholder="password"/>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="ConfirmPassword" class="form-control" placeholder="confirm your password"/>
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
+                <p class="register-label">Confirm Password</p>
+                <div class="form-group">
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password"/>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-
-
-                <div class="form-group login-left">
-                    <input type="submit" value="Register" class="btn login-btn"/>
-                </div>
-            </form>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        </div>
+            </div>
+            <div class="form-group login-left">
+                <input type="submit" value="Register" class="btn register-btn"/>
+            </div>
+        </form>
     </div>
 </div>
 
