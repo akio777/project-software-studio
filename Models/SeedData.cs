@@ -64,26 +64,25 @@ namespace LabReservation.Models
                     );
                 }
 
-
+                // Console.WriteLine("SEED DATA");
                 // for (var i = 0; i < 10; i++)
                 // {
+                //     var random = r.Next(8, 17);
                 //     context.Reserveinfo.AddRange(
                 //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+1, 0, 0),
+                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+2, 0, 0),
                 //         },
                 //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+2, 0, 0),
+                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+3, 0, 0),
                 //         },
                 //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,17), 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), r.Next(8,19), 0, 0),
+                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+3, 0, 0),
+                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+4, 0, 0),
                 //         }
                 //     );
                 // }
-                
-                
                 context.SaveChanges();
             }
         }
