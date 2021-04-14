@@ -49,7 +49,12 @@ namespace LabReservation.Controllers
             //     }
             // };
             // var temp = LAB.Confirm(mock, userid);
-            var temp = LAB.ReadCancel( 1);
+
+            CancelReserved[] mock = new CancelReserved[]
+            {
+                new CancelReserved{reserve_id = 7542},
+            };
+            var temp = LAB.Cancel(mock);
             return null;
         }
         
