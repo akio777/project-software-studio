@@ -1,29 +1,37 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LabReservation.Models;
+using LabReservation.Services;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+
 
 namespace LabReservation.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILabService LAB;
+        public HomeController(ILabService lab)
         {
-            _logger = logger;
+            LAB = lab;
         }
+        
 
         public IActionResult Index()
         {
             var token = Request.Headers["Cookie"];
-            
-            // Console.WriteLine("LOG : "+User.Identity.Name);
+            var temp = LAB.Read(1, 1);
             return View();
+        }
+        public IActionResult Test()
+        {
+            // var token = Request.Headers["Cookie"];
+            // var temp = LAB.Read(1, 1);
+            
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
