@@ -24,17 +24,9 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
-            if (id == null) {
-                return NotFound();
-            }
-            var labinfo = await _context.Labinfo.FindAsync(id);
-            if (labinfo == null) {
-                return NotFound();
-            }
-            
-            return View(labinfo);
+            return View();
         }
         
         

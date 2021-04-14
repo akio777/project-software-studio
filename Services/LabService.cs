@@ -155,7 +155,7 @@ namespace LabReservation.Services
                     equipment => equipment.lab_id,
                     (labinfo, equipment) => new LabManageInfo
                         {id = labinfo.id, name = labinfo.name, equip = labinfo.equip, amount = equipment.maximum}
-                );
+                ).ToArray();
             return new Return
             {
                 Error = false,

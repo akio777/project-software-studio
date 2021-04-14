@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using LabReservation.Services;
 
 namespace LabReservation.Controllers
 {
     public class LabManageController : Controller
     {
         private readonly LabReservationContext _context;
+        private readonly ILabService LAB;
 
-        public LabManageController(LabReservationContext context)
+        public LabManageController(LabReservationContext context, ILabService labservice)
         {
             _context = context;
+            LAB = labservice;
         }
 
         // GET: Labinfo
         public async Task<IActionResult> Index()
         {
-            return View();
+            var lab_info = LAB.LabManageInfo();
+            return View(lab_info.Data);
         }
 
         public async Task<IActionResult> EditCancel(int? id)

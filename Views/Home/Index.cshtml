@@ -13,14 +13,6 @@
     @* <div class="form-group">
         <input type="submit" value="Login" class="btn btn-primary" />
     </div> *@
-    <div>
-        @foreach (var item in listLabID)
-        {
-            <div>
-                @await Component.InvokeAsync("LabManageCard", new {id = @item})
-            </div>
-        }
-    </div>
     
     <a href="https://docs.microsoft.com/aspnet/core">
     </a>

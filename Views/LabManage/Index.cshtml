@@ -1,6 +1,7 @@
+@model IEnumerable<LabReservation.Models.LabManageInfo>
+
 @{
     ViewData["Title"] = "Home Page";
-    var listLabID = new List<int>() {1, 2, 3, 4, 5};
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/labmanageLayout.css">
@@ -10,10 +11,10 @@
         <h1 class="h-lab-manage"> Lab Management </h1>
     </div>  
     <div>
-        @foreach (var item in listLabID)
+        @foreach (var item in @Model)
         {
             <div>
-                @await Component.InvokeAsync("LabManageCard", new {id = @item})
+                @await Component.InvokeAsync("LabManageCard", new {lab_info = @item})
             </div>
         }
     </div>
