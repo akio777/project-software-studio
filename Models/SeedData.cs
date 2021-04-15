@@ -25,7 +25,7 @@ namespace LabReservation.Models
                             id = 1,
                             name = "LAB001",
                             equip = "TOOL-1"
-                        }, 
+                        },
                         new Labinfo
                         {
                             id = 2,
@@ -56,32 +56,43 @@ namespace LabReservation.Models
                 if (!context.Equipment.Any())
                 {
                     context.Equipment.AddRange(
-                        new Equipment{id = 1, lab_id = 1, maximum = 10},
-                        new Equipment{id = 2, lab_id = 2, maximum = 20},
-                        new Equipment{id = 3, lab_id = 3, maximum = 30},
-                        new Equipment{id = 4, lab_id = 4, maximum = 40},
-                        new Equipment{id = 5, lab_id = 5, maximum = 50}
+                        new Equipment { id = 1, lab_id = 1, maximum = 10 },
+                        new Equipment { id = 2, lab_id = 2, maximum = 20 },
+                        new Equipment { id = 3, lab_id = 3, maximum = 30 },
+                        new Equipment { id = 4, lab_id = 4, maximum = 40 },
+                        new Equipment { id = 5, lab_id = 5, maximum = 50 }
                     );
                 }
 
-                // Console.WriteLine("SEED DATA");
+                Console.WriteLine("SEED DATA");
                 // for (var i = 0; i < 10; i++)
                 // {
                 //     var random = r.Next(8, 17);
+
                 //     context.Reserveinfo.AddRange(
-                //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+1, 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+2, 0, 0),
-                //         },
-                //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+2, 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+3, 0, 0),
-                //         },
-                //         new Reserveinfo{lab_id = r.Next(1,6), reserve_by = r.Next(1,20),
-                //             start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+3, 0, 0),
-                //             end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1,28), random+4, 0, 0),
+                //         new Reserveinfo
+                //         {
+                //             lab_id = 1,
+                //             reserve_by = r.Next(1, 20),
+                //             start_time = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + r.Next(1, 7), random + 1, 0, 0),
+                //             end_time = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + r.Next(1, 7), random + 2, 0, 0),
                 //         }
-                //     );
+                // ,
+                // new Reserveinfo
+                // {
+                //     lab_id = r.Next(1, 6),
+                //     reserve_by = r.Next(1, 20),
+                //     start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 2, 0, 0),
+                //     end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 3, 0, 0),
+                // },
+                // new Reserveinfo
+                // {
+                //     lab_id = r.Next(1, 6),
+                //     reserve_by = r.Next(1, 20),
+                //     start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 3, 0, 0),
+                //     end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 4, 0, 0),
+                // }
+                // );
                 // }
                 context.SaveChanges();
             }

@@ -36,10 +36,58 @@
   left: 0;
   height: 56px;
   width: 56px;
-  background-color: var(--white);
   color: var(--blue-500);
   border-radius: 50%;
   border: 2px solid var(--blue-500);
+}
+/* Hidden Checkbox Style */
+.hidden {
+  display: none !important;
+}
+
+/* Success Checkbox Style */
+.success .checkmark {
+  color: var(--success);
+  border: 2px solid var(--success);
+}
+
+.success:hover .checkmark {
+  box-shadow: 0 0 10px 0 var(--success) !important;
+}
+/* Warning Checkbox Style */
+.warning .checkmark {
+  color: var(--warning);
+  border: 2px solid var(--warning);
+}
+
+.warning:hover .checkmark {
+  box-shadow: 0 0 10px 0 var(--warning) !important;
+}
+/* Full Checkbox Style */
+.full .checkmark {
+  color: var(--grey-400);
+  border: 2px solid var(--grey-400);
+  font-size: 14px;
+}
+
+.full:hover input ~ .checkmark {
+  cursor: default;
+  box-shadow: none !important;
+  user-select: none;
+}
+
+/* Reserved Checkbox Style */
+.reserved .checkmark {
+  color: var(--white);
+  background-color: var(--blue-200);
+  border: none;
+  font-size: 12px;
+}
+
+.reserved:hover input ~ .checkmark {
+  cursor: default;
+  box-shadow: none !important;
+  user-select: none;
 }
 
 /* On mouse-over, add a grey background color */
@@ -50,6 +98,11 @@
 /* When the checkbox is checked, add a blue background */
 .circular-container input:checked ~ .checkmark {
   background-color: var(--blue-500);
+  border: none;
+}
+
+.circular-container input:checked:hover ~ .checkmark {
+  box-shadow: 0 0 10px 0 var(--blue-500) !important;
 }
 
 .circular-container input:checked ~ .checkmark p {
@@ -79,20 +132,4 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
-}
-
-.success-btn {
-  color: var(--success);
-  border: 2px solid var(--success);
-}
-
-.success-btn:hover {
-  color: var(--white);
-  background-color: var(--success);
-}
-
-.check-btn {
-  color: var(--white);
-  border: 0 !important;
-  background-color: var(--blue-500);
 }
