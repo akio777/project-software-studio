@@ -59,3 +59,20 @@
   font-weight: 500;
   line-height: 60px;
 }
+
+.card-name {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-name-area {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 120px;
+  color: white;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 60px;
+  align-self: center;
+}

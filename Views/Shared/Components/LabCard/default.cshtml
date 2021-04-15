@@ -4,12 +4,20 @@
 
 <div class="card">
     <div class="card-name">
-        <h1>@Model.name</h1>
+        <div class="card-name-area">@Model.name</div>
     </div>
 
     <div class="card-status">
         <div class="status">Status
-            <p>@Model.notAvailable</p>
+            @if (Model.notAvailable == false)
+            {
+                <p>Avaiable</p>
+            }
+            @if (Model.notAvailable == true)
+            {
+                <p>Full</p>
+            }
+            @* <p>@Model.notAvailable</p> *@
         </div>
         <div class="equipment">Equipment
             <p>@Model.equip</p>
