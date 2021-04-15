@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LabReservation.Models;
+using LabReservation.Services;
 
 namespace LabReservation.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        private readonly ILabServices LAB;
 
         public HomeController(ILogger<HomeController> logger)
         {
