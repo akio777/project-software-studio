@@ -22,6 +22,7 @@ namespace LabReservation.Services
         Return BlackListInfo();
         Return UnBlock(int userid);
         Return ForceBlock(int userid);
+        Return GetEmailUser(int userid);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
@@ -397,6 +398,17 @@ namespace LabReservation.Services
             {
                 Error = false,
                 Data = ""
+            };
+        }
+
+        public Return GetEmailUser(int userid)
+        {
+            var temp = db.Userinfo.Where(a => a.id == userid).First();
+            UserEmail output = new UserEmail {email = temp.email, user_id = temp.id};
+            return new Return
+            {
+                Error = false,
+                Data = output
             };
         }
     }
