@@ -45,7 +45,7 @@ namespace LabReservation.Controllers
         }
 
         // [HttpPost]
-        public IActionResult Confirm(ReservedInput reservedInput)
+        public IActionResult Confirm(ReservedInput reservedInput, int id)
         {
             var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var reservedList = new List<Reserved>();
@@ -64,17 +64,19 @@ namespace LabReservation.Controllers
                         var reservedObject = new Reserved();
                         reservedObject.day = j;
                         reservedObject.time = i;
-                        reservedObject.lab_id = 0;
+                        reservedObject.lab_id = 1;
                         reservedList.Add(reservedObject);
                     }
                 }
             }
+            Console.WriteLine(id);
 
             Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
 
-            // LAB.Confirm(mock, userId);
+            LAB.Confirm(reservedList.ToArray(), userId);
 
             return RedirectToAction("Index", "Home");
+
 
         }
 
