@@ -77,3 +77,42 @@
 .reservation-table-content tr:last-of-type td {
   border-bottom: none;
 }
+
+.confirm-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.reserved-content {
+  display: flex;
+}
+
+.select-content {
+  display: flex;
+}
+
+.count-h {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.count-text {
+  font-size: 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.btn-confirm {
+  font-size: 1rem;
+  background-color: var(--blue-500);
+  color: var(--light);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}

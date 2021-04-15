@@ -8,8 +8,17 @@
 <link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
 <link rel="stylesheet" type="text/css" href="~/css/circularButton.css">
 <form id="myAnchor" asp-action="Confirm" method="post">
-    <p id="count_reserved">Count</p>
-    <button type="submit">Confirm</button>
+    <div class="confirm-content">
+        <div class="reserved-content">
+            <p class="count-h">Reserved :</p>
+            <p id="count_reserved" class="count-text">Not reserved</p>
+        </div>
+        <div class="select-content">
+            <p class="count-h">Select :</p>
+            <p id="count_select" class="count-text">Not selected</p>
+            <button type="submit" class="btn-confirm">Confirm Reserve</button>
+        </div>
+    </div>
 
     <table class="reservation-table-container">
         <thead class="reservation-table-header">
@@ -211,13 +220,22 @@
 </form>
 
 <script type="text/javascript">
+    let reserved_time = 0;
     const currentDateTime = new Date();
     const model = @Json.Serialize(@Model);
     const allCheckBox = document.querySelectorAll(".circular-container")
 
     function checkedHandler() {
         var checkboxes = document.querySelectorAll('.circular-container input:checked');
-        document.querySelector("#count_reserved").innerHTML = checkboxes.length
+        if (checkboxes.length == 0) {
+            document.querySelector("#count_select").innerHTML = 'Not selected'
+        }
+        else if (checkboxes.length > 0 && checkboxes.length < 2) {
+            document.querySelector("#count_select").innerHTML = checkboxes.length + ' hour'
+        }
+        else {
+            document.querySelector("#count_select").innerHTML = checkboxes.length + ' hours'
+        }
     }
 
 
@@ -233,6 +251,7 @@
         const reservedList = model.reservePageList[dayIndex].reserved;
 
         if (reservedList.includes(timeIndex)) {
+            reserved_time++;
             cb.classList.add("reserved")
             cb.querySelector("p").innerHTML = "Reserved"
             cb.querySelector("input").disabled = true
@@ -245,7 +264,16 @@
         } else {
             cb.classList.add("warning")
         }
-
     }
     )
+
+    if (reserved_time == 0) {
+        document.querySelector("#count_reserved").innerHTML = 'Not reserved'
+    }
+    else if (reserved_time > 0 && reserved_time < 2) {
+        document.querySelector("#count_reserved").innerHTML = reserved_time + ' hour'
+    }
+    else {
+        document.querySelector("#count_reserved").innerHTML = reserved_time + ' hours'
+    }
 </script>

@@ -19,10 +19,11 @@ namespace LabReservation.Models
         public Labinfo labinfo { get; set; }
         public Reserve_page[] reservePageList { get; set; }
         public ReservedInput reservedInput { get; set; }
-        public ReserveinfoProps(Reserve_page[] _reservePageList)
+        public ReserveinfoProps(Reserve_page[] _reservePageList, Labinfo _labinfo)
         {
             reservedInput = new ReservedInput();
             reservePageList = _reservePageList;
+            labinfo = _labinfo;
         }
     }
     public class Reserve_page

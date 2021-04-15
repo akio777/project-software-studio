@@ -12,7 +12,7 @@ namespace LabReservation.Services
     public interface ILabService
     {
         Return Read(int labid, int userid);
-        Return LabInfo();
+        Return LabInfo(int userid);
         Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
         Return ReadCancel(int userid);
@@ -86,12 +86,12 @@ namespace LabReservation.Services
             };
         }
 
-        public Return LabInfo()
+        public Return LabInfo(int userid)
         {
             List<bool> lab = new List<bool> { false, false, false, false, false };
             for (var i = 0; i < 5; i++)
             {
-                var temp = Read(i + 1, 1);
+                var temp = Read(i + 1, userid);
                 foreach (Reserve_page data in temp.Data)
                 {
                     var check = data.timeslot.Contains(0);
@@ -121,7 +121,7 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = ""
+                Data = lab_info.ToList()
             };
         }
 

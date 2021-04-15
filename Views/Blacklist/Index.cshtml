@@ -4,32 +4,46 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@section Scripts
+{
+<link href="~/css/blacklist.css" rel="stylesheet" />
+}
 
-<p>
+<div class="container-blacklist">
+    <div class="blacklist-header">Blacklist</div>
+    <div class="users-list">
+        <div class="user-email">Users</div>
+        <div class="blacklist-email">Blacklist</div>
+    </div>
+    @await Component.InvokeAsync("EmailCard")
+</div>
+
+@* <h1>Index</h1>
+
+    <p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    </p>
+    <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.user_id)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.user_id)
+    </th>
+    <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.user_id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
+    @foreach (var item in Model) {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.user_id)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+    </td>
+    </tr>
+    }
     </tbody>
-</table>
+    </table> *@

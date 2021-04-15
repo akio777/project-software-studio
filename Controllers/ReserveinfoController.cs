@@ -38,9 +38,9 @@ namespace LabReservation.Controllers
         {
             var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var reservePageList = LAB.Read(id, userId);
+            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
 
-            var reserveinfoProps = new ReserveinfoProps(reservePageList.Data);
-            Console.WriteLine(JsonConvert.SerializeObject(reserveinfoProps.reservePageList, Formatting.Indented));
+            var reserveinfoProps = new ReserveinfoProps(reservePageList.Data, labinfo);
             return View("Index", reserveinfoProps);
         }
 
