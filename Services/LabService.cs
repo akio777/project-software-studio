@@ -12,12 +12,16 @@ namespace LabReservation.Services
     public interface ILabService
     {
         Return Read(int labid, int userid);
-        Return LabInfo();
+        Return LabInfo(int userid);
         Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
         Return ReadCancel(int userid);
         Return Cancel(CancelReserved[] data);
         Return LabManage(int labid);
+        Return CancelList(Reserved data);
+        Return BlackListInfo();
+        Return UnBlock(int userid);
+        Return ForceBlock(int userid);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
@@ -86,12 +90,12 @@ namespace LabReservation.Services
             };
         }
 
-        public Return LabInfo()
+        public Return LabInfo(int userid)
         {
             List<bool> lab = new List<bool> {false, false, false, false, false};
             for (var i = 0; i < 5; i++)
             {
-                var temp = Read(i + 1, 1);
+                var temp = Read(i + 1, userid);
                 foreach (Reserve_page data in temp.Data)
                 {
                     var check = data.timeslot.Contains(0);
@@ -187,6 +191,8 @@ namespace LabReservation.Services
                         name = labres.labinfo.name,
                         start_time = labres.reserveinfo.start_time,
                         end_time = labres.reserveinfo.end_time,
+                        lab_name = labres.labinfo.name,
+                        lab_id = labres.labinfo.id
                     }
                 ).OrderBy(arg => arg.reserve_id);
             List<CancelMap> output = new List<CancelMap>();
@@ -197,7 +203,9 @@ namespace LabReservation.Services
                 {
                     reserve_id = data.reserve_id,
                     day = day_slot.ToList().IndexOf(data.start_time.Day-dateNow.Day),
-                    time = time_slot.ToList().IndexOf(data.start_time.Hour)
+                    time = time_slot.ToList().IndexOf(data.start_time.Hour),
+                    lab_id = data.lab_id,
+                    lab_name = data.lab_name
                 });
             }
             return new Return
@@ -262,7 +270,7 @@ namespace LabReservation.Services
                 foreach (var time in time_slot)
                 {
                     var n_time = from x in dayN where x.start_time.Hour == time select x;
-                    timeslot.Add(maxi - n_time.Count());
+                    timeslot.Add(n_time.Count());
                 }
 
                 temp_day.timeslot = timeslot.ToArray();
@@ -274,6 +282,122 @@ namespace LabReservation.Services
                 Data = days.ToArray()
             };
         }
+
+        public Return CancelList(Reserved data)
+        {
+            var dateNow = DateTime.Now;
+            var temp = db.Reserveinfo
+                .Where(
+                    x => x.lab_id == data.lab_id &&
+                         x.start_time.Day == dateNow.Day + data.day &&
+                         x.start_time.Hour == time_slot[data.time]
+                )
+                .Join(
+                    db.Userinfo,
+                    reserveinfo => reserveinfo.reserve_by,
+                    userinfo => userinfo.id,
+                    (reserveinfo, userinfo) => new WhoReserved
+                    {
+                        reserved_id = reserveinfo.id,
+                        email = userinfo.email,
+                        user_id = userinfo.id
+                    }
+                ).ToArray();
+            string name = db.Labinfo.Where(L => L.id == data.lab_id).First().name;
+            var lab_info = db.Reserveinfo.Where(
+                x => x.lab_id == data.lab_id &&
+                x.start_time.Day == dateNow.Day + data.day && 
+                x.start_time.Hour == time_slot[data.time]
+            )
+            .Join(db.Labinfo, R => R.lab_id, L => L.id,
+                (reserveinfo, labinfo) => new LabShowForCancel
+                {
+                    data = temp,
+                    lab_id = data.lab_id,
+                    name = name,
+                    start_time = reserveinfo.start_time.Hour,
+                    end_time = reserveinfo.start_time.Hour+1,
+                }
+            );
+            return new Return
+            {
+                Error = false,
+                Data = lab_info.ToArray()
+            };
+        }
+
+        public Return BlackListInfo()
+        {
+            
+            var wasBlock = db.Userinfo
+                .Join(db.Blacklist, a => a.id, b => b.user_id,
+                   (userinfo, blacklist) => new UserEmail
+                   {
+                       email = userinfo.email,
+                       user_id = userinfo.id
+                   }
+                );
+            var NotBlock = db.Userinfo
+                .Join(db.Userinfo, a => a.id, b => b.id,
+                    (userinfo, userinfo1) => new UserEmail
+                    {
+                        email = userinfo.email,
+                        user_id = userinfo.id
+                    }
+                ).Where(n => wasBlock.Any(w => n.user_id != w.user_id));
+            BlackListPage output = new BlackListPage {wasBlock = wasBlock.ToArray(), NotBlock = NotBlock.ToArray()};
+            Console.WriteLine(JsonConvert.SerializeObject(output, Formatting.Indented));
+            return new Return
+            {
+                Error = false,
+                Data = output
+            };
+        }
+
+        public Return UnBlock(int userid)
+        {
+            var check = db.Blacklist.Where(a => a.user_id == userid).FirstOrDefault();
+            if (check != null)
+            {
+                db.Blacklist.Remove(check);
+            }
+            else
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ไม่สามารถทำงานได้ กรุณา refresh"
+                };
+            }
+            db.SaveChanges();
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
         
+        public Return ForceBlock(int userid)
+        {
+            var check = db.Blacklist.Where(a => a.user_id == userid).FirstOrDefault();
+            if (check == null)
+            {
+                db.Blacklist.Add(new Blacklist {user_id = userid});
+            }
+            else
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ผู้ใช้นี้ถูก block อยู่่แล้ว"
+                };
+            }
+            db.SaveChanges();
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
     }
 }

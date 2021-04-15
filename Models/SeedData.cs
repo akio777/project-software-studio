@@ -17,6 +17,10 @@ namespace LabReservation.Models
                 Random r = new Random();
                 var dateNow = DateTime.Now;
                 // Look for any movies.
+
+                if (!context.Userinfo.Any())
+                    context.Userinfo.Add(new Userinfo{email = "admin@admin.com",id = 1,password = "123456",role = 0});
+                
                 if (!context.Labinfo.Any())
                 {
                     context.Labinfo.AddRange(

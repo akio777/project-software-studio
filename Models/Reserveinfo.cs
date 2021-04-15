@@ -33,12 +33,40 @@ namespace LabReservation.Models
         public int reserve_id { get; set; }
         public int day { get; set; }
         public int time { get; set; }
+        public string lab_name { get; set; }
+        public int lab_id { get; set; }
     }
 
     public class CancelReserved
     {
         public int reserve_id { get; set; }
     }
+
+    public class WhoReserved
+    {
+        public int reserved_id { get; set; }
+        public int user_id { get; set; }
+        public string email { get; set; }
+    }
+    public class LabShowForCancel
+    {
+        public string name { get; set; }
+        public int lab_id { get; set; }
+        public WhoReserved[] data { get; set; }
+        public int start_time { get; set; }
+        public int end_time { get; set; }
+    }
+
+    public class UserEmail
+    {
+        public int user_id { get; set; }
+        public string email { get; set; }
+    }
     
+    public class BlackListPage
+    {
+        public UserEmail[] NotBlock { get; set; }
+        public UserEmail[] wasBlock { get; set; }
+    }
     
 }

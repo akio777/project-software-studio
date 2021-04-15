@@ -37,20 +37,19 @@ namespace LabReservation.Controllers
             // int userid = 1;
             // var mock = new Reserve_confirm
             // {
-            //     confirm = new Reserved[]
-            //     {
-            //         new Reserved {time = 0, day = 0, lab_id = 1},
-            //         new Reserved {time = 1, day = 2, lab_id = 1},
-            //         new Reserved {time = 2, day = 3, lab_id = 1},
-            //         new Reserved {time = 3, day = 4, lab_id = 1},
-            //         new Reserved {time = 4, day = 5, lab_id = 1},
-            //         new Reserved {time = 5, day = 6, lab_id = 1},
-            //         
-            //     }
+            // var mock = new Reserved[]
+            // {
+            // var mock = new Reserved {time = 5, day = 0, lab_id = 1};
+                // new Reserved {time = 1, day = 2, lab_id = 1},
+                // new Reserved {time = 2, day = 3, lab_id = 1},
+                // new Reserved {time = 3, day = 4, lab_id = 1},
+                // new Reserved {time = 4, day = 5, lab_id = 1},
+                // new Reserved {time = 5, day = 6, lab_id = 1},
+                
+            // }
             // };
             // var temp = LAB.Confirm(mock, userid);
 
-            var temp = LAB.LabManage(3);
             return null;
         }
         
