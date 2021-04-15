@@ -1,19 +1,19 @@
 ﻿.register-container {
   height: 100vh;
   display: grid;
-  grid-template-areas: 
-  "register-left register-right";
+  grid-template-areas: "register-left register-right";
   align-items: center;
   justify-content: center;
 }
 
 .register-right {
   display: grid;
-  grid-template-areas: 
-  "top"
-  "mid"
-  "bot";
-  height: 80vh;
+  grid-template-areas:
+    "top"
+    "mid"
+    "bot";
+  height: 70vh;
+  max-height: 720px;
   width: 300px;
   background-color: var(--blue-400);
   border-radius: 20px;
@@ -21,7 +21,7 @@
   padding: 1.5rem;
 }
 
-.register-right>h1 {
+.register-right > h1 {
   color: white;
   margin: 3rem 0;
   grid-area: mid;
@@ -39,7 +39,7 @@
   float: left;
 }
 
-.register-right>.register-top {
+.register-right > .register-top {
   grid-area: "top";
   height: fit-content;
   width: fit-content;
@@ -63,7 +63,7 @@
   grid-area: bot;
 }
 
-.register-btn>a {
+.register-btn > a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,35 +72,37 @@
 
 .register-left {
   display: grid;
-  grid-template-areas: 
-  "top"
-  "mid"
-  "bot";
-  height: 80vh;
+  grid-template-areas:
+    "top"
+    "mid"
+    "bot";
+  height: 70vh;
+  max-height: 720px;
   padding-right: 4rem;
   justify-content: space-between;
 }
 
-.register-left>.rules {
+.register-left > .rules {
   grid-area: top;
 }
 
-.register-left>.rules>.logo {
+.register-left > .rules > .logo {
   height: 4rem;
   margin-bottom: 1rem;
 }
 
-.sm-box{
+.sm-box {
   grid-area: bot;
   align-self: flex-end;
 }
 
-.sm-box>span, .sm-logo{
-  font-size: 1vw;
+.sm-box > span,
+.sm-logo {
+  font-size: 18px;
 }
 
-.sm-logo{
-  color: #0A58CA;
+.sm-logo {
+  color: #0a58ca;
   display: flex;
   font-weight: 700;
   font-size: 21px;
@@ -108,17 +110,17 @@
   margin-bottom: 1rem;
 }
 
-.sm-box>span {
+.sm-box > span {
   font-size: larger;
 }
 
-.sm-logo>.material-icons{
+.sm-logo > .material-icons {
   margin: 0 10px 0 10px;
 }
 
-.sm-desc{
+.sm-desc {
   display: flex;
-  color: #0D6EFD;
+  color: #0d6efd;
   font-weight: 400;
   font-size: 18px;
 }
