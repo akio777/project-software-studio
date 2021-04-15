@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
@@ -29,21 +30,15 @@ namespace LabReservation.Controllers
             return View(lab_info.Data);
         }
 
-        public async Task<IActionResult> EditCancel(int? id)
+        public async Task<IActionResult> EditCancel(int id)
         {
-            if (id == null) {
-                return NotFound();
-            }
+            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+            var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
+            var reservePageList = LAB.LabManage(id);
 
-            var labmanage_info = new LabManageCard();
-            labmanage_info.labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
-            labmanage_info.equipinfo = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
+            var labManageInfo = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);         
 
-            if (labmanage_info.labinfo == null || labmanage_info.equipinfo == null) {
-                return NotFound();
-            }
-
-            return View(labmanage_info);
+            return View(labManageInfo);
         }
     }
 }
