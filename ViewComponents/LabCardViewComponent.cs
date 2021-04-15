@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabReservation.Data;
 using Microsoft.EntityFrameworkCore;
+using LabReservation.Models;
 
 namespace LabReservation.ViewComponents
 {
@@ -15,9 +16,9 @@ namespace LabReservation.ViewComponents
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(LabCardInfo? lab)
         {
-            return View();
+            return View(lab);
         }
     }
 

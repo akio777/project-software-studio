@@ -121,7 +121,7 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = ""
+                Data = lab_info.ToList()
             };
         }
 
