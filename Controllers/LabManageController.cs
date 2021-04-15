@@ -71,6 +71,5 @@ namespace LabReservation.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

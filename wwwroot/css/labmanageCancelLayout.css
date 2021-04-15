@@ -43,6 +43,7 @@
 
 .detail {
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .back-content {
@@ -52,6 +53,7 @@
   width: fit-content;
   border-radius: 0.5rem;
   padding: 5px;
+  margin-bottom: 16px;
 }
 
 .back-content button {
@@ -60,12 +62,12 @@
   padding-left: 0;
   background-color: transparent;
   color: var(--blue-500);
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .back-content p {
   color: var(--blue-500);
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 .back-content:hover {
