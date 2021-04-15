@@ -1,6 +1,7 @@
 .navbar {
-  background: #F8F9FA;
+  background: #f8f9fa;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.25);
+  width: 100vw;
   height: 80px;
   display: flex;
   flex-flow: row wrap;
@@ -8,7 +9,9 @@
   padding: 1rem 2rem;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .logo {
