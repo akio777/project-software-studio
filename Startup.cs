@@ -48,6 +48,7 @@ namespace LabReservation
                 });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILabService, LabService>();
         }
 
@@ -69,10 +70,7 @@ namespace LabReservation
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            app.UseDefaultFiles();
-
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -80,6 +78,7 @@ namespace LabReservation
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
