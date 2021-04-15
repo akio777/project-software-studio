@@ -11,6 +11,8 @@ for details on configuring this project to bundle and minify static web assets. 
 
 :root {
   --grey-400: #bdbdbd;
+  --grey-500: #ededed;
+  --grey-600: #f2f2f2;
   --blue-100: #cfe2ff;
   --blue-200: #9ec5fe;
   --blue-300: #6ea8fe;
