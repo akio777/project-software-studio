@@ -23,19 +23,17 @@
 
 <body>
     @if (!hidenav.Contains(Context.Request.Path.ToString().ToLower()))
-
     {
         <header>
             <nav>
                 <div class="navbar">
                     <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
-                    @if (isAdmin)
+                    @if (!isAdmin)
                     {
                         <div class="links">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+                            <a class="nav-link" asp-area="" asp-controller="LabManage" asp-action="Index">Lab Management</a>
+                            <a class="nav-link" asp-area="" asp-controller="Blacklist" asp-action="Index">Blacklist</a>
                         </div>
-
                     }
                     else
                     {
@@ -46,8 +44,10 @@
 
                     }
                     <div class="user">
-                        <strong style="user-select: none;">Username</strong>
-                        <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256"
+                        <div>
+                            @await Component.InvokeAsync("NavUsername")
+                        </div>
+                        <img src='@Url.Content("~/Images/profilepic.jpg")'
                         alt="profile-pic" class="profile-pic">
                         <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout"><i
                             class="fas fa-sign-out-alt"></i></a>
