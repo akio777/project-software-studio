@@ -1,29 +1,18 @@
+@model LabReservation.Models.LabCardInfo;
+
 <link rel="stylesheet" type="text/css" href="css/labCard.css" />
 
-<div class="container">
-    <div class="card">
-        <h1>LAB001</h1>
-        <div class="card-status">
-            <div class="status">Status
-                <p>Avaiable</p>
-            </div>
-            <div class="equipment">Equipment
-                <p>Router</p>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-name">
+        <h1>@Model.name</h1>
     </div>
-    <div class="card">
-        <h1>LAB<br>001</h1>
-        <div class="card-status">
 
+    <div class="card-status">
+        <div class="status">Status
+            <p>@Model.notAvailable</p>
         </div>
-    </div>
-    <div class="card">
-        <h1>LAB<br>001</h1>
-        <div class="card-status"></div>
-    </div>
-    <div class="card">
-        <h1>LAB<br>001</h1>
-        <div class="card-status"></div>
+        <div class="equipment">Equipment
+            <p>@Model.equip</p>
+        </div>
     </div>
 </div>
