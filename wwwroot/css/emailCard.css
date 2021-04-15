@@ -1,7 +1,7 @@
 .email-card {
   width: 400px;
   height: 40px;
-  background-color: var(--blue-500);
+  background-color: white;
   border-radius: 5px;
   margin-top: 10px;
   display: flex;
