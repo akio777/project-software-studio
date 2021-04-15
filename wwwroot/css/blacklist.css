@@ -1,0 +1,26 @@
+.container-blacklist {
+  width: 850px;
+  height: 500px;
+  border: solid black 2px;
+  margin: 56px auto 0 auto;
+}
+
+.blacklist-header {
+  height: 74px;
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--blue-500);
+}
+
+.users-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-email,
+.blacklist-email {
+  border-bottom: solid #D8D8D8 2px;
+  width: 400px;
+  font-size: 40px;
+  font-weight: 500;
+}
