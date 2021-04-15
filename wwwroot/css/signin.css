@@ -1,19 +1,19 @@
 ﻿.login-container {
   height: 100vh;
   display: grid;
-  grid-template-areas: 
-  "login-left login-right";
+  grid-template-areas: "login-left login-right";
   align-items: center;
   justify-content: center;
 }
 
 .login-left {
   display: grid;
-  grid-template-areas: 
-  "top"
-  "mid"
-  "bot";
-  height: 80vh;
+  grid-template-areas:
+    "top"
+    "mid"
+    "bot";
+  height: 70vh;
+  max-height: 720px;
   width: 300px;
   background-color: var(--blue-400);
   border-radius: 20px;
@@ -21,7 +21,7 @@
   padding: 1.5rem;
 }
 
-.login-left>h1 {
+.login-left > h1 {
   color: white;
   margin: 4rem 0;
   grid-area: mid;
@@ -35,7 +35,7 @@
   grid-area: bot;
 }
 
-.login-left>.login-top {
+.login-left > .login-top {
   grid-area: top;
   height: fit-content;
   width: fit-content;
@@ -68,7 +68,7 @@
   float: right;
 }
 
-.register-btn>a {
+.register-btn > a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,36 +77,38 @@
 
 .login-right {
   display: grid;
-  grid-template-areas: 
-  "top"
-  "mid"
-  "bot";
-  height: 80vh;
+  grid-template-areas:
+    "top"
+    "mid"
+    "bot";
+  height: 70vh;
+  max-height: 720px;
   padding-left: 4rem;
 }
 
-.login-right>.logo {
+.login-right > .logo {
   height: 4rem;
   justify-self: end;
   grid-area: top;
 }
 
-.login-right>.login-pic {
+.login-right > .login-pic {
   align-self: end;
   grid-area: bot;
 }
 
-.sm-box{
+.sm-box {
   margin-bottom: 25px;
   grid-area: mid;
 }
 
-.sm-box>span, .sm-logo{
-  font-size: 1vw;
+.sm-box > span,
+.sm-logo {
+  font-size: 18px;
 }
 
-.sm-logo{
-  color: #0A58CA;
+.sm-logo {
+  color: #0a58ca;
   display: flex;
   flex-direction: row-reverse;
   font-weight: 700;
@@ -114,14 +116,14 @@
   align-items: center;
 }
 
-.sm-logo>.material-icons{
+.sm-logo > .material-icons {
   margin: 0 10px 0 10px;
 }
 
-.sm-desc{
+.sm-desc {
   display: flex;
   flex-direction: row-reverse;
-  color: #0D6EFD;
+  color: #0d6efd;
   font-weight: 400;
   font-size: 18px;
 }

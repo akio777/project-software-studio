@@ -1,4 +1,4 @@
-@model LabReservation.Models.LabManageCard
+@model LabReservation.Models.LabManageInfoProps
 
 @{
     ViewData["Title"] = "Home Page";
@@ -25,7 +25,7 @@
             <button><i class="fa fa-edit"></i></button>
         </div>
         <div class="equipment">
-            <h3>Maximum Equipment : @Model.equipinfo.maximum</h3>
+            <h3>Maximum Equipment : @Model.equipment.maximum</h3>
             <button><i class="fa fa-edit"></i></button>
         </div>
         <div class="detail">

@@ -162,7 +162,7 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = temp
+                Data = temp.ToArray()
             };
         }
 
