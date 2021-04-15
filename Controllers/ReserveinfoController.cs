@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,31 +10,63 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace LabReservation.Controllers
 {
     public class ReserveinfoController : Controller
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILabService LAB;
         private readonly LabReservationContext _context;
 
-        public ReserveinfoController(ILabService labservice, LabReservationContext context)
+        public ReserveinfoController(ILabService labservice, LabReservationContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             LAB = labservice;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
+            var userId = _httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value;
+            Console.WriteLine(userId);
             return View();
         }
-        
-        
+
+
         // [HttpPost]
-        // public IActionResult Confirm(Reserve_confirm data)
-        public IResourceService Confirm(Reserved[] data)
+        public IActionResult Confirm(ReservedInput reservedInput)
         {
+            var reservedList = new List<Reserved>();
+            var mapReservedInput = new List<dynamic>();
+            foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
+            {
+                mapReservedInput.Add(propertyInfo.GetValue(reservedInput, null));
+            }
+
+            for (var i = 0; i < mapReservedInput.Count(); i++)
+            {
+                for (var j = 0; j < mapReservedInput[i].Length; j++)
+                {
+                    Console.WriteLine(mapReservedInput[i][j]);
+                    if (mapReservedInput[i][j])
+                    {
+                        var reservedObject = new Reserved();
+                        reservedObject.day = j;
+                        reservedObject.time = i;
+                        reservedObject.lab_id = 0;
+                        reservedList.Add(reservedObject);
+                    }
+                }
+            }
+
+            Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
+
+            return RedirectToAction("Index");
+
             // int userid = 1;
             // var mock = new Reserve_confirm
             // {
@@ -49,11 +82,10 @@ namespace LabReservation.Controllers
             //     }
             // };
             // var temp = LAB.Confirm(mock, userid);
-
-            var temp = LAB.LabManage(3);
-            return null;
+            // var temp = LAB.ReadCancel(1);
+            // return null;
         }
-        
+
         // GET: Reserveinfo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -93,7 +125,7 @@ namespace LabReservation.Controllers
             }
             return View(reserveinfo);
         }
-        
+
         // GET: Reserveinfo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

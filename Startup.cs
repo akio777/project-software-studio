@@ -46,8 +46,8 @@ namespace LabReservation
                     opts.LoginPath = "/Login";
                     opts.AccessDeniedPath = "/home";
                 });
-            
-            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILabService, LabService>();
         }
@@ -76,17 +76,16 @@ namespace LabReservation
             app.UseRouting();
 
             app.UseCookiePolicy();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Authen}/{action=Index}/{id?}");
             });
-            
+
 
         }
     }
