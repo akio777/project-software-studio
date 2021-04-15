@@ -1,7 +1,7 @@
 @model IEnumerable<LabReservation.Models.LabManageInfo>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Lab Management";
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/labmanageLayout.css">
@@ -9,7 +9,7 @@
 <div>
     <div>
         <h1 class="h-lab-manage"> Lab Management </h1>
-    </div>  
+    </div>
     <div>
         @foreach (var item in @Model)
         {
@@ -19,4 +19,3 @@
         }
     </div>
 </div>
-

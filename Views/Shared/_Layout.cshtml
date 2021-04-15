@@ -2,7 +2,9 @@
 @using System;
 @using System.Collections.Generic;
 @{
+
     string[] hidenav = { "/authen", "/", "/login", "/register" };
+
     bool isAdmin = Context.User.Clone().IsInRole("0");
 }
 
@@ -26,11 +28,11 @@
             <nav>
                 <div class="navbar">
                     <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
-                    @if (isAdmin)
+                    @if (!isAdmin)
                     {
                         <div class="links">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+                            <a class="nav-link" asp-area="" asp-controller="LabManage" asp-action="Index">Lab Management</a>
+                            <a class="nav-link" asp-area="" asp-controller="Blacklist" asp-action="Index">Blacklist</a>
                         </div>
                     }
                     else
@@ -39,17 +41,21 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
                             <a class="nav-link" asp-area="" asp-controller="MyReserve" asp-action="Index">My Reservation</a>
                         </div>
+
                     }
                     <div class="user">
-                        <a href="">Admin Boi</a>
-                        <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256"
+                        <div>
+                            @await Component.InvokeAsync("NavUsername")
+                        </div>
+                        <img src='@Url.Content("~/Images/profilepic.jpg")'
                         alt="profile-pic" class="profile-pic">
-                        <a class="logout" asp-controller="Authen" asp-action="Logout"><i
+                        <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout"><i
                             class="fas fa-sign-out-alt"></i></a>
                     </div>
                 </div>
             </nav>
         </header>
+
     }
     <div class="container">
         <main role="main" class="pb-3">

@@ -7,7 +7,6 @@ using LabReservation.Services;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-
 namespace LabReservation.Controllers
 {
     public class HomeController : Controller
@@ -33,11 +32,6 @@ namespace LabReservation.Controllers
             // var temp = LAB.Read(1, 1);
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
