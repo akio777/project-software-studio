@@ -31,7 +31,8 @@ namespace LabReservation.Controllers
 
         public async Task<IActionResult> EditCancel(int? id)
         {
-            if (id == null) {
+            if (id == null)
+            {
                 return NotFound();
             }
 
@@ -39,7 +40,8 @@ namespace LabReservation.Controllers
             labmanage_info.labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
             labmanage_info.equipinfo = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
 
-            if (labmanage_info.labinfo == null || labmanage_info.equipinfo == null) {
+            if (labmanage_info.labinfo == null || labmanage_info.equipinfo == null)
+            {
                 return NotFound();
             }
 
