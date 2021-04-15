@@ -13,7 +13,8 @@ using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
-    public class MyReserveController : Controller {
+    public class MyReserveController : Controller
+    {
         private readonly LabReservationContext _context;
         private readonly ILabService LAB;
         private readonly IHttpContextAccessor _httpContextAccessor;

@@ -96,4 +96,14 @@ namespace LabReservation.Models
             reservePageList = _reservePageList;
         }
     }
+
+    public class MyReserveProps
+    {
+        public Labinfo labinfo { get; set; }
+        public MyReserveProps(Labinfo _labinfo)
+        {
+
+            labinfo = _labinfo;
+        }
+    }
 }
