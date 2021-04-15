@@ -1,0 +1,133 @@
+﻿.register-container {
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 
+  "register-left register-right";
+  align-items: center;
+  justify-content: center;
+}
+
+.register-right {
+  display: grid;
+  grid-template-areas: 
+  "top"
+  "mid"
+  "bot";
+  height: 80vh;
+  width: 300px;
+  background-color: var(--blue-400);
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+.register-right>h1 {
+  color: white;
+  margin: 3rem 0;
+  grid-area: mid;
+}
+
+.register-right .login-btn {
+  background-color: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: fit-content;
+  float: left;
+}
+
+.register-right>.register-top {
+  grid-area: "top";
+  height: fit-content;
+  width: fit-content;
+}
+
+.register-right .register-btn {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-600);
+  border-radius: 5px;
+  padding: 10px;
+  width: fit-content;
+  font-weight: bold;
+  float: right;
+  margin-top: 1rem;
+}
+
+.register-right .register-form {
+  grid-area: bot;
+}
+
+.register-btn>a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.register-left {
+  display: grid;
+  grid-template-areas: 
+  "top"
+  "mid"
+  "bot";
+  height: 80vh;
+  padding-right: 4rem;
+  justify-content: space-between;
+}
+
+.register-left>.rules {
+  grid-area: top;
+}
+
+.register-left>.rules>.logo {
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.sm-box{
+  grid-area: bot;
+  align-self: flex-end;
+}
+
+.sm-box>span, .sm-logo{
+  font-size: 1vw;
+}
+
+.sm-logo{
+  color: #0A58CA;
+  display: flex;
+  font-weight: 700;
+  font-size: 21px;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sm-box>span {
+  font-size: larger;
+}
+
+.sm-logo>.material-icons{
+  margin: 0 10px 0 10px;
+}
+
+.sm-desc{
+  display: flex;
+  color: #0D6EFD;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.register-label {
+  color: white;
+  margin-top: 1rem;
+}
+
+ol {
+  padding: 0;
+}

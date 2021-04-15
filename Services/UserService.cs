@@ -1,6 +1,9 @@
 ﻿using System.Linq;
+
 using LabReservation.Models;
 using LabReservation.Data;
+using RegisterModel = LabReservation.Models.RegisterModel;
+
 
 namespace LabReservation.Services
 {
@@ -9,7 +12,7 @@ namespace LabReservation.Services
         Return CheckLogin(LoginModel data);
         Return CheckRegister(RegisterModel data);
     }
-
+    
     public class UserService : IUserService
     {
         private readonly LabReservationContext db;
@@ -17,9 +20,17 @@ namespace LabReservation.Services
         {
             db = context;
         }
-        
+
         public Return CheckLogin(LoginModel data)
         {
+            if (data.email==null || data.password==null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "กรุณากรอกข้อมูล"
+                };
+            }
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.email);
             if (c_user != null)
             {
@@ -48,16 +59,40 @@ namespace LabReservation.Services
                 };
             }
         }
-        
+
         public Return CheckRegister(RegisterModel data)
         {
+            if (data.Email==null || data.Password==null || data.ConfirmPassword == null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "กรุณากรอกข้อมูล"
+                };
+            }
+            else if (data.Password.Length<6 || data.ConfirmPassword.Length<6)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "รหัสผ่านต้องมีความยาวตั้งแต่ 6 ตัวขึ้นไป"
+                };
+            }
+            else if (!data.Password.Equals(data.ConfirmPassword))
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data =  "รหัสผ่านไม่ตรงกัน"
+                };
+            }
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.Email);
             if (c_user != null)
             {
                 return new Return
                 {
                     Error = true,
-                    Data = "ไม่สามารถใช้ email นี้ได้"
+                    Data = "ไม่สามารถใช้ Email นี้ได้"
                 };
             }
             else
@@ -74,6 +109,9 @@ namespace LabReservation.Services
                     Data = c_user
                 };
             }
+
         }
+        
+        
     }
 }

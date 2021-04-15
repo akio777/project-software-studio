@@ -48,4 +48,10 @@ namespace LabReservation.Models
         public bool[] time_8 { get; set; }
         public bool[] time_9 { get; set; }
     }
+    public class CancelReserved
+    {
+        public int reserve_id { get; set; }
+    }
+
+
 }

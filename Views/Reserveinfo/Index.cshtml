@@ -54,4 +54,18 @@
 
 <div style="display: flex; padding: 50px; justify-content: center 50px;">
     @await Component.InvokeAsync("ReservationTable")
+    <link rel="stylesheet" type="text/css" href="~/css/reserveLayout.css">
+</div>
+<div class="layout">
+    <div class="layout-main">
+        <h1 class="lab-name">LAB001</h1>
+        <h2 class="equiment-name">Router1</h2>
+        <p>Select time slot to reserve the equipment</p>
+    </div>
+</div>
+
+<button id="btn-open-modal">Open Modal</button>
+
+<div>
+    @await Component.InvokeAsync("CancelReserve")
 </div>

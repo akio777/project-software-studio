@@ -16,7 +16,8 @@ namespace LabReservation.Services
         Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
         Return ReadCancel(int userid);
-        // Return Confirm(Reserve_confirm data, int userid);
+        Return Cancel(CancelReserved[] data);
+        Return LabManage(int labid);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
@@ -154,7 +155,7 @@ namespace LabReservation.Services
                     equipment => equipment.lab_id,
                     (labinfo, equipment) => new LabManageInfo
                         {id = labinfo.id, name = labinfo.name, equip = labinfo.equip, amount = equipment.maximum}
-                );
+                ).ToArray();
             return new Return
             {
                 Error = false,
@@ -205,5 +206,74 @@ namespace LabReservation.Services
                 Data = output
             };
         }
+
+        public Return Cancel(CancelReserved[] data)
+        {
+            bool error = false;
+            foreach (var i in data)
+            {
+                var check = db.Reserveinfo.Where(x => x.id == i.reserve_id).FirstOrDefault();
+                if (check == null)
+                {
+                    error = true;
+                    break;
+                }
+                db.Reserveinfo.Remove(new Reserveinfo {id = i.reserve_id});
+            }
+            if (error)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ไม่สามารถยกเลิกได้ ข้อมูลไม่ถูกต้อง กรุณา refresh"
+                };
+            }
+            db.SaveChanges();
+            return new Return
+            {
+                Error = false,
+                Data = ""
+            };
+        }
+
+
+        public Return LabManage(int lab_id)
+        {
+            var dateNow = DateTime.Now;
+            var data = db.Labinfo
+                .Where(labinfo => labinfo.id == lab_id)
+                .Join(db.Equipment, labinfo => labinfo.id, equipment => equipment.lab_id,
+                    (labinfo, equipment) => new
+                    {
+                        lab_id = labinfo.id, name = labinfo.name, equipment = labinfo.equip, maximum = equipment.maximum
+                    });
+            var maxi = data.Select(a => a.maximum).FirstOrDefault();
+            var pull_data = db.Reserveinfo
+                .Where(x => (x.start_time.Day - dateNow.Day) >= 0 &&
+                            (x.start_time.Day - dateNow.Day) <= 6 &&
+                            x.lab_id == lab_id
+                ).OrderBy(x => x.lab_id).OrderBy(x=>x.id);
+            List<Reserve_page> days = new List<Reserve_page>();
+            for (var day = 0; day < 7; day++)
+            {
+                var dayN = from x in pull_data where x.start_time.Day - dateNow.Day == day select x;
+                var temp_day = new Reserve_page {day = day, maximum = maxi};
+                List<int> timeslot = new List<int>();
+                foreach (var time in time_slot)
+                {
+                    var n_time = from x in dayN where x.start_time.Hour == time select x;
+                    timeslot.Add(maxi - n_time.Count());
+                }
+
+                temp_day.timeslot = timeslot.ToArray();
+                days.Add(temp_day);
+            }
+            return new Return
+            {
+                Error = false,
+                Data = days.ToArray()
+            };
+        }
+        
     }
 }
