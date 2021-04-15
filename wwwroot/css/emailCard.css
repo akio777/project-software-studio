@@ -1,0 +1,17 @@
+.email-card {
+  width: 400px;
+  height: 40px;
+  background-color: var(--blue-500);
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+
+.email-info,
+.btn-block {
+  font-size: 18px;
+  padding: 10px 20px;
+}
