@@ -8,8 +8,6 @@
 <link rel="stylesheet" type="text/css" href="~/css/labmanageCancelLayout.css">
 @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> *@
 
-
-
 <div class="layout">
     <div tabindex="0">
         <a asp-controller="LabManage" asp-action="Index">
@@ -31,6 +29,9 @@
         <div class="detail">
             <h3 class="equiment-name">Cancel Reservation</h3>
             <p>Select time slot to cancel reservation</p>
+        </div>
+        <div>
+            @await Component.InvokeAsync("CancelReservationTable", new { labManageInfoProps = @Model})
         </div>
     </div>
 </div>

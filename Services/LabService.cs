@@ -268,7 +268,7 @@ namespace LabReservation.Services
                 foreach (var time in time_slot)
                 {
                     var n_time = from x in dayN where x.start_time.Hour == time select x;
-                    timeslot.Add(maxi - n_time.Count());
+                    timeslot.Add(n_time.Count());
                 }
 
                 temp_day.timeslot = timeslot.ToArray();

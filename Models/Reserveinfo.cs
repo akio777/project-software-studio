@@ -78,15 +78,18 @@ namespace LabReservation.Models
     {
         public int reserve_id { get; set; }
     }
-    
+
     public class LabManageInfoProps
     {
-        public Labinfo labinfo { get; set; } 
+        public Labinfo labinfo { get; set; }
         public Equipment equipment { get; set; }
         public Reserve_page[] reservePageList { get; set; }
 
+        public ReservedInput reservedInput { get; set; }
+
         public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList)
         {
+            reservedInput = new ReservedInput();
             equipment = _equipment;
             labinfo = _labinfo;
             reservePageList = _reservePageList;

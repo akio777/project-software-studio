@@ -47,6 +47,7 @@ namespace LabReservation.Controllers
         // [HttpPost]
         public IActionResult Confirm(ReservedInput reservedInput)
         {
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var reservedList = new List<Reserved>();
             var mapReservedInput = new List<dynamic>();
             foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
@@ -71,25 +72,10 @@ namespace LabReservation.Controllers
 
             Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
 
+            // LAB.Confirm(mock, userId);
+
             return RedirectToAction("Index", "Home");
 
-            // int userid = 1;
-            // var mock = new Reserve_confirm
-            // {
-            //     confirm = new Reserved[]
-            //     {
-            //         new Reserved {time = 0, day = 0, lab_id = 1},
-            //         new Reserved {time = 1, day = 2, lab_id = 1},
-            //         new Reserved {time = 2, day = 3, lab_id = 1},
-            //         new Reserved {time = 3, day = 4, lab_id = 1},
-            //         new Reserved {time = 4, day = 5, lab_id = 1},
-            //         new Reserved {time = 5, day = 6, lab_id = 1},
-            //         
-            //     }
-            // };
-            // var temp = LAB.Confirm(mock, userid);
-            // var temp = LAB.ReadCancel(1);
-            // return null;
         }
 
         // GET: Reserveinfo/Details/5

@@ -63,6 +63,16 @@
 .warning:hover .checkmark {
   box-shadow: 0 0 10px 0 var(--warning) !important;
 }
+
+/* Success Checkbox Style */
+.danger .checkmark {
+  color: var(--danger);
+  border: 2px solid var(--danger);
+}
+
+.danger:hover .checkmark {
+  box-shadow: 0 0 10px 0 var(--danger) !important;
+}
 /* Full Checkbox Style */
 .full .checkmark {
   color: var(--grey-400);

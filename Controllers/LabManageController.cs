@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +37,40 @@ namespace LabReservation.Controllers
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
             var reservePageList = LAB.LabManage(id);
 
-            var labManageInfo = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);         
+            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);
 
-            return View(labManageInfo);
+            return View(labManageInfoProps);
         }
+
+        // [HttpPost]
+        public IActionResult Confirm(ReservedInput reservedInput)
+        {
+            var reservedList = new List<Reserved>();
+            var mapReservedInput = new List<dynamic>();
+            foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
+            {
+                mapReservedInput.Add(propertyInfo.GetValue(reservedInput, null));
+            }
+
+            for (var i = 0; i < mapReservedInput.Count(); i++)
+            {
+                for (var j = 0; j < mapReservedInput[i].Length; j++)
+                {
+                    if (mapReservedInput[i][j])
+                    {
+                        var reservedObject = new Reserved();
+                        reservedObject.day = j;
+                        reservedObject.time = i;
+                        reservedObject.lab_id = 0;
+                        reservedList.Add(reservedObject);
+                    }
+                }
+            }
+
+            Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
+
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
