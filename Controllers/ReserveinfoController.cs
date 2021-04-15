@@ -11,24 +11,28 @@ using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace LabReservation.Controllers
 {
     public class ReserveinfoController : Controller
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILabService LAB;
         private readonly LabReservationContext _context;
 
-        public ReserveinfoController(ILabService labservice, LabReservationContext context)
+        public ReserveinfoController(ILabService labservice, LabReservationContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             LAB = labservice;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-
+            var userId = _httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value;
+            Console.WriteLine(userId);
             return View();
         }
 
