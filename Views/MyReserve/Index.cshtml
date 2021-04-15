@@ -1,0 +1,30 @@
+@* @model IEnumerable<LabReservation.Models.CancelMap> *@
+@{
+    ViewData["Title"] = "My Reservation";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/myreservation.css">
+
+<div class="layout">
+    <div class="layout-main">
+        <h1>My Reservation</h1>
+        <div class="equipment">
+            <h3>All Reservation : 7 hours</h3>
+        </div>
+        <div class="detail">
+            <p>Select time slot to cancel reservation</p>
+        </div>
+        <div class="option">
+            <label>Filter
+                <select name="" id="">
+                    <option value="">LAB001</option>
+                    <option value="">LAB002</option>
+                    <option value="">LAB003</option>
+                </select>
+            </label>
+            <button>
+                Cancel Selected Reservation
+            </button>
+        </div>
+    </div>
+</div>

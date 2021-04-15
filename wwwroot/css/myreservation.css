@@ -1,0 +1,58 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 2rem 1rem;
+  width: 60%;
+}
+
+.lab-name {
+  padding-top: 5px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.layout h1 {
+  color: var(--blue-500);
+}
+
+.equipment {
+  padding-top: 1rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+.detail {
+  padding-top: 1rem;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.option select {
+  margin-left: 0.5rem;
+  border-radius: 5px;
+  padding: 5px 0;
+  width: 100px;
+}
+
+.option button {
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-size: 16px;
+  padding: 5px 0;
+  margin-left: 1rem;
+  border-radius: 5px;
+  width: 250px;
+  transition: all ease-in-out 150ms;
+}
+
+.option button:hover {
+  background: var(--danger);
+  border: 1px solid var(--danger);
+  color: var(--light);
+}
