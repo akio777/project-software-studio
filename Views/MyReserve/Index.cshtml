@@ -22,9 +22,13 @@
                     <option value="">LAB003</option>
                 </select>
             </label>
-            <button>
+            <button id="cancel-selected-btn">
                 Cancel Selected Reservation
             </button>
         </div>
     </div>
+</div>
+
+<div>
+    @await Component.InvokeAsync("CancelSelectedReserve")
 </div>

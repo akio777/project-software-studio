@@ -30,7 +30,6 @@ namespace LabReservation.Controllers
         {
             var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var cancel_read = LAB.ReadCancel(userId);
-            Console.WriteLine(JsonConvert.SerializeObject(cancel_read.Data, Formatting.Indented));
             return View(cancel_read);
         }
     }
