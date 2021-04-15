@@ -1,0 +1,26 @@
+@model LabReservation.Models.LabCardInfo;
+
+<link rel="stylesheet" type="text/css" href="css/labCard.css" />
+
+<div class="card">
+    <div class="card-name">
+        <div class="card-name-area">@Model.name</div>
+    </div>
+
+    <div class="card-status">
+        <div class="status">Status
+            @if (Model.notAvailable == false)
+            {
+                <p>Avaiable</p>
+            }
+            @if (Model.notAvailable == true)
+            {
+                <p>Full</p>
+            }
+            @* <p>@Model.notAvailable</p> *@
+        </div>
+        <div class="equipment">Equipment
+            <p>@Model.equip</p>
+        </div>
+    </div>
+</div>

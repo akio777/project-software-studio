@@ -18,19 +18,17 @@ namespace LabReservation.Controllers
         {
             LAB = lab;
         }
-        
-
         public IActionResult Index()
         {
             var token = Request.Headers["Cookie"];
-            var temp = LAB.Read(1, 1);
-            return View();
+            var lab = LAB.LabInfo();
+            return View(lab.Data);
         }
         public IActionResult Test()
         {
             // var token = Request.Headers["Cookie"];
             // var temp = LAB.Read(1, 1);
-            
+
             return RedirectToAction("Index");
         }
 
