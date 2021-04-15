@@ -5,10 +5,18 @@
 <link rel="stylesheet" type="text/css" href="~/css/reserveLayout.css">
 
 <div class="layout">
+    <div tabindex="0">
+        <a asp-controller="LabManage" asp-action="Index">
+            <div class="back-content">
+                <button><i class="fa fa-chevron-left"></i></button>
+                <p>Back</p>
+            </div>
+        </a>
+    </div>
     <div class="layout-main">
         <h1 class="lab-name">LAB001</h1>
         <h2 class="equiment-name">Router1</h2>
-
+        <p>Select time slot to reserve the equipment.</p>
         <div>
             @await Component.InvokeAsync("ReservationTable", new { reserveinfoProps = @Model})
         </div>

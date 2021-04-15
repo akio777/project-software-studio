@@ -40,7 +40,6 @@ namespace LabReservation.Controllers
             var reservePageList = LAB.Read(id, userId);
 
             var reserveinfoProps = new ReserveinfoProps(reservePageList.Data);
-            Console.WriteLine(JsonConvert.SerializeObject(reserveinfoProps.reservePageList, Formatting.Indented));
             return View("Index", reserveinfoProps);
         }
 
