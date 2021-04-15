@@ -14,8 +14,8 @@
         </a>
     </div>
     <div class="layout-main">
-        <h1 class="lab-name">LAB001</h1>
-        <h2 class="equiment-name">Router1</h2>
+        <h1 class="lab-name">@Model.labinfo.name</h1>
+        <h2 class="equiment-name">@Model.labinfo.equip</h2>
         <p>Select time slot to reserve the equipment.</p>
         <div>
             @await Component.InvokeAsync("ReservationTable", new { reserveinfoProps = @Model})

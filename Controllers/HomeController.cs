@@ -14,14 +14,17 @@ namespace LabReservation.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ILabService LAB;
-        public HomeController(ILabService lab)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(ILabService lab, IHttpContextAccessor httpContextAccessor)
         {
             LAB = lab;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index()
         {
             var token = Request.Headers["Cookie"];
-            var lab = LAB.LabInfo();
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var lab = LAB.LabInfo(userId);
             return View(lab.Data);
         }
         public IActionResult Test()

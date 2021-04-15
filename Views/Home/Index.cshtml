@@ -13,33 +13,8 @@
 
 
 <div class="container">
-    @* <h2 class="display-4">LabReservation</h2> *@
-    @* <h1 class="home">show reserve queue</h1> *@
-    @* <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-primary" />
-        </div> *@
-
-    <a href="https://docs.microsoft.com/aspnet/core">
-    </a>
-
-    @* <form asp-controller="Reserveinfo" asp-action="Confirm" style="width: 100px; height: 100px; background-color:
-        red"> *@
-    @* <button asp-controller="Reserveinfo" style="width: 100px; height: 100px; background-color: red" *@
-    @* onclick="location.href='@Url.Action("Confirm","Reserveinfo", temp)'" *@
-    @* /> *@
-    @Html.ActionLink("Confirm", "Confirm", "Reserveinfo", "", "")
-    @* </form> *@
     @foreach (var item in @Model)
     {
         @await Component.InvokeAsync("LabCard",new {lab = @item})
     }
 </div>
-@* <div>
-    @foreach (var item in listLabID)
-    {
-    <div>
-    @await Component.InvokeAsync("LabManageCard", new {id = @item})
-    </div>
-    }
-    </div> *@
-@* <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
