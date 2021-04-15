@@ -13,6 +13,19 @@ namespace LabReservation.Models
         [DataType(DataType.DateTime)]
         public DateTime end_time { get; set; }
     }
+
+    public class ReserveinfoProps
+    {
+        public Labinfo labinfo { get; set; }
+        public Reserve_page[] reservePageList { get; set; }
+        public ReservedInput reservedInput { get; set; }
+        public ReserveinfoProps(Reserve_page[] _reservePageList, Labinfo _labinfo)
+        {
+            reservedInput = new ReservedInput();
+            reservePageList = _reservePageList;
+            labinfo = _labinfo;
+        }
+    }
     public class Reserve_page
     {
         public int day { get; set; }
@@ -47,6 +60,20 @@ namespace LabReservation.Models
         public bool[] time_7 { get; set; }
         public bool[] time_8 { get; set; }
         public bool[] time_9 { get; set; }
+
+        public ReservedInput()
+        {
+            time_0 = new bool[] { false, false, false, false, false, false, false };
+            time_1 = new bool[] { false, false, false, false, false, false, false };
+            time_2 = new bool[] { false, false, false, false, false, false, false };
+            time_3 = new bool[] { false, false, false, false, false, false, false };
+            time_4 = new bool[] { false, false, false, false, false, false, false };
+            time_5 = new bool[] { false, false, false, false, false, false, false };
+            time_6 = new bool[] { false, false, false, false, false, false, false };
+            time_7 = new bool[] { false, false, false, false, false, false, false };
+            time_8 = new bool[] { false, false, false, false, false, false, false };
+            time_9 = new bool[] { false, false, false, false, false, false, false };
+        }
     }
     public class CancelReserved
     {

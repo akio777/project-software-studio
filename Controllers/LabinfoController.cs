@@ -162,12 +162,12 @@ namespace LabReservation.Controllers
             return _context.Labinfo.Any(e => e.id == id);
         }
 
-        [Authorize(Roles = "1")]
-        [AllowAnonymous]
-        [Route("[action]")]
-        public IActionResult CatchAll()
-        {
-            return RedirectToAction("Index", "NoPermission");
-        }
+        // [Authorize(Roles = "1")]
+        // [AllowAnonymous]
+        // [Route("[action]")]
+        // public IActionResult CatchAll()
+        // {
+        //     return RedirectToAction("Index", "NoPermission");
+        // }
     }
 }

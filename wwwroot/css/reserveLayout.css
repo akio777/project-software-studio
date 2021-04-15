@@ -1,18 +1,46 @@
 .layout {
   display: flex;
   margin: auto;
-  padding: 2rem 1rem; 
+  flex-direction: column;
+  padding: 2rem 1rem;
   width: 60%;
 }
 
 .layout_main {
-    margin: auto;
+  margin: auto;
 }
 
 .lab-name {
-    color: var(--blue-500);
+  color: var(--blue-500);
 }
 
 .equiment-name {
-    margin: 0.75rem 0;
+  margin: 0.75rem 0;
+}
+
+.back-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  width: fit-content;
+  border-radius: 0.5rem;
+  padding: 5px;
+}
+
+.back-content button {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 0;
+  background-color: transparent;
+  color: var(--blue-500);
+  font-size: 1.25rem;
+}
+
+.back-content p {
+  color: var(--blue-500);
+  font-size: 1.25rem;
+}
+
+.back-content:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }

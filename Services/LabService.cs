@@ -12,7 +12,7 @@ namespace LabReservation.Services
     public interface ILabService
     {
         Return Read(int labid, int userid);
-        Return LabInfo();
+        Return LabInfo(int userid);
         Return LabManageInfo();
         Return Confirm(Reserved[] data, int userid);
         Return ReadCancel(int userid);
@@ -23,7 +23,7 @@ namespace LabReservation.Services
     public class LabService : ILabService
     {
         private readonly LabReservationContext db;
-        public int[] time_slot = Enumerable.Range(0+8, 10).ToArray();
+        public int[] time_slot = Enumerable.Range(0 + 8, 10).ToArray();
         public int[] day_slot = Enumerable.Range(0, 7).ToArray();
         public LabService(LabReservationContext context)
         {
@@ -39,7 +39,7 @@ namespace LabReservation.Services
                     db.Reserveinfo,
                     labinfo => labinfo.id,
                     reserveinfo => reserveinfo.lab_id,
-                    (labinfo, reserveinfo) => new {labinfo, reserveinfo}
+                    (labinfo, reserveinfo) => new { labinfo, reserveinfo }
                 ).Where(x =>
                     (x.reserveinfo.start_time.Day - dateNow.Day) >= 0 &&
                     (x.reserveinfo.start_time.Day - dateNow.Day) <= 6 &&
@@ -57,7 +57,7 @@ namespace LabReservation.Services
                         reserve_by = labres.reserveinfo.reserve_by
                     }
                 ).OrderBy(arg => arg.reserve_time);
-            
+
             // IDictionary<string, object> main_data = new Dictionary<string, object>();
             List<Reserve_page> all = new List<Reserve_page>();
             for (var day = 0; day < 7; day++)
@@ -71,27 +71,27 @@ namespace LabReservation.Services
                 foreach (var time in time_slot)
                 {
                     // map_data.timeslot.Append(time);
-                    tempINT.Add(maxall-(data_day.Where(data => data.reserve_time.Hour == time).Count()));
+                    tempINT.Add(maxall - (data_day.Where(data => data.reserve_time.Hour == time).Count()));
                 }
-                Reserve_page map_data = new Reserve_page {day = day, reserved = mine,  timeslot = tempINT.ToArray(), maximum = maxall};
-                
+                Reserve_page map_data = new Reserve_page { day = day, reserved = mine, timeslot = tempINT.ToArray(), maximum = maxall };
+
                 all.Add(map_data);
             }
-            
+
             // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
             return new Return
             {
                 Error = false,
-                Data = all,
+                Data = all.ToArray(),
             };
         }
 
-        public Return LabInfo()
+        public Return LabInfo(int userid)
         {
-            List<bool> lab = new List<bool> {false, false, false, false, false};
+            List<bool> lab = new List<bool> { false, false, false, false, false };
             for (var i = 0; i < 5; i++)
             {
-                var temp = Read(i + 1, 1);
+                var temp = Read(i + 1, userid);
                 foreach (Reserve_page data in temp.Data)
                 {
                     var check = data.timeslot.Contains(0);
@@ -104,7 +104,7 @@ namespace LabReservation.Services
 
                 if (lab[i]) break;
             }
-            
+
             var lab_info = db.Labinfo
                 .Join(
                     db.Equipment,
@@ -121,7 +121,7 @@ namespace LabReservation.Services
             return new Return
             {
                 Error = false,
-                Data = ""
+                Data = lab_info.ToList()
             };
         }
 
@@ -131,11 +131,14 @@ namespace LabReservation.Services
             // var dateMock = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + 1, 23,0,0);
             foreach (var i in data)
             {
-                var start_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time],0,0);
-                var end_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time]+1,0,0);
+                var start_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time], 0, 0);
+                var end_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time] + 1, 0, 0);
                 var reserved = db.Reserveinfo.Add(new Reserveinfo
                 {
-                    lab_id = i.lab_id, reserve_by = userid, start_time = start_date, end_time = end_date
+                    lab_id = i.lab_id,
+                    reserve_by = userid,
+                    start_time = start_date,
+                    end_time = end_date
                 });
                 db.SaveChanges();
             }
@@ -154,8 +157,8 @@ namespace LabReservation.Services
                     labinfo => labinfo.id,
                     equipment => equipment.lab_id,
                     (labinfo, equipment) => new LabManageInfo
-                        {id = labinfo.id, name = labinfo.name, equip = labinfo.equip, amount = equipment.maximum}
-                );
+                    { id = labinfo.id, name = labinfo.name, equip = labinfo.equip, amount = equipment.maximum }
+                ).ToArray();
             return new Return
             {
                 Error = false,
@@ -171,7 +174,7 @@ namespace LabReservation.Services
                     db.Reserveinfo,
                     labinfo => labinfo.id,
                     reserveinfo => reserveinfo.lab_id,
-                    (labinfo, reserveinfo) => new {labinfo, reserveinfo}
+                    (labinfo, reserveinfo) => new { labinfo, reserveinfo }
                 ).Where(x =>
                     (x.reserveinfo.start_time.Day - dateNow.Day) >= 0 &&
                     (x.reserveinfo.start_time.Day - dateNow.Day) <= 6 &&
@@ -196,7 +199,7 @@ namespace LabReservation.Services
                 output.Add(new CancelMap
                 {
                     reserve_id = data.reserve_id,
-                    day = day_slot.ToList().IndexOf(data.start_time.Day-dateNow.Day),
+                    day = day_slot.ToList().IndexOf(data.start_time.Day - dateNow.Day),
                     time = time_slot.ToList().IndexOf(data.start_time.Hour)
                 });
             }
@@ -218,7 +221,7 @@ namespace LabReservation.Services
                     error = true;
                     break;
                 }
-                db.Reserveinfo.Remove(new Reserveinfo {id = i.reserve_id});
+                db.Reserveinfo.Remove(new Reserveinfo { id = i.reserve_id });
             }
             if (error)
             {
@@ -245,19 +248,22 @@ namespace LabReservation.Services
                 .Join(db.Equipment, labinfo => labinfo.id, equipment => equipment.lab_id,
                     (labinfo, equipment) => new
                     {
-                        lab_id = labinfo.id, name = labinfo.name, equipment = labinfo.equip, maximum = equipment.maximum
+                        lab_id = labinfo.id,
+                        name = labinfo.name,
+                        equipment = labinfo.equip,
+                        maximum = equipment.maximum
                     });
             var maxi = data.Select(a => a.maximum).FirstOrDefault();
             var pull_data = db.Reserveinfo
                 .Where(x => (x.start_time.Day - dateNow.Day) >= 0 &&
                             (x.start_time.Day - dateNow.Day) <= 6 &&
                             x.lab_id == lab_id
-                ).OrderBy(x => x.lab_id).OrderBy(x=>x.id);
+                ).OrderBy(x => x.lab_id).OrderBy(x => x.id);
             List<Reserve_page> days = new List<Reserve_page>();
             for (var day = 0; day < 7; day++)
             {
                 var dayN = from x in pull_data where x.start_time.Day - dateNow.Day == day select x;
-                var temp_day = new Reserve_page {day = day, maximum = maxi};
+                var temp_day = new Reserve_page { day = day, maximum = maxi };
                 List<int> timeslot = new List<int>();
                 foreach (var time in time_slot)
                 {
@@ -274,6 +280,6 @@ namespace LabReservation.Services
                 Data = days.ToArray()
             };
         }
-        
+
     }
 }

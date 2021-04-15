@@ -29,13 +29,20 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(ReserveinfoProps reserveinfoProps)
         {
-            var userId = _httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value;
-            Console.WriteLine(userId);
-            return View();
+            return View(reserveinfoProps);
         }
 
+        public async Task<IActionResult> Lab(int id)
+        {
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var reservePageList = LAB.Read(id, userId);
+            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+
+            var reserveinfoProps = new ReserveinfoProps(reservePageList.Data, labinfo);
+            return View("Index", reserveinfoProps);
+        }
 
         // [HttpPost]
         public IActionResult Confirm(ReservedInput reservedInput)
@@ -51,7 +58,6 @@ namespace LabReservation.Controllers
             {
                 for (var j = 0; j < mapReservedInput[i].Length; j++)
                 {
-                    Console.WriteLine(mapReservedInput[i][j]);
                     if (mapReservedInput[i][j])
                     {
                         var reservedObject = new Reserved();
@@ -65,7 +71,7 @@ namespace LabReservation.Controllers
 
             Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
 
             // int userid = 1;
             // var mock = new Reserve_confirm
