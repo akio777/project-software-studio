@@ -64,18 +64,14 @@ namespace LabReservation.Controllers
                         var reservedObject = new Reserved();
                         reservedObject.day = j;
                         reservedObject.time = i;
-                        reservedObject.lab_id = 1;
+                        reservedObject.lab_id = id;
                         reservedList.Add(reservedObject);
                     }
                 }
             }
-            Console.WriteLine(id);
-
-            Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
-
             LAB.Confirm(reservedList.ToArray(), userId);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Lab", "Reserveinfo", new { id = id });
 
 
         }

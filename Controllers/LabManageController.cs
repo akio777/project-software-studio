@@ -43,7 +43,7 @@ namespace LabReservation.Controllers
         }
 
         // [HttpPost]
-        public IActionResult Confirm(ReservedInput reservedInput)
+        public IActionResult Confirm(ReservedInput reservedInput, int id)
         {
             var reservedList = new List<Reserved>();
             var mapReservedInput = new List<dynamic>();

@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
 <link rel="stylesheet" type="text/css" href="~/css/circularButton.css">
-<form id="myAnchor" asp-action="Confirm" method="post">
+<form id="myAnchor" asp-action="Confirm" asp-route-id="@Model.labinfo.id" method="post">
     <div class="confirm-content">
         <div class="reserved-content">
             <p class="count-h">Reserved :</p>
