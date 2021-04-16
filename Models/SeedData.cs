@@ -19,8 +19,8 @@ namespace LabReservation.Models
                 // Look for any movies.
 
                 if (!context.Userinfo.Any())
-                    context.Userinfo.Add(new Userinfo{email = "admin@admin.com",id = 1,password = "123456",role = 0});
-                
+                    context.Userinfo.Add(new Userinfo { email = "admin@admin.com", id = 1, password = "123456", role = 0 });
+
                 if (!context.Labinfo.Any())
                 {
                     context.Labinfo.AddRange(
@@ -77,7 +77,7 @@ namespace LabReservation.Models
                 //         new Reserveinfo
                 //         {
                 //             lab_id = 1,
-                //             reserve_by = r.Next(1, 20),
+                //             reserve_by = r.Next(1, 3),
                 //             start_time = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + r.Next(1, 7), random + 1, 0, 0),
                 //             end_time = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + r.Next(1, 7), random + 2, 0, 0),
                 //         }
@@ -85,14 +85,14 @@ namespace LabReservation.Models
                 // new Reserveinfo
                 // {
                 //     lab_id = r.Next(1, 6),
-                //     reserve_by = r.Next(1, 20),
+                //     reserve_by = r.Next(1, 3),
                 //     start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 2, 0, 0),
                 //     end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 3, 0, 0),
                 // },
                 // new Reserveinfo
                 // {
                 //     lab_id = r.Next(1, 6),
-                //     reserve_by = r.Next(1, 20),
+                //     reserve_by = r.Next(1, 3),
                 //     start_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 3, 0, 0),
                 //     end_time = new DateTime(dateNow.Year, dateNow.Month, r.Next(1, 28), random + 4, 0, 0),
                 // }

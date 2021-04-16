@@ -1,9 +1,7 @@
+@model LabReservation.Models.LabManageInfoProps
+
 @{
-  var labName = "Lab001";
-  var currentDate =  DateTime.Now;
-  var mockList = new List<string>(new string[] { "test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",
-"test9", "test10","test11", "test12", "test13", "test14", "test15", "test16", "test17", "test18", "test19", "test20", "test21",
-"test22", "test23", "test24", "test25", "test26", "test27", "test28", "test29", "test30" });
+  var currentDate = DateTime.Now;
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/cancelReserve.css" />
@@ -18,13 +16,13 @@
     </div>
     <div class="modal-body">
       <p>Select user to cancel reservation in</p>
-      <p class="detail-reserve">@labName @currentDate</p>
+      <p class="detail-reserve">@Model.labinfo.name (@Model.cancelUserList.day)</p>
       <form>
         <div class="select-cancel">
-          @foreach (var item in @mockList)
+          @foreach (var item in @Model.cancelUserList.data)
           {
             <div>
-              @await Component.InvokeAsync("CheckBox", new { key = @item })
+              @await Component.InvokeAsync("CheckBox", new { whoReserved = @item })
             </div>
           }
         </div>
@@ -46,8 +44,6 @@
 <script>
   var modal = document.getElementById("modal-main");
 
-  var btn = document.getElementById("btn-open-modal");
-
   var span = document.getElementsByClassName("close")[0];
 
   var cancel = document.getElementById("btn-cancel");
@@ -55,10 +51,6 @@
   var confirm = document.getElementById("btn-confirm");
 
   var select_all = document.getElementById("btn-selectall");
-
-  btn.onclick = function () {
-    modal.style.display = "block";
-  }
 
   span.onclick = function () {
     modal.style.display = "none";

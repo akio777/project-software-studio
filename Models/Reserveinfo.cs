@@ -30,6 +30,8 @@ namespace LabReservation.Models
     {
         public int day { get; set; }
         public int[] reserved { get; set; }
+        
+        public int[] notAvailable { get; set; }
         public int[] timeslot { get; set; }
         public int maximum { get; set; }
     }
@@ -47,7 +49,14 @@ namespace LabReservation.Models
         public int day { get; set; }
         public int time { get; set; }
         public string lab_name { get; set; }
-        public int lab_id { get; set; }
+        public int? lab_id { get; set; }
+
+        public CancelMap()
+        {
+            reserve_id = -1;
+            lab_name = "";
+        }
+
     }
 
     public class ReservedInput
@@ -80,6 +89,10 @@ namespace LabReservation.Models
     public class CancelReserved
     {
         public int reserve_id { get; set; }
+        public CancelReserved(int _reserve_id)
+        {
+            reserve_id = _reserve_id;
+        }
     }
 
     public class LabManageInfoProps
@@ -87,17 +100,65 @@ namespace LabReservation.Models
         public Labinfo labinfo { get; set; }
         public Equipment equipment { get; set; }
         public Reserve_page[] reservePageList { get; set; }
+        public LabShowForCancel cancelUserList { get; set; }
 
+        public bool modalOpen { get; set; }
         public ReservedInput reservedInput { get; set; }
 
-        public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList)
+        public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList, bool open = false)
         {
             reservedInput = new ReservedInput();
+            modalOpen = open;
             equipment = _equipment;
             labinfo = _labinfo;
             reservePageList = _reservePageList;
         }
     }
+
+    public class CancelMyReservedInput
+    {
+        public CancelMapOutput?[] time_0 { get; set; }
+        public CancelMapOutput?[] time_1 { get; set; }
+        public CancelMapOutput?[] time_2 { get; set; }
+        public CancelMapOutput?[] time_3 { get; set; }
+        public CancelMapOutput?[] time_4 { get; set; }
+        public CancelMapOutput?[] time_5 { get; set; }
+        public CancelMapOutput?[] time_6 { get; set; }
+        public CancelMapOutput?[] time_7 { get; set; }
+        public CancelMapOutput?[] time_8 { get; set; }
+        public CancelMapOutput?[] time_9 { get; set; }
+
+    }
+
+    public class CancelMapOutput : CancelMap
+    {
+        public bool selected { get; set; }
+
+        public CancelMapOutput(CancelMap? cancelMap)
+        {
+            reserve_id = cancelMap.reserve_id;
+            day = cancelMap.day;
+            time = cancelMap.time;
+            lab_name = cancelMap.lab_name;
+            lab_id = cancelMap.lab_id;
+            selected = false;
+        }
+    }
+
+    public class MyReserveProps
+    {
+        public CancelMyReservedInput cancelMyReservedInput { get; set; }
+        public ReservedInput reservedInput { get; set; }
+        public CancelMap[] cancelReservedModalInput { get; set; }
+        public bool modalOpen { get; set; }
+        public MyReserveProps(CancelMyReservedInput _cancelMyReservedInput)
+        {
+            reservedInput = new ReservedInput();
+            cancelMyReservedInput = _cancelMyReservedInput;
+        }
+    }
+
+
     public class WhoReserved
     {
         public int reserved_id { get; set; }
@@ -111,6 +172,7 @@ namespace LabReservation.Models
         public WhoReserved[] data { get; set; }
         public int start_time { get; set; }
         public int end_time { get; set; }
+        public DateTime day { get; set; }
     }
 
     public class UserEmail

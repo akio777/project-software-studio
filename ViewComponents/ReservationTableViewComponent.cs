@@ -19,7 +19,6 @@ namespace LabReservation.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(ReserveinfoProps reserveinfoProps)
         {
-
             return View(reserveinfoProps);
         }
     }

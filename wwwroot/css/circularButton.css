@@ -26,7 +26,7 @@
 }
 
 /* Create a custom checkbox */
-.checkmark {
+.circular-container .checkmark {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -41,60 +41,60 @@
   border: 2px solid var(--blue-500);
 }
 /* Hidden Checkbox Style */
-.hidden {
+.circular-container.hidden {
   display: none !important;
 }
 
 /* Success Checkbox Style */
-.success .checkmark {
+.circular-container.success .checkmark {
   color: var(--success);
   border: 2px solid var(--success);
 }
 
-.success:hover .checkmark {
+.circular-container.success:hover .checkmark {
   box-shadow: 0 0 10px 0 var(--success) !important;
 }
 /* Warning Checkbox Style */
-.warning .checkmark {
+.circular-container.warning .checkmark {
   color: var(--warning);
   border: 2px solid var(--warning);
 }
 
-.warning:hover .checkmark {
+.circular-container.warning:hover .checkmark {
   box-shadow: 0 0 10px 0 var(--warning) !important;
 }
 
 /* Success Checkbox Style */
-.danger .checkmark {
+.circular-container.danger .checkmark {
   color: var(--danger);
   border: 2px solid var(--danger);
 }
 
-.danger:hover .checkmark {
+.circular-container.danger:hover .checkmark {
   box-shadow: 0 0 10px 0 var(--danger) !important;
 }
 /* Full Checkbox Style */
-.full .checkmark {
+.circular-container.full .checkmark {
   color: var(--grey-400);
   border: 2px solid var(--grey-400);
   font-size: 14px;
 }
 
-.full:hover input ~ .checkmark {
+.circular-container.full:hover input ~ .checkmark {
   cursor: default;
   box-shadow: none !important;
   user-select: none;
 }
 
 /* Reserved Checkbox Style */
-.reserved .checkmark {
+.circular-container.reserved .checkmark {
   color: var(--white);
   background-color: var(--blue-200);
   border: none;
   font-size: 12px;
 }
 
-.reserved:hover input ~ .checkmark {
+.circular-container.reserved:hover input ~ .checkmark {
   cursor: default;
   box-shadow: none !important;
   user-select: none;
@@ -120,7 +120,7 @@
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.circular-container .checkmark:after {
   content: "";
   position: absolute;
   display: none;
@@ -142,4 +142,16 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.cancel-select-btn {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 0;
+  z-index: 100;
+}
+
+.full .cancel-select-btn {
+  pointer-events: none;
 }

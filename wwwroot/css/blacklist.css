@@ -1,7 +1,7 @@
 .container-blacklist {
   width: 850px;
   height: 500px;
-  border: solid black 2px;
+  /* border: solid black 2px; */
   margin: 56px auto 0 auto;
 }
 
@@ -17,9 +17,16 @@
   justify-content: space-between;
 }
 
-.user-email,
-.blacklist-email {
-  border-bottom: solid #D8D8D8 2px;
+.notblock-area,
+.wasblock-area {
+  margin-top: 10px;
+  height: 350px;
+  overflow-y: scroll;
+}
+
+.notblock-header,
+.block-header {
+  border-bottom: solid #d8d8d8 2px;
   width: 400px;
   font-size: 40px;
   font-weight: 500;
