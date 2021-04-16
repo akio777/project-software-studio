@@ -30,6 +30,8 @@ namespace LabReservation.Models
     {
         public int day { get; set; }
         public int[] reserved { get; set; }
+        
+        public int[] notAvailable { get; set; }
         public int[] timeslot { get; set; }
         public int maximum { get; set; }
     }
