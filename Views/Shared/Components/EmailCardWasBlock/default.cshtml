@@ -4,5 +4,6 @@
 
 <div class="email-card">
     <div class="email-info">@Model.email</div>
-    <button><i class="fas fa-undo"></i></button>
+    @Html.ActionLink("", "UnBlock", "Blacklist", new {userid = @Model.user_id}, new {@class="fas fa-undo"})
+    @* <button><i class="fas fa-undo"></i></button> *@
 </div>

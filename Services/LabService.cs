@@ -393,7 +393,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ผู้ใช้นี้ถูก block อยู่่แล้ว"
+                    Data = "ผู้ใช้นี้ถูก block อยู่แล้ว"
                 };
             }
             db.SaveChanges();

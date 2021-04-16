@@ -7,6 +7,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.email-card a {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 
 .email-info {
@@ -20,20 +30,20 @@ button {
   background-color: transparent;
 }
 
-button .fa-ban {
+.fa-ban {
   font-size: 16px;
   color: var(--danger);
 }
 
-button .fa-ban:hover{
+.fa-ban:hover {
   text-shadow: 1px 1px 1px var(--danger);
 }
 
-button .fa-undo:hover{
+.fa-undo:hover {
   text-shadow: 1px 1px 1px var(--blue-500);
 }
 
-button .fa-undo {
+.fa-undo {
   font-size: 16px;
   color: var(--blue-500);
 }

@@ -154,5 +154,17 @@ namespace LabReservation.Controllers
         {
             return _context.Blacklist.Any(e => e.id == id);
         }
+
+        public IActionResult AddToBlock(int userid)
+        {
+            LAB.ForceBlock(userid);
+            return RedirectToAction("Index", "Blacklist");
+        }
+
+        public IActionResult UnBlock(int userid)
+        {
+            LAB.UnBlock(userid);
+            return RedirectToAction("Index", "Blacklist");
+        }
     }
 }
