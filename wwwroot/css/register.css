@@ -1,4 +1,8 @@
-﻿.register-container {
+﻿body {
+  padding: 0;
+}
+
+.register-container {
   height: 100vh;
   display: grid;
   grid-template-areas: "register-left register-right";
