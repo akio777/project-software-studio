@@ -1,7 +1,7 @@
 .container-blacklist {
   width: 850px;
   height: 500px;
-  border: solid black 2px;
+  /* border: solid black 2px; */
   margin: 56px auto 0 auto;
 }
 
@@ -15,6 +15,13 @@
 .users-list {
   display: flex;
   justify-content: space-between;
+}
+
+.notblock-area,
+.wasblock-area {
+  margin-top: 10px;
+  height: 350px;
+  overflow-y: scroll;
 }
 
 .notblock-header,

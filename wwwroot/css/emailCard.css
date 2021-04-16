@@ -3,7 +3,7 @@
   height: 40px;
   background-color: var(--light);
   border-radius: 5px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
