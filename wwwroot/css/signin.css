@@ -1,4 +1,8 @@
-﻿.login-container {
+﻿body {
+  padding: 0;
+}
+
+.login-container {
   height: 100vh;
   display: grid;
   grid-template-areas: "login-left login-right";

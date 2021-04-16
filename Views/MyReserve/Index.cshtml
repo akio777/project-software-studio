@@ -1,4 +1,4 @@
-@* @model IEnumerable<LabReservation.Models.CancelMap> *@
+@model LabReservation.Models.MyReserveProps
 @{
     ViewData["Title"] = "My Reservation";
 }
@@ -14,21 +14,16 @@
         <div class="detail">
             <p>Select time slot to cancel reservation</p>
         </div>
-        <div class="option">
-            <label>Filter
-                <select name="" id="">
-                    <option value="">LAB001</option>
-                    <option value="">LAB002</option>
-                    <option value="">LAB003</option>
-                </select>
-            </label>
-            <button id="cancel-selected-btn">
-                Cancel Selected Reservation
-            </button>
+
+        <div>
+            @await Component.InvokeAsync("MyReservationTable", new { myReserveProps = @Model })
         </div>
     </div>
 </div>
 
-<div>
-    @await Component.InvokeAsync("CancelSelectedReserve")
-</div>
+@if (@Model.modalOpen)
+{
+    <div>
+        @await Component.InvokeAsync("CancelSelectedReserve", new { MyReserveProps = @Model })
+    </div>
+}

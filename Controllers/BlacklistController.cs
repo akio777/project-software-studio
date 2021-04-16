@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using LabReservation.Services;
 
 namespace LabReservation.Controllers
 {
@@ -14,15 +15,19 @@ namespace LabReservation.Controllers
     {
         private readonly LabReservationContext _context;
 
-        public BlacklistController(LabReservationContext context)
+        private readonly ILabService LAB;
+
+        public BlacklistController(LabReservationContext context, ILabService lab)
         {
+            LAB = lab;
             _context = context;
         }
 
         // GET: Blacklist
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Blacklist.ToListAsync());
+            var blacklist = LAB.BlackListInfo();
+            return View(blacklist.Data);
         }
 
         // GET: Blacklist/Details/5
@@ -148,6 +153,18 @@ namespace LabReservation.Controllers
         private bool BlacklistExists(int id)
         {
             return _context.Blacklist.Any(e => e.id == id);
+        }
+
+        public IActionResult AddToBlock(int userid)
+        {
+            LAB.ForceBlock(userid);
+            return RedirectToAction("Index", "Blacklist");
+        }
+
+        public IActionResult UnBlock(int userid)
+        {
+            LAB.UnBlock(userid);
+            return RedirectToAction("Index", "Blacklist");
         }
     }
 }

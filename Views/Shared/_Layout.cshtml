@@ -41,14 +41,12 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
                             <a class="nav-link" asp-area="" asp-controller="MyReserve" asp-action="Index">My Reservation</a>
                         </div>
-
                     }
                     <div class="user">
                         <div>
                             @await Component.InvokeAsync("NavUsername")
                         </div>
-                        <img src='@Url.Content("~/Images/profilepic.jpg")'
-                        alt="profile-pic" class="profile-pic">
+                        <img src='@Url.Content("~/Images/profilepic.jpg")' alt="profile-pic" class="profile-pic">
                         <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout"><i
                             class="fas fa-sign-out-alt"></i></a>
                     </div>
