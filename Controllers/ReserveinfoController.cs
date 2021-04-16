@@ -48,8 +48,7 @@ namespace LabReservation.Controllers
                 
             // }
             // };
-            var temp = LAB.BlackListInfo();
-
+            var temp = LAB.Confirm(new Reserved[]{},1);
             return null;
         }
         

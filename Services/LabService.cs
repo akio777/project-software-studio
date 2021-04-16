@@ -132,8 +132,16 @@ namespace LabReservation.Services
 
         public Return Confirm(Reserved[] data, int userid)
         {
+            var check = db.Blacklist.Where(b => b.user_id == userid).FirstOrDefault();
+            if (check != null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ไม่สามารถของได้ บัญชีของคุณถูกระงับ กรุณาติดต่อเจ้าหน้าที่"
+                };
+            }
             var dateNow = DateTime.Now;
-            // var dateMock = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + 1, 23,0,0);
             foreach (var i in data)
             {
                 var start_date = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + i.day, time_slot[i.time],0,0);
@@ -329,17 +337,21 @@ namespace LabReservation.Services
 
         public Return BlackListInfo()
         {
+            
+            
             var notBlock = from user in db.Userinfo
                 where db.Blacklist.Where(bl=>bl.user_id==user.id).First()==null
                 select new UserEmail{email = user.email, user_id = user.id};
             var wasBlock = from block_user in db.Blacklist
                 join user in db.Userinfo on block_user.user_id equals user.id
                 select new UserEmail{email = user.email, user_id = user.id};
-            BlackListPage output = new BlackListPage {wasBlock = wasBlock.ToArray(), NotBlock = notBlock.ToArray()};
+            // BlackListPage output = new BlackListPage {wasBlock = wasBlock.ToArray(), NotBlock = NotBlock.ToArray()};
+            Console.WriteLine(JsonConvert.SerializeObject(notBlock, Formatting.Indented));
+            Console.WriteLine(JsonConvert.SerializeObject(wasBlock, Formatting.Indented));
             return new Return
             {
                 Error = false,
-                Data = output
+                Data = "output"
             };
         }
 
