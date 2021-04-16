@@ -39,6 +39,7 @@ namespace LabReservation.Controllers
             var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var reservePageList = LAB.Read(id, userId);
             var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+            Console.WriteLine(JsonConvert.SerializeObject(reservePageList, Formatting.Indented));
 
             var reserveinfoProps = new ReserveinfoProps(reservePageList.Data, labinfo);
             return View("Index", reserveinfoProps);
@@ -71,7 +72,7 @@ namespace LabReservation.Controllers
             }
             LAB.Confirm(reservedList.ToArray(), userId);
 
-            return RedirectToAction("Lab", "Reserveinfo", new { id = id });
+            return RedirectToAction("Index", "Home");
 
 
         }
