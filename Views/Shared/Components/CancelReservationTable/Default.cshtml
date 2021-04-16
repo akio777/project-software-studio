@@ -2,8 +2,6 @@
 
 @{
     var currentDateTime = DateTime.Now;
-    var timeIndex = 0;
-    var dayIndex = 0;
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
@@ -50,7 +48,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(0,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "0"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[0]</p>
@@ -66,7 +66,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(1,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "1"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[1]</p>
@@ -82,7 +84,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(2,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "2"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[2]</p>
@@ -98,7 +102,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(3,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "3"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[3]</p>
@@ -114,7 +120,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(4,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "4"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[4]</p>
@@ -130,7 +138,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(5,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "5"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[5]</p>
@@ -146,7 +156,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(6,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "6"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[6]</p>
@@ -162,7 +174,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(7,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "7"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[7]</p>
@@ -178,7 +192,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(8,@i)">
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "8"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[8]</p>
@@ -194,8 +210,9 @@
             {
                 <td>
                     <div>
-                        <label class="circular-container" tabindex="0" onclick="checkedHandler(9,@i)">
-
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "9"
+                        + @i}, new {@class="cancel-select-btn"})
                             <input type="checkbox" disabled>
                             <span class="checkmark">
                                 <p>@Model.reservePageList[i].timeslot[9]</p>
@@ -208,15 +225,19 @@
     </tbody>
 </table>
 
+@if (@Model.modalOpen)
+{
+    <div>
+        @* @Html.ActionLink("PassData", "Confirm", "LabManage", new {cancelReservedInput = "0@i"}) *@
+        @await Component.InvokeAsync("CancelReserve", new {labManageInfoProps = @Model})
+    </div>
+}
+
+
 <script type="text/javascript">
     const currentDateTime = new Date();
     const model = @Json.Serialize(@Model);
     const allCheckBox = document.querySelectorAll(".circular-container")
-
-    function checkedHandler(timeIndex, dayIndex) {
-        console.log(timeIndex, dayIndex)
-    }
-
 
     allCheckBox.forEach((cb, index) => {
         const timeIndex = parseInt(index / 7);

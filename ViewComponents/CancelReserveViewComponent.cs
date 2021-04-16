@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LabReservation.Data;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using LabReservation.Models;
 
 namespace LabReservation.ViewComponents
 {
@@ -17,9 +18,10 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(LabManageInfoProps labManageInfoProps)
         {
-            return View();
+            //Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps, Formatting.Indented));
+            return View(labManageInfoProps);
         }
     }
 }

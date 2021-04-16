@@ -43,33 +43,32 @@ namespace LabReservation.Controllers
         }
 
         // [HttpPost]
-        public IActionResult Confirm(ReservedInput reservedInput, int id)
+        public async Task<IActionResult> Confirm(string cancelReservedInput)
         {
-            var reservedList = new List<Reserved>();
-            var mapReservedInput = new List<dynamic>();
-            foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
-            {
-                mapReservedInput.Add(propertyInfo.GetValue(reservedInput, null));
-            }
+            int lab_id = cancelReservedInput[0] - '0';
+            int time = cancelReservedInput[1] - '0';
+            int day = cancelReservedInput[2] - '0';
+        
+            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
+            var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == lab_id);
+            var reservePageList = LAB.LabManage(lab_id);
 
-            for (var i = 0; i < mapReservedInput.Count(); i++)
-            {
-                for (var j = 0; j < mapReservedInput[i].Length; j++)
-                {
-                    if (mapReservedInput[i][j])
-                    {
-                        var reservedObject = new Reserved();
-                        reservedObject.day = j;
-                        reservedObject.time = i;
-                        reservedObject.lab_id = 0;
-                        reservedList.Add(reservedObject);
-                    }
-                }
-            }
+            // init Reserved for use with CancelList()
+            var reservedObject = new Reserved();
+            reservedObject.lab_id = lab_id;
+            reservedObject.time = time;
+            reservedObject.day = day;
+            // Console.WriteLine(JsonConvert.SerializeObject(reservedObject, Formatting.Indented));
 
-            Console.WriteLine(JsonConvert.SerializeObject(reservedList, Formatting.Indented));
+            var cancelUserList = LAB.CancelList(reservedObject);
+            // Console.WriteLine(JsonConvert.SerializeObject(cancelUserList, Formatting.Indented));
 
-            return RedirectToAction("Index", "Home");
+            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data, true);
+            labManageInfoProps.cancelUserList = cancelUserList.Data;
+
+            //Console.WriteLine(JsonConvert.SerializeObject(cancelReservedInput, Formatting.Indented));
+
+            return View("Views/LabManage/EditCancel.cshtml", labManageInfoProps);
         }
     }
 }

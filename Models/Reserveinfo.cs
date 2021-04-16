@@ -87,12 +87,15 @@ namespace LabReservation.Models
         public Labinfo labinfo { get; set; }
         public Equipment equipment { get; set; }
         public Reserve_page[] reservePageList { get; set; }
+        public LabShowForCancel cancelUserList { get; set; }
 
+        public bool modalOpen { get; set; }
         public ReservedInput reservedInput { get; set; }
 
-        public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList)
+        public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList, bool open = false)
         {
             reservedInput = new ReservedInput();
+            modalOpen = open;
             equipment = _equipment;
             labinfo = _labinfo;
             reservePageList = _reservePageList;
@@ -111,6 +114,7 @@ namespace LabReservation.Models
         public WhoReserved[] data { get; set; }
         public int start_time { get; set; }
         public int end_time { get; set; }
+        public DateTime day { get; set; }
     }
 
     public class UserEmail

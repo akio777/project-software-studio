@@ -324,12 +324,13 @@ namespace LabReservation.Services
                     name = name,
                     start_time = reserveinfo.start_time.Hour,
                     end_time = reserveinfo.start_time.Hour + 1,
+                    day = reserveinfo.start_time
                 }
             );
             return new Return
             {
                 Error = false,
-                Data = lab_info.ToArray()
+                Data = lab_info.ToArray()[0]
             };
         }
 
