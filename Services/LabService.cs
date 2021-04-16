@@ -72,11 +72,11 @@ namespace LabReservation.Services
                 var reserved = temp.Where(data => data.reserve_by == userid);
                 var mine = (from data in data_day where data.reserve_by == userid select time_slot.ToList().IndexOf(data.reserve_time.Hour)).ToArray();
                 var notA = (from data in db.Reserveinfo
-                    where data.reserve_by == userid &&
-                          data.lab_id != labid &&
-                          data.start_time.Day == this_day
-                    orderby data.lab_id
-                    select time_slot.ToList().IndexOf(data.start_time.Hour)).ToArray();
+                            where data.reserve_by == userid &&
+                                  data.lab_id != labid &&
+                                  data.start_time.Day == this_day
+                            orderby data.lab_id
+                            select time_slot.ToList().IndexOf(data.start_time.Hour)).ToArray();
                 List<int> tempINT = new List<int>();
                 foreach (var time in time_slot)
                 {
