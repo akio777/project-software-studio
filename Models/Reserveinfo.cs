@@ -43,11 +43,18 @@ namespace LabReservation.Models
 
     public class CancelMap
     {
-        public int reserve_id { get; set; }
+        public int? reserve_id { get; set; }
         public int day { get; set; }
         public int time { get; set; }
         public string lab_name { get; set; }
         public int lab_id { get; set; }
+
+        public CancelMap()
+        {
+            reserve_id = -1;
+            lab_name = "";
+        }
+
     }
 
     public class ReservedInput
@@ -99,13 +106,44 @@ namespace LabReservation.Models
         }
     }
 
+    public class CancelMyReservedInput
+    {
+        public CancelMapOutput?[] time_0 { get; set; }
+        public CancelMapOutput?[] time_1 { get; set; }
+        public CancelMapOutput?[] time_2 { get; set; }
+        public CancelMapOutput?[] time_3 { get; set; }
+        public CancelMapOutput?[] time_4 { get; set; }
+        public CancelMapOutput?[] time_5 { get; set; }
+        public CancelMapOutput?[] time_6 { get; set; }
+        public CancelMapOutput?[] time_7 { get; set; }
+        public CancelMapOutput?[] time_8 { get; set; }
+        public CancelMapOutput?[] time_9 { get; set; }
+
+    }
+
+    public class CancelMapOutput : CancelMap
+    {
+        public bool selected { get; set; }
+
+        public CancelMapOutput(CancelMap? cancelMap)
+        {
+            reserve_id = cancelMap.reserve_id;
+            day = cancelMap.day;
+            time = cancelMap.time;
+            lab_name = cancelMap.lab_name;
+            lab_id = cancelMap.lab_id;
+            selected = false;
+        }
+    }
+
     public class MyReserveProps
     {
-        public Labinfo labinfo { get; set; }
-        public MyReserveProps(Labinfo _labinfo)
+        public CancelMyReservedInput cancelMyReservedInput { get; set; }
+        public ReservedInput reservedInput { get; set; }
+        public MyReserveProps(CancelMyReservedInput _cancelMyReservedInput)
         {
-
-            labinfo = _labinfo;
+            reservedInput = new ReservedInput();
+            cancelMyReservedInput = _cancelMyReservedInput;
         }
     }
     public class WhoReserved
