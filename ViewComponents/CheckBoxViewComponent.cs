@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using LabReservation.Data;
 using LabReservation.Models;
+using Newtonsoft.Json;
 
 namespace LabReservation.ViewComponents
 {
@@ -17,11 +18,10 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string? key)
+        public async Task<IViewComponentResult> InvokeAsync(WhoReserved whoReserved)
         {
-            var checkboxProps = new CheckBox();
-            checkboxProps.key = key;
-            return View(checkboxProps);
+            Console.WriteLine(JsonConvert.SerializeObject(whoReserved, Formatting.Indented));
+            return View(whoReserved);
         }
     }
 }

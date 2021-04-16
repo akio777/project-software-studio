@@ -7,220 +7,237 @@
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
 <link rel="stylesheet" type="text/css" href="~/css/circularButton.css">
-<form id="myAnchor" asp-action="Confirm" method="post">
-    <p id="count_reserved">Count</p>
-    <button type="submit">Confirm</button>
+<table class="reservation-table-container">
+    <thead class="reservation-table-header">
+        <tr>
+            <th></th>
+            <th>
+                <div>@currentDateTime.ToString("ddd")</div>
+                <div>Today</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
+            </th>
+            <th>
+                <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
+                <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="reservation-table-content">
+        <tr>
+            <td>08:00<br>-<br>09:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "0"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[0]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>09:00<br>-<br>10:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "1"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[1]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>10:00<br>-<br>11:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "2"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[2]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>11:00<br>-<br>12:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "3"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[3]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>12:00<br>-<br>13:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "4"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[4]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>13:00<br>-<br>14:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "5"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[5]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>14:00<br>-<br>15:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "6"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[6]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>15:00<br>-<br>16:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "7"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[7]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>16:00<br>-<br>17:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "8"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[8]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>17:00<br>-<br>18:00</td>
+            @for (int i = 0; i < 7; i++)
+            {
+                <td>
+                    <div>
+                        <label class="circular-container" tabindex="0">
+                            @Html.ActionLink("", "Confirm", "LabManage", new {cancelReservedInput = @Model.labinfo.id + "9"
+                        + @i}, new {@class="cancel-select-btn"})
+                            <input type="checkbox" disabled>
+                            <span class="checkmark">
+                                <p>@Model.reservePageList[i].timeslot[9]</p>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>
 
-    <table class="reservation-table-container">
-        <thead class="reservation-table-header">
-            <tr>
-                <th></th>
-                <th>
-                    <div>@currentDateTime.ToString("ddd")</div>
-                    <div>Today</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
-                </th>
-                <th>
-                    <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
-                    <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="reservation-table-content">
-            <tr>
-                <td>08:00<br>-<br>09:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(0,@i)">
-                                <input asp-for="reservedInput.time_0[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[0]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>09:00<br>-<br>10:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(1,@i)">
-                                <input asp-for="reservedInput.time_1[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[1]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>10:00<br>-<br>11:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(2,@i)">
-                                <input asp-for="reservedInput.time_2[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[2]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>11:00<br>-<br>12:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(3,@i)">
-                                <input asp-for="reservedInput.time_3[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[3]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>12:00<br>-<br>13:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(4,@i)">
-                                <input asp-for="reservedInput.time_4[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[4]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>13:00<br>-<br>14:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(5,@i)">
-                                <input asp-for="reservedInput.time_5[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[5]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>14:00<br>-<br>15:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(6,@i)">
-                                <input asp-for="reservedInput.time_6[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[6]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>15:00<br>-<br>16:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(7,@i)">
-                                <input asp-for="reservedInput.time_7[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[7]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>16:00<br>-<br>17:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(8,@i)">
-                                <input asp-for="reservedInput.time_8[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[8]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-            <tr>
-                <td>17:00<br>-<br>18:00</td>
-                @for (int i = 0; i < 7; i++)
-                {
-                    <td>
-                        <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler(9,@i)">
-                                <input asp-for="reservedInput.time_9[i]" type="checkbox" disabled>
-                                <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[9]</p>
-                                </span>
-                            </label>
-                        </div>
-                    </td>
-                }
-            </tr>
-        </tbody>
-    </table>
-</form>
+@if (@Model.modalOpen)
+{
+    <div>
+        @* @Html.ActionLink("PassData", "Confirm", "LabManage", new {cancelReservedInput = "0@i"}) *@
+        @await Component.InvokeAsync("CancelReserve", new {labManageInfoProps = @Model})
+    </div>
+}
+
 
 <script type="text/javascript">
     const currentDateTime = new Date();
     const model = @Json.Serialize(@Model);
     const allCheckBox = document.querySelectorAll(".circular-container")
-
-    function checkedHandler(timeIndex, dayIndex) {
-        console.log(timeIndex, dayIndex)
-        var checkboxes = document.querySelectorAll('.circular-container input:checked');
-        document.querySelector("#count_reserved").innerHTML = checkboxes.length
-    }
-
 
     allCheckBox.forEach((cb, index) => {
         const timeIndex = parseInt(index / 7);
@@ -238,6 +255,7 @@
             cb.classList.add("full")
             cb.querySelector("p").innerHTML = "Empty"
             cb.querySelector("input").disabled = true
+            cb.removeAttribute("onclick")
         } else if (
             countEquip >= model.reservePageList[dayIndex].maximum
         ) {

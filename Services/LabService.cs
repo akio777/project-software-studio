@@ -296,8 +296,8 @@ namespace LabReservation.Services
             var temp = db.Reserveinfo
                 .Where(
                     x => x.lab_id == data.lab_id &&
-                         x.start_time.Day == dateNow.Day + data.day &&
-                         x.start_time.Hour == time_slot[data.time]
+                        x.start_time.Day == dateNow.Day + data.day &&
+                        x.start_time.Hour == time_slot[data.time]
                 )
                 .Join(
                     db.Userinfo,
@@ -324,12 +324,13 @@ namespace LabReservation.Services
                     name = name,
                     start_time = reserveinfo.start_time.Hour,
                     end_time = reserveinfo.start_time.Hour + 1,
+                    day = reserveinfo.start_time
                 }
             );
             return new Return
             {
                 Error = false,
-                Data = lab_info.ToArray()
+                Data = lab_info.ToArray()[0]
             };
         }
 
@@ -338,11 +339,11 @@ namespace LabReservation.Services
 
             var wasBlock = db.Userinfo
                 .Join(db.Blacklist, a => a.id, b => b.user_id,
-                   (userinfo, blacklist) => new UserEmail
-                   {
-                       email = userinfo.email,
-                       user_id = userinfo.id
-                   }
+                    (userinfo, blacklist) => new UserEmail
+                    {
+                        email = userinfo.email,
+                        user_id = userinfo.id
+                    }
                 );
             var NotBlock = db.Userinfo
                 .Join(db.Userinfo, a => a.id, b => b.id,
