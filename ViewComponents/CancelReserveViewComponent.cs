@@ -20,7 +20,6 @@ namespace LabReservation.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(LabManageInfoProps labManageInfoProps)
         {
-            //Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps, Formatting.Indented));
             return View(labManageInfoProps);
         }
     }

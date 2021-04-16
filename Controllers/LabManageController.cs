@@ -61,14 +61,50 @@ namespace LabReservation.Controllers
             // Console.WriteLine(JsonConvert.SerializeObject(reservedObject, Formatting.Indented));
 
             var cancelUserList = LAB.CancelList(reservedObject);
-            // Console.WriteLine(JsonConvert.SerializeObject(cancelUserList, Formatting.Indented));
+            bool[] checkList = new bool[cancelUserList.Data.data.Length];
+            //Console.WriteLine(JsonConvert.SerializeObject(cancelUserList.Data, Formatting.Indented));
 
             var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data, true);
             labManageInfoProps.cancelUserList = cancelUserList.Data;
+            labManageInfoProps.checkedList = checkList;
 
-            //Console.WriteLine(JsonConvert.SerializeObject(cancelReservedInput, Formatting.Indented));
+            labManageInfoProps.id = (lab_id * 100) + (time * 10) + (day);
 
+            // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.cancelUserList, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.checkedList, Formatting.Indented));
+           
             return View("Views/LabManage/EditCancel.cshtml", labManageInfoProps);
+        }
+
+        public IActionResult SubmitCancel(bool[] checkedList, int id)
+        {
+            // init Reserved for use with CancelList()
+            var reservedObject = new Reserved();
+            reservedObject.lab_id = id/100;
+            reservedObject.time = (id % 100) / 10;
+            reservedObject.day = (id % 100) % 10;
+            // Console.WriteLine(JsonConvert.SerializeObject(reservedObject, Formatting.Indented));
+            
+            var cancelUserList = LAB.CancelList(reservedObject);
+            var userList = cancelUserList.Data.data;
+            // Console.WriteLine(JsonConvert.SerializeObject(userList, Formatting.Indented));
+            // Console.WriteLine(userList.GetType());
+
+            List<CancelReserved> cancelReserveds = new List<CancelReserved>();
+            int i = 0;
+            foreach (var item in userList) {
+                if (checkedList[i]) {
+                    var tmp = new CancelReserved();
+                    tmp.reserve_id = item.reserved_id;
+                    cancelReserveds.Add(tmp);
+                }
+                i++;
+            }
+
+            LAB.Cancel(cancelReserveds.ToArray());
+            // Console.WriteLine(JsonConvert.SerializeObject(cancelReserveds, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(checkedList, Formatting.Indented));
+            return RedirectToAction("Index", "LabManage");
         }
     }
 }

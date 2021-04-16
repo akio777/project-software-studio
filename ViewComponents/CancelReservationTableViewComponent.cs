@@ -19,6 +19,8 @@ namespace LabReservation.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(LabManageInfoProps labManageInfoProps)
         {
+            // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.cancelUserList, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.checkedList, Formatting.Indented));
             return View(labManageInfoProps);
         }
     }

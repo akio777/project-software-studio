@@ -84,10 +84,13 @@ namespace LabReservation.Models
 
     public class LabManageInfoProps
     {
+        public int id { get; set; }
         public Labinfo labinfo { get; set; }
         public Equipment equipment { get; set; }
         public Reserve_page[] reservePageList { get; set; }
         public LabShowForCancel cancelUserList { get; set; }
+        public bool[] checkedList { get; set; }
+
 
         public bool modalOpen { get; set; }
         public ReservedInput reservedInput { get; set; }
@@ -99,8 +102,10 @@ namespace LabReservation.Models
             equipment = _equipment;
             labinfo = _labinfo;
             reservePageList = _reservePageList;
+
         }
     }
+
     public class WhoReserved
     {
         public int reserved_id { get; set; }

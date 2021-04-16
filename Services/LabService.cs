@@ -224,14 +224,15 @@ namespace LabReservation.Services
             bool error = false;
             foreach (var i in data)
             {
-                var check = db.Reserveinfo.Where(x => x.id == i.reserve_id).FirstOrDefault();
+                Reserveinfo check = (from a in db.Reserveinfo where a.id == i.reserve_id select a).Single();
                 if (check == null)
                 {
                     error = true;
                     break;
                 }
-                db.Reserveinfo.Remove(new Reserveinfo { id = i.reserve_id });
+                db.Reserveinfo.Remove(check);
             }
+            db.SaveChanges();
             if (error)
             {
                 return new Return
@@ -240,7 +241,7 @@ namespace LabReservation.Services
                     Data = "ไม่สามารถยกเลิกได้ ข้อมูลไม่ถูกต้อง กรุณา refresh"
                 };
             }
-            db.SaveChanges();
+            
             return new Return
             {
                 Error = false,

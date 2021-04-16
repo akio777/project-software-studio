@@ -5,39 +5,40 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/cancelReserve.css" />
+<link rel="stylesheet" type="text/css" href="~/css/checkbox.css">
 
 <div id="modal-main" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title">Cancel Reservation</h2>
-      <button type="button" class="close">
-        <span>×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Select user to cancel reservation in</p>
-      <p class="detail-reserve">@Model.labinfo.name (@Model.cancelUserList.day)</p>
-      <form>
+  <form asp-action="SubmitCancel" asp-route-id="@Model.id" method="POST">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Cancel Reservation</h2>
+        <button type="button" class="close">
+          <span>×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Select user to cancel reservation in</p>
+        <p class="detail-reserve">@Model.labinfo.name (@Model.cancelUserList.day.ToShortDateString() @Model.cancelUserList.start_time:00 - @Model.cancelUserList.end_time:00)</p>
         <div class="select-cancel">
-          @foreach (var item in @Model.cancelUserList.data)
+          @for (int i = 0; i < @Model.cancelUserList.data.Length; i++)
           {
             <div>
-              @await Component.InvokeAsync("CheckBox", new { whoReserved = @item })
+              <input asp-for="checkedList[i]" type="checkbox"> @Model.cancelUserList.data[i].email<br>
             </div>
           }
         </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <div>
-        <button type="button" id="btn-selectall" class="btn btn-selectall">Select All</button>
       </div>
-      <div>
-        <button type="button" id="btn-cancel" class="btn btn-cancel">Cancel</button>
-        <button type="submit" id="btn-confirm" class="btn btn-confirm">Confirm</button>
+      <div class="modal-footer">
+        <div>
+          <button type="button" id="btn-selectall" class="btn btn-selectall">Select All</button>
+        </div>
+        <div>
+          <button type="button" id="btn-cancel" class="btn btn-cancel">Cancel</button>
+          <button type="submit" id="btn-confirm" class="btn btn-confirm">Confirm</button>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 
 
@@ -77,4 +78,5 @@
       modal.style.display = "none";
     }
   }
+  
 </script>
