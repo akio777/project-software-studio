@@ -21,6 +21,9 @@
     </div>
 </div>
 
-@* <div>
-    @await Component.InvokeAsync("CancelSelectedReserve")
-    </div> *@
+@if (@Model.modalOpen)
+{
+    <div>
+        @await Component.InvokeAsync("CancelSelectedReserve", new { MyReserveProps = @Model })
+    </div>
+}

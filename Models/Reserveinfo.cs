@@ -43,11 +43,11 @@ namespace LabReservation.Models
 
     public class CancelMap
     {
-        public int? reserve_id { get; set; }
+        public int reserve_id { get; set; }
         public int day { get; set; }
         public int time { get; set; }
         public string lab_name { get; set; }
-        public int lab_id { get; set; }
+        public int? lab_id { get; set; }
 
         public CancelMap()
         {
@@ -87,6 +87,10 @@ namespace LabReservation.Models
     public class CancelReserved
     {
         public int reserve_id { get; set; }
+        public CancelReserved(int _reserve_id)
+        {
+            reserve_id = _reserve_id;
+        }
     }
 
     public class LabManageInfoProps
@@ -143,12 +147,16 @@ namespace LabReservation.Models
     {
         public CancelMyReservedInput cancelMyReservedInput { get; set; }
         public ReservedInput reservedInput { get; set; }
+        public CancelMap[] cancelReservedModalInput { get; set; }
+        public bool modalOpen { get; set; }
         public MyReserveProps(CancelMyReservedInput _cancelMyReservedInput)
         {
             reservedInput = new ReservedInput();
             cancelMyReservedInput = _cancelMyReservedInput;
         }
     }
+
+
     public class WhoReserved
     {
         public int reserved_id { get; set; }

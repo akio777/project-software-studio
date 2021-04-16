@@ -246,8 +246,6 @@
     const allCheckBox = document.querySelectorAll(".circular-x-container")
     const allCheckBoxData = Object.values(model.cancelMyReservedInput)
 
-    console.log(model.cancelMyReservedInput)
-
     allCheckBox.forEach((cb, index) => {
         const timeIndex = parseInt(index / 7);
         const dayIndex = index % 7;

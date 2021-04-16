@@ -27,6 +27,8 @@ namespace LabReservation.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
+
+
         // GET: 
         public async Task<IActionResult> Index()
         {
@@ -65,8 +67,81 @@ namespace LabReservation.Controllers
         // [HttpPost]
         public IActionResult Confirm(ReservedInput reservedInput)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(reservedInput, Formatting.Indented));
-            return RedirectToAction("Index", "Home");
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var cancel_read = LAB.ReadCancel(userId);
+            var cancelMyReservedInput = new CancelMyReservedInput();
+            var tempCancelMapOutput = new CancelMapOutput(new CancelMap());
+
+            int t = 0;
+            foreach (PropertyInfo p in cancelMyReservedInput.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                CancelMapOutput[] temptime = new CancelMapOutput[] {
+                    tempCancelMapOutput, tempCancelMapOutput,
+                    tempCancelMapOutput, tempCancelMapOutput,
+                    tempCancelMapOutput, tempCancelMapOutput,
+                    tempCancelMapOutput };
+                for (int d = 0; d < 7; d++)
+                {
+                    foreach (dynamic data in cancel_read.Data)
+                    {
+                        if (d == data.day && t == data.time)
+                        {
+                            temptime[d] = new CancelMapOutput(data);
+                        }
+                    }
+
+                }
+                t += 1;
+                p.SetValue(cancelMyReservedInput, temptime.ToArray());
+            }
+
+            //New Map
+
+            List<CancelMap> cancelReservedModalList = new List<CancelMap>();
+
+            int tIndex = 0;
+            foreach (PropertyInfo p in reservedInput.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                for (int dIndex = 0; dIndex < 7; dIndex++)
+                {
+                    object anArray = p.GetValue(reservedInput, null);
+                    IEnumerable<bool> enumerable = anArray as IEnumerable<bool>;
+                    if (enumerable.ToArray()[dIndex])
+                    {
+                        foreach (dynamic data in cancel_read.Data)
+                        {
+                            if (data.time == tIndex && data.day == dIndex)
+                            {
+                                cancelReservedModalList.Add(data);
+                            }
+                        }
+                    }
+
+                }
+                tIndex += 1;
+            }
+            // Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalList, Formatting.Indented));
+
+            var myReserveProps = new MyReserveProps(cancelMyReservedInput);
+            myReserveProps.modalOpen = true;
+            myReserveProps.cancelReservedModalInput = cancelReservedModalList.ToArray();
+
+            return View("Views/MyReserve/Index.cshtml", myReserveProps);
+            // return RedirectToAction("Index", "Home");
+        }
+
+        // [HttpPost]
+        public IActionResult ConfirmCancel(CancelMap[] cancelReservedModalInput)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalInput, Formatting.Indented));
+            List<CancelReserved> reserveIdList = new List<CancelReserved>();
+            for (int i = 0; i < cancelReservedModalInput.Length; i++)
+            {
+                reserveIdList.Add(new CancelReserved(cancelReservedModalInput[i].reserve_id));
+            }
+
+            LAB.Cancel(reserveIdList.ToArray());
+            return RedirectToAction("Index", "MyReserve");
         }
     }
 }

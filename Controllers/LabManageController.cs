@@ -48,7 +48,7 @@ namespace LabReservation.Controllers
             int lab_id = cancelReservedInput[0] - '0';
             int time = cancelReservedInput[1] - '0';
             int day = cancelReservedInput[2] - '0';
-        
+
             var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == lab_id);
             var reservePageList = LAB.LabManage(lab_id);
