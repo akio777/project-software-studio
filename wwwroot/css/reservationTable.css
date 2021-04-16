@@ -109,7 +109,7 @@
   padding-right: 1rem;
 }
 
-/* .btn-confirm {
+.btn-confirm-reserve {
   font-size: 1rem;
   background-color: var(--blue-500);
   color: var(--light);
@@ -117,10 +117,10 @@
   border-radius: 0.5rem;
 }
 
-.btn-confirm:hover {
+.btn-confirm-reserve:hover {
   font-size: 1rem;
   background-color: var(--blue-600);
   color: var(--light);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-} */
+}

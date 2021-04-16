@@ -94,8 +94,7 @@ namespace LabReservation.Controllers
             int i = 0;
             foreach (var item in userList) {
                 if (checkedList[i]) {
-                    var tmp = new CancelReserved();
-                    tmp.reserve_id = item.reserved_id;
+                    var tmp = new CancelReserved(item.reserved_id);
                     cancelReserveds.Add(tmp);
                 }
                 i++;
