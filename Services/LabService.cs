@@ -329,25 +329,13 @@ namespace LabReservation.Services
 
         public Return BlackListInfo()
         {
-            
-            var wasBlock = db.Userinfo
-                .Join(db.Blacklist, a => a.id, b => b.user_id,
-                   (userinfo, blacklist) => new UserEmail
-                   {
-                       email = userinfo.email,
-                       user_id = userinfo.id
-                   }
-                );
-            var NotBlock = db.Userinfo
-                .Join(db.Userinfo, a => a.id, b => b.id,
-                    (userinfo, userinfo1) => new UserEmail
-                    {
-                        email = userinfo.email,
-                        user_id = userinfo.id
-                    }
-                ).Where(n => wasBlock.Any(w => n.user_id != w.user_id));
-            BlackListPage output = new BlackListPage {wasBlock = wasBlock.ToArray(), NotBlock = NotBlock.ToArray()};
-            Console.WriteLine(JsonConvert.SerializeObject(output, Formatting.Indented));
+            var notBlock = from user in db.Userinfo
+                where db.Blacklist.Where(bl=>bl.user_id==user.id).First()==null
+                select new UserEmail{email = user.email, user_id = user.id};
+            var wasBlock = from block_user in db.Blacklist
+                join user in db.Userinfo on block_user.user_id equals user.id
+                select new UserEmail{email = user.email, user_id = user.id};
+            BlackListPage output = new BlackListPage {wasBlock = wasBlock.ToArray(), NotBlock = notBlock.ToArray()};
             return new Return
             {
                 Error = false,
