@@ -71,18 +71,28 @@ namespace LabReservation.Services
                 var data_day = temp.Where(data => data.reserve_time.Day == this_day);
                 var reserved = temp.Where(data => data.reserve_by == userid);
                 var mine = (from data in data_day where data.reserve_by == userid select time_slot.ToList().IndexOf(data.reserve_time.Hour)).ToArray();
-                // IDictionary<string, object> map_data = new Dictionary<string, object>();
+                var notA = (from data in db.Reserveinfo
+                    where data.reserve_by == userid &&
+                          data.lab_id != labid &&
+                          data.start_time.Day == this_day
+                    orderby data.lab_id
+                    select time_slot.ToList().IndexOf(data.start_time.Hour)).ToArray();
                 List<int> tempINT = new List<int>();
                 foreach (var time in time_slot)
                 {
                     // map_data.timeslot.Append(time);
                     tempINT.Add(maxall - (data_day.Where(data => data.reserve_time.Hour == time).Count()));
                 }
-                Reserve_page map_data = new Reserve_page { day = day, reserved = mine, timeslot = tempINT.ToArray(), maximum = maxall };
-
+                Reserve_page map_data = new Reserve_page
+                {
+                    day = day,
+                    reserved = mine,
+                    notAvailable = notA,
+                    timeslot = tempINT.ToArray(),
+                    maximum = maxall
+                };
                 all.Add(map_data);
             }
-
             // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
             return new Return
             {
@@ -132,6 +142,15 @@ namespace LabReservation.Services
 
         public Return Confirm(Reserved[] data, int userid)
         {
+            var check = db.Blacklist.Where(b => b.user_id == userid).FirstOrDefault();
+            if (check != null)
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ไม่สามารถจองได้ บัญชีของคุณถูกระงับ กรุณาติดต่อเจ้าหน้าที่"
+                };
+            }
             var dateNow = DateTime.Now;
             // var dateMock = new DateTime(dateNow.Year, dateNow.Month, dateNow.Day + 1, 23,0,0);
             foreach (var i in data)
@@ -338,25 +357,13 @@ namespace LabReservation.Services
 
         public Return BlackListInfo()
         {
-
-            var wasBlock = db.Userinfo
-                .Join(db.Blacklist, a => a.id, b => b.user_id,
-                    (userinfo, blacklist) => new UserEmail
-                    {
-                        email = userinfo.email,
-                        user_id = userinfo.id
-                    }
-                );
-            var NotBlock = db.Userinfo
-                .Join(db.Userinfo, a => a.id, b => b.id,
-                    (userinfo, userinfo1) => new UserEmail
-                    {
-                        email = userinfo.email,
-                        user_id = userinfo.id
-                    }
-                ).Where(n => wasBlock.Any(w => n.user_id != w.user_id));
-            BlackListPage output = new BlackListPage { wasBlock = wasBlock.ToArray(), NotBlock = NotBlock.ToArray() };
-            Console.WriteLine(JsonConvert.SerializeObject(output, Formatting.Indented));
+            var notBlock = from user in db.Userinfo
+                           where db.Blacklist.Where(bl => bl.user_id == user.id).First() == null
+                           select new UserEmail { email = user.email, user_id = user.id };
+            var wasBlock = from block_user in db.Blacklist
+                           join user in db.Userinfo on block_user.user_id equals user.id
+                           select new UserEmail { email = user.email, user_id = user.id };
+            BlackListPage output = new BlackListPage { wasBlock = wasBlock.ToArray(), NotBlock = notBlock.ToArray() };
             return new Return
             {
                 Error = false,
@@ -399,7 +406,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ผู้ใช้นี้ถูก block อยู่่แล้ว"
+                    Data = "ผู้ใช้นี้ถูก block อยู่แล้ว"
                 };
             }
             db.SaveChanges();
