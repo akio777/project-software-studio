@@ -71,18 +71,28 @@ namespace LabReservation.Services
                 var data_day = temp.Where(data => data.reserve_time.Day == this_day);
                 var reserved = temp.Where(data => data.reserve_by == userid);
                 var mine = (from data in data_day where data.reserve_by == userid select time_slot.ToList().IndexOf(data.reserve_time.Hour)).ToArray();
-                // IDictionary<string, object> map_data = new Dictionary<string, object>();
+                var notA = (from data in db.Reserveinfo
+                    where data.reserve_by == userid &&
+                          data.lab_id != labid &&
+                          data.start_time.Day == this_day
+                    orderby data.lab_id
+                    select time_slot.ToList().IndexOf(data.start_time.Hour)).ToArray();
                 List<int> tempINT = new List<int>();
                 foreach (var time in time_slot)
                 {
                     // map_data.timeslot.Append(time);
                     tempINT.Add(maxall - (data_day.Where(data => data.reserve_time.Hour == time).Count()));
                 }
-                Reserve_page map_data = new Reserve_page { day = day, reserved = mine, timeslot = tempINT.ToArray(), maximum = maxall };
-
+                Reserve_page map_data = new Reserve_page
+                {
+                    day = day,
+                    reserved = mine,
+                    notAvailable = notA,
+                    timeslot = tempINT.ToArray(),
+                    maximum = maxall
+                };
                 all.Add(map_data);
             }
-
             // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
             return new Return
             {
@@ -333,12 +343,13 @@ namespace LabReservation.Services
                     name = name,
                     start_time = reserveinfo.start_time.Hour,
                     end_time = reserveinfo.start_time.Hour + 1,
+                    day = reserveinfo.start_time
                 }
             );
             return new Return
             {
                 Error = false,
-                Data = lab_info.ToArray()
+                Data = lab_info.ToArray()[0]
             };
         }
 
