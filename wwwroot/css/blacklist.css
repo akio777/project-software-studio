@@ -17,9 +17,9 @@
   justify-content: space-between;
 }
 
-.user-email,
-.blacklist-email {
-  border-bottom: solid #D8D8D8 2px;
+.notblock-header,
+.block-header {
+  border-bottom: solid #d8d8d8 2px;
   width: 400px;
   font-size: 40px;
   font-weight: 500;

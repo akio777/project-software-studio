@@ -1,17 +1,39 @@
 .email-card {
   width: 400px;
   height: 40px;
-  background-color: white;
+  background-color: var(--light);
   border-radius: 5px;
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
- 
 }
 
-.email-info,
-.btn-block {
+.email-info {
   font-size: 18px;
-  padding: 10px 20px;
+  margin-left: 10px;
+  /* padding: 10px 20px; */
+}
+
+button {
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+button .fa-ban {
+  font-size: 16px;
+  color: var(--danger);
+}
+
+button .fa-ban:hover{
+  text-shadow: 1px 1px 1px var(--danger);
+}
+
+button .fa-undo:hover{
+  text-shadow: 1px 1px 1px var(--blue-500);
+}
+
+button .fa-undo {
+  font-size: 16px;
+  color: var(--blue-500);
 }
