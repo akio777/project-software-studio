@@ -249,7 +249,10 @@ namespace LabReservation.Services
                     error = true;
                     break;
                 }
-                db.Reserveinfo.Remove(new Reserveinfo { id = i.reserve_id });
+                var temp = (from a in db.Reserveinfo where a.id == i.reserve_id select a).Single();
+                db.Reserveinfo.Remove(temp);
+                db.SaveChanges();
+
             }
             if (error)
             {
@@ -259,7 +262,6 @@ namespace LabReservation.Services
                     Data = "ไม่สามารถยกเลิกได้ ข้อมูลไม่ถูกต้อง กรุณา refresh"
                 };
             }
-            db.SaveChanges();
             return new Return
             {
                 Error = false,

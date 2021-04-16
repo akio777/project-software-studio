@@ -1,4 +1,4 @@
-@model LabReservation.Models.ReserveinfoProps
+@model LabReservation.Models.MyReserveProps
 
 @{
     var currentDateTime = DateTime.Now;
@@ -6,20 +6,21 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 <link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
-<link rel="stylesheet" type="text/css" href="~/css/circularButton.css">
-<form id="myAnchor" asp-action="Confirm" asp-route-id="@Model.labinfo.id" method="post">
-    <div class="confirm-content">
-        <div class="reserved-content">
-            <p class="count-h">Reserved :</p>
-            <p id="count_reserved" class="count-text">Not reserved</p>
-        </div>
-        <div class="select-content">
-            <p class="count-h">Selected :</p>
-            <p id="count_select" class="count-text">Not selected</p>
-            <button type="submit" class="btn-confirm">Confirm Reserve</button>
-        </div>
-    </div>
+<link rel="stylesheet" type="text/css" href="~/css/circularButtonX.css">
 
+<form id="myAnchor" asp-action="Confirm" method="post">
+    <div class="option">
+        <label>Filter
+            <select name="" id="">
+                <option value="">LAB001</option>
+                <option value="">LAB002</option>
+                <option value="">LAB003</option>
+            </select>
+        </label>
+        <button id="cancel-selected-btn" type="submit">
+            Cancel Selected Reservation
+        </button>
+    </div>
     <table class="reservation-table-container">
         <thead class="reservation-table-header">
             <tr>
@@ -59,12 +60,13 @@
                 <td>08:00<br>-<br>09:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_0[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[0]</p>
+                                    <p>@Model.cancelMyReservedInput.time_0[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -75,12 +77,14 @@
                 <td>09:00<br>-<br>10:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_1[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[1]</p>
+                                    <p>@Model.cancelMyReservedInput.time_1[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -91,12 +95,14 @@
                 <td>10:00<br>-<br>11:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_2[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[2]</p>
+                                    <p>@Model.cancelMyReservedInput.time_2[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -107,12 +113,14 @@
                 <td>11:00<br>-<br>12:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_3[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[3]</p>
+                                    <p>@Model.cancelMyReservedInput.time_3[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -123,12 +131,14 @@
                 <td>12:00<br>-<br>13:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_4[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[4]</p>
+                                    <p>@Model.cancelMyReservedInput.time_4[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -139,12 +149,14 @@
                 <td>13:00<br>-<br>14:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_5[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[5]</p>
+                                    <p>@Model.cancelMyReservedInput.time_5[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -155,12 +167,14 @@
                 <td>14:00<br>-<br>15:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_6[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[6]</p>
+                                    <p>@Model.cancelMyReservedInput.time_6[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -171,12 +185,14 @@
                 <td>15:00<br>-<br>16:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_7[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[7]</p>
+                                    <p>@Model.cancelMyReservedInput.time_7[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -184,15 +200,17 @@
                 }
             </tr>
             <tr>
-                <td>16:00<br>-<br>17:00</td>
+                <td>16:00<br>-<br>179:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_8[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[8]</p>
+                                    <p>@Model.cancelMyReservedInput.time_8[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -203,12 +221,14 @@
                 <td>17:00<br>-<br>18:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
+
                     <td>
                         <div>
-                            <label class="circular-container" tabindex="0" onclick="checkedHandler()">
+
+                            <label class="circular-x-container" tabindex="0">
                                 <input asp-for="reservedInput.time_9[i]" type="checkbox">
                                 <span class="checkmark">
-                                    <p>@Model.reservePageList[i].timeslot[9]</p>
+                                    <p>@Model.cancelMyReservedInput.time_9[i]?.lab_name</p>
                                 </span>
                             </label>
                         </div>
@@ -223,21 +243,8 @@
     let reserved_time = 0;
     const currentDateTime = new Date();
     const model = @Json.Serialize(@Model);
-    const allCheckBox = document.querySelectorAll(".circular-container")
-
-    function checkedHandler() {
-        var checkboxes = document.querySelectorAll('.circular-container input:checked');
-        if (checkboxes.length == 0) {
-            document.querySelector("#count_select").innerHTML = 'Not selected'
-        }
-        else if (checkboxes.length > 0 && checkboxes.length < 2) {
-            document.querySelector("#count_select").innerHTML = checkboxes.length + ' hour'
-        }
-        else {
-            document.querySelector("#count_select").innerHTML = checkboxes.length + ' hours'
-        }
-    }
-
+    const allCheckBox = document.querySelectorAll(".circular-x-container")
+    const allCheckBoxData = Object.values(model.cancelMyReservedInput)
 
     allCheckBox.forEach((cb, index) => {
         const timeIndex = parseInt(index / 7);
@@ -247,33 +254,9 @@
             cb.classList.add("hidden")
         }
 
-        const countEquip = model.reservePageList[dayIndex].timeslot[timeIndex];
-        const reservedList = model.reservePageList[dayIndex].reserved;
-
-        if (reservedList.includes(timeIndex)) {
-            reserved_time++;
-            cb.classList.add("reserved")
-            cb.querySelector("p").innerHTML = "Reserved"
-            cb.querySelector("input").disabled = true
-        } else if (countEquip <= 0) {
-            cb.classList.add("full")
-            cb.querySelector("p").innerHTML = "Full"
-            cb.querySelector("input").disabled = true
-        } else if (countEquip > model.reservePageList[dayIndex].maximum * 0.3) {
-            cb.classList.add("success")
-        } else {
-            cb.classList.add("warning")
+        if (allCheckBoxData[timeIndex][dayIndex].reserve_id == -1) {
+            cb.classList.add("hidden")
         }
-    }
-    )
+    })
 
-    if (reserved_time == 0) {
-        document.querySelector("#count_reserved").innerHTML = 'Not reserved'
-    }
-    else if (reserved_time > 0 && reserved_time < 2) {
-        document.querySelector("#count_reserved").innerHTML = reserved_time + ' hour'
-    }
-    else {
-        document.querySelector("#count_reserved").innerHTML = reserved_time + ' hours'
-    }
 </script>
