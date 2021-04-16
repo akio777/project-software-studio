@@ -16,12 +16,15 @@
             <div class="notblock-header">Users</div>
             @foreach (var item in @Model.NotBlock)
             {
-                @await Component.InvokeAsync("EmailCard",new {lab = @item})
+                @await Component.InvokeAsync("EmailCardNotBlock",new {lab = @item})
             }
         </div>
         <div class="blacklist-email">
             <div class="block-header">Blacklist</div>
-            @await Component.InvokeAsync("EmailCard") 
+            @foreach (var item in @Model.wasBlock)
+            {
+                @await Component.InvokeAsync("EmailCardWasBlock",new {lab = @item})
+            }
         </div>
     </div>
 
