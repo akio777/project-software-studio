@@ -1,4 +1,4 @@
-@model IEnumerable<LabReservation.Models.Blacklist>
+@model LabReservation.Models.BlackListPage
 
 @{
     ViewData["Title"] = "Index";
@@ -14,7 +14,10 @@
     <div class="users-list">
         <div class="user-email">
             <div class="notblock-header">Users</div>
-            @await Component.InvokeAsync("EmailCard")
+            @foreach (var item in @Model.NotBlock)
+            {
+                @await Component.InvokeAsync("EmailCard",new {lab = @item})
+            }
         </div>
         <div class="blacklist-email">
             <div class="block-header">Blacklist</div>
