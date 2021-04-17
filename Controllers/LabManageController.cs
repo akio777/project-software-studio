@@ -38,7 +38,6 @@ namespace LabReservation.Controllers
             var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
             var reservePageList = LAB.LabManage(id);
-
             var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);
 
             return View(labManageInfoProps);

@@ -23,6 +23,7 @@ namespace LabReservation.Services
         Return UnBlock(int userid);
         Return ForceBlock(int userid);
         Return GetEmailUser(int userid);
+        Return EditLab(LabManageInfo data);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
     public class LabService : ILabService
@@ -423,6 +424,32 @@ namespace LabReservation.Services
             {
                 Error = false,
                 Data = output
+            };
+        }
+
+        public Return EditLab(LabManageInfo data)
+        {
+            // Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            var this_lab = db.Labinfo.SingleOrDefault(L => L.id == data.id);
+            var this_equip = db.Equipment.SingleOrDefault(L => L.lab_id == data.id);
+            if (this_lab != null && this_equip != null)
+            {
+                this_lab.name = data.name;
+                this_equip.maximum = data.amount;
+                db.SaveChanges();
+            }
+            else
+            {
+                return new Return
+                {
+                    Error = true,
+                    Data = "ข้อมูลแลป และ อุปกรณ์มีข้อผิดพลาด"
+                };
+            }
+            return new Return
+            {
+                Error = false,
+                Data = ""
             };
         }
     }
