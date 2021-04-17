@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.Controllers
 {
+    [Authorize(Roles = "0")]
     public class EquipmentController : Controller
     {
         private readonly LabReservationContext _context;

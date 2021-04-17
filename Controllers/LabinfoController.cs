@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.Controllers
 {
-
+    [Authorize(Roles = "0")]
     public class LabinfoController : Controller
     {
         private readonly LabReservationContext _context;

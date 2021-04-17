@@ -28,7 +28,7 @@
             <nav>
                 <div class="navbar">
                     <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
-                    @if (!isAdmin)
+                    @if (isAdmin)
                     {
                         <div class="links">
                             <a class="nav-link" asp-area="" asp-controller="LabManage" asp-action="Index">Lab Management</a>

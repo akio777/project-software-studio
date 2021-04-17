@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.Controllers
 {
+    [Authorize(Roles = "0")]
     public class BlacklistController : Controller
     {
         private readonly LabReservationContext _context;

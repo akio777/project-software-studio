@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 
@@ -78,6 +79,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Details/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -96,6 +98,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Create
+        [Authorize(Roles = "0")]
         public IActionResult Create()
         {
             return View();
@@ -104,6 +107,7 @@ namespace LabReservation.Controllers
         // POST: Reserveinfo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
@@ -118,6 +122,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Edit/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -136,6 +141,7 @@ namespace LabReservation.Controllers
         // POST: Reserveinfo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
@@ -169,6 +175,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Delete/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -187,6 +194,7 @@ namespace LabReservation.Controllers
         }
 
         // POST: Reserveinfo/Delete/5
+        [Authorize(Roles = "0")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -196,7 +204,8 @@ namespace LabReservation.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
+        [Authorize(Roles = "0")]
         private bool ReserveinfoExists(int id)
         {
             return _context.Reserveinfo.Any(e => e.id == id);

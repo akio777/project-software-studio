@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using LabReservation.Models;
 using LabReservation.Services;
+using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
@@ -34,12 +35,17 @@ namespace LabReservation.Controllers
 
         [AllowAnonymous]
         [Route("[action]")]
-        public IActionResult Login()
+        public async Task<ActionResult> Login()
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                if (User.IsInRole("0"))
+                {
+                    return RedirectToAction("Index", "LabManage");
+                }
+                    return RedirectToAction("Index", "Home");
             }
+
             return View();
         }
 
@@ -66,8 +72,8 @@ namespace LabReservation.Controllers
                     claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal ReClaims = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
-                if (temp.Data.role == 0) return RedirectToAction("Index", "Labinfo");
-                else return RedirectToAction("Index", "Labinfo");
+                if (temp.Data.role == 0) return RedirectToAction("Index", "LabManage");
+                else return RedirectToAction("Index", "Home");
             }
         }
 
