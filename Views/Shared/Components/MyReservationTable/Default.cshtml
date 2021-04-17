@@ -10,6 +10,12 @@
 
 <form id="myAnchor" asp-action="Confirm" method="post">
     <div class="option">
+        <label for="filter">
+            Filter
+            <select name="filter" id="filter-reservation">
+                <option value="all">All</option>
+            </select>
+        </label>
         <button id="cancel-selected-btn" type="submit">
             Cancel Selected Reservation
         </button>
@@ -193,7 +199,7 @@
                 }
             </tr>
             <tr>
-                <td>16:00<br>-<br>179:00</td>
+                <td>16:00<br>-<br>17:00</td>
                 @for (int i = 0; i < 7; i++)
                 {
 
@@ -238,6 +244,8 @@
     const model = @Json.Serialize(@Model);
     const allCheckBox = document.querySelectorAll(".circular-x-container")
     const allCheckBoxData = Object.values(model.cancelMyReservedInput)
+
+    console.log(model)
 
     allCheckBox.forEach((cb, index) => {
         const timeIndex = parseInt(index / 7);
