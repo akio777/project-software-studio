@@ -36,7 +36,7 @@ namespace LabReservation.Controllers
             var cancel_read = LAB.ReadCancel(userId);
             var cancelMyReservedInput = new CancelMyReservedInput();
             var tempCancelMapOutput = new CancelMapOutput(new CancelMap());
-
+            Labinfo[] tempFilterList = _context.Labinfo.ToListAsync().Result.ToArray();
             int t = 0;
             foreach (PropertyInfo p in cancelMyReservedInput.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
@@ -61,6 +61,7 @@ namespace LabReservation.Controllers
             }
 
             var myReserveProps = new MyReserveProps(cancelMyReservedInput);
+            myReserveProps.filterList = tempFilterList;
             return View(myReserveProps);
         }
 
@@ -71,6 +72,7 @@ namespace LabReservation.Controllers
             var cancel_read = LAB.ReadCancel(userId);
             var cancelMyReservedInput = new CancelMyReservedInput();
             var tempCancelMapOutput = new CancelMapOutput(new CancelMap());
+            Labinfo[] tempFilterList = _context.Labinfo.ToListAsync().Result.ToArray();
 
             int t = 0;
             foreach (PropertyInfo p in cancelMyReservedInput.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
@@ -125,6 +127,7 @@ namespace LabReservation.Controllers
             var myReserveProps = new MyReserveProps(cancelMyReservedInput);
             myReserveProps.modalOpen = true;
             myReserveProps.cancelReservedModalInput = cancelReservedModalList.ToArray();
+            myReserveProps.filterList = tempFilterList;
 
             return View("Views/MyReserve/Index.cshtml", myReserveProps);
             // return RedirectToAction("Index", "Home");

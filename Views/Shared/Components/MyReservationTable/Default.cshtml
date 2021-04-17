@@ -12,8 +12,11 @@
     <div class="option">
         <label for="filter">
             Filter
-            <select name="filter" id="filter-reservation">
-                <option value="all">All</option>
+            <select name="filter" id="filter-reservation" onchange=filterList()>
+                <option value="0">All</option>
+                @foreach(var item in @Model.filterList) {
+                    <option value=@item.id >@item.name</option>
+                }
             </select>
         </label>
         <button id="cancel-selected-btn" type="submit">
@@ -245,19 +248,35 @@
     const allCheckBox = document.querySelectorAll(".circular-x-container")
     const allCheckBoxData = Object.values(model.cancelMyReservedInput)
 
-    console.log(model)
+    function filterList() {
+        const selectedFilter = document.getElementById("filter-reservation")
+        renderTable(parseInt(selectedFilter.value))
+    }
 
-    allCheckBox.forEach((cb, index) => {
-        const timeIndex = parseInt(index / 7);
-        const dayIndex = index % 7;
+    function renderTable(filter = 0) {
+        allCheckBox.forEach((cb, index) => {
+            const timeIndex = parseInt(index / 7);
+            const dayIndex = index % 7;
+            const currentLabId = Object.values(model.cancelMyReservedInput)[timeIndex][dayIndex].lab_id;
+            
+            if (filter !== 0) {
+                if (currentLabId !== filter) {
+                    cb.classList.add("hidden")
+                }
+                else {
+                    cb.classList.remove("hidden")
+                }
+            } else cb.classList.remove("hidden")
+            if (currentDateTime.getHours() >= 8 + timeIndex && dayIndex == 0) {
+                cb.classList.add("hidden")
+            }
 
-        if (currentDateTime.getHours() >= 8 + timeIndex && dayIndex == 0) {
-            cb.classList.add("hidden")
-        }
+            if (allCheckBoxData[timeIndex][dayIndex].reserve_id == -1) {
+                cb.classList.add("hidden")
+            }
+        })
+    }
 
-        if (allCheckBoxData[timeIndex][dayIndex].reserve_id == -1) {
-            cb.classList.add("hidden")
-        }
-    })
+    renderTable()
 
 </script>

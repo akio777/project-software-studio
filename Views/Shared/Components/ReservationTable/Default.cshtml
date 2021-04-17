@@ -257,8 +257,8 @@
             cb.querySelector("p").innerHTML = "Reserved"
             cb.querySelector("input").disabled = true
         } else if (notAvailableList.includes(timeIndex)) {
-            cb.classList.add("reserved")
-            cb.querySelector("p").innerHTML = "Duplicate reservation"
+            cb.classList.add("duplicate")
+            cb.querySelector("p").innerHTML = "Duplicate Reservation"
             cb.querySelector("p").style.fontSize = "10px"
             cb.querySelector("input").disabled = true
 

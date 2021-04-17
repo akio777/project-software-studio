@@ -20,7 +20,7 @@ namespace LabReservation.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(WhoReserved whoReserved)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(whoReserved, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(whoReserved, Formatting.Indented));
             return View(whoReserved);
         }
     }

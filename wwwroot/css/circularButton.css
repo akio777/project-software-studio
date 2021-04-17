@@ -88,13 +88,25 @@
 
 /* Reserved Checkbox Style */
 .circular-container.reserved .checkmark {
-  color: var(--white);
-  background-color: var(--blue-200);
+  color: var(--blue-500);
+  /* background-color: var(--blue-200); */
   border: none;
   font-size: 12px;
 }
 
 .circular-container.reserved:hover input ~ .checkmark {
+  cursor: default;
+  box-shadow: none !important;
+  user-select: none;
+}
+
+.circular-container.duplicate .checkmark {
+  color: gray;
+  border: none;
+  font-size: 12px;
+}
+
+.circular-container.duplicate:hover input ~ .checkmark {
   cursor: default;
   box-shadow: none !important;
   user-select: none;

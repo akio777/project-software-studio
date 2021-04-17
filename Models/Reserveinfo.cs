@@ -30,7 +30,6 @@ namespace LabReservation.Models
     {
         public int day { get; set; }
         public int[] reserved { get; set; }
-        
         public int[] notAvailable { get; set; }
         public int[] timeslot { get; set; }
         public int maximum { get; set; }
@@ -155,6 +154,7 @@ namespace LabReservation.Models
         public ReservedInput reservedInput { get; set; }
         public CancelMap[] cancelReservedModalInput { get; set; }
         public bool modalOpen { get; set; }
+        public Labinfo[] filterList { get; set; }
         public MyReserveProps(CancelMyReservedInput _cancelMyReservedInput)
         {
             reservedInput = new ReservedInput();
