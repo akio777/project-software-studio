@@ -64,15 +64,15 @@
   display: flex;
   align-items: center;
   padding: 20px;
+  box-sizing: border-box;
+  height: 160px;
 }
 
 .card-name-area {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  max-width: 120px;
   color: white;
-  font-size: 64px;
+  font-size: 250%;
   font-weight: 500;
-  line-height: 60px;
-  align-self: center;
+  max-height: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
