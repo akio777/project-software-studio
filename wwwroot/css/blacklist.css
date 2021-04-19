@@ -1,5 +1,5 @@
 .container-blacklist {
-  width: 850px;
+  width: 70vw;
   height: 500px;
   /* border: solid black 2px; */
   margin: 56px auto 0 auto;
@@ -7,7 +7,7 @@
 
 .blacklist-header {
   height: 74px;
-  font-size: 48px;
+  font-size: 32px;
   font-weight: bold;
   color: var(--blue-500);
 }
@@ -15,19 +15,21 @@
 .users-list {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .notblock-area,
 .wasblock-area {
   margin-top: 10px;
-  height: 350px;
-  overflow-y: scroll;
+  height: 60vh;
+  width: 33vw;
+  overflow-y: auto;
 }
 
 .notblock-header,
 .block-header {
   border-bottom: solid #d8d8d8 2px;
-  width: 400px;
-  font-size: 30px;
+  width: 33vw;
+  font-size: 24px;
   font-weight: 500;
 }

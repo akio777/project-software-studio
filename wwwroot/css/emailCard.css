@@ -1,5 +1,5 @@
 .email-card {
-  width: 400px;
+  width: 100%;
   height: 40px;
   background-color: var(--light);
   border-radius: 5px;
@@ -22,7 +22,19 @@
 .email-info {
   font-size: 18px;
   margin-left: 10px;
-  /* padding: 10px 20px; */
+  max-width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-card:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.email-card:hover > .fa-ban,
+.email-card:hover > .fa-undo {
+  opacity: 100;
 }
 
 button {
@@ -31,19 +43,33 @@ button {
 }
 
 .fa-ban {
+  display: flex;
   font-size: 16px;
   color: var(--danger);
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 3px;
+  opacity: 0;
 }
 
 .fa-ban:hover {
-  text-shadow: 1px 1px 1px var(--danger);
-}
-
-.fa-undo:hover {
-  text-shadow: 1px 1px 1px var(--blue-500);
+  background: var(--danger);
+  color: white;
 }
 
 .fa-undo {
+  display: flex;
   font-size: 16px;
   color: var(--blue-500);
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+.fa-undo:hover {
+  background: var(--blue-500);
+  color: white;
 }
