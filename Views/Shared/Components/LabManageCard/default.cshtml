@@ -5,12 +5,17 @@
 <div class="card">
     <div class="card-main" tabindex="0" id="@Model.id">
         <a asp-controller="LabManage" asp-action="EditCancel" asp-route-id="@Model.id">
-            <div class="card-header">
-                <h3 class="lab-name">@Model.name</h3>
+            <div class="card-name" title="@Model.name">
+                <div class="card-name-area">@Model.name</div>
             </div>
-            <div class="card-detail">
-                <p>Equipment : @Model.equip</p>
-                <p>Current Amount : @Model.amount</p>
+
+            <div class="card-status">
+                <div class="equipment">Equipment
+                    <p>@Model.equip</p>
+                </div>
+                <div class="equipment">Current Amount
+                    <p>@Model.amount</p>
+                </div>
             </div>
         </a>
     </div>

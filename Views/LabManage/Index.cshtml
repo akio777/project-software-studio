@@ -10,10 +10,10 @@
     <div>
         <h1 class="h-lab-manage"> Lab Management </h1>
     </div>
-    @foreach (var item in @Model)
-    {
-        <div>
+    <div class="lab-manage-card-container">
+        @foreach (var item in @Model)
+        {
             @await Component.InvokeAsync("LabManageCard", new {lab_info = @item})
-        </div>
-    }
+        }
+    </div>
 </div>
