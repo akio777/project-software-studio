@@ -6,67 +6,62 @@
   width: 60%;
 }
 
-.lab-name {
-  padding-top: 5px;
+.page-nav {
   display: flex;
-  align-items: flex-start;
-}
-.lab-name h1 {
-  color: var(--blue-500);
-}
-.lab-name button {
-  margin-top: 14px;
-  margin-bottom: auto;
-  padding-left: 1rem;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.3);
-}
-.lab-name button:hover {
-  color: rgba(0, 0, 0, 0.5);
+  justify-content: space-between;
 }
 
-.equipment {
-  padding-top: 1rem;
+.page-nav button {
+  padding: 5px 10px;
+  border-radius: 5px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--blue-500);
 }
-.equipment button {
-  margin-top: 3px;
-  margin-bottom: auto;
-  padding-left: 1rem;
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.3);
+
+.page-nav button:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
-.equipment button:hover {
-  color: rgba(0, 0, 0, 0.5);
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.header h1 {
+  color: var(--blue-500);
+}
+
+.info-wrapper {
+  display: flex;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  border: solid 1px var(--blue-600);
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-box .head {
+  background-color: var(--blue-500);
+  color: white;
+  padding: 5px;
+}
+
+.info-box .info {
+  color: var(--blue-500);
+  padding: 5px;
+  font-weight: 500;
 }
 
 .detail {
-  padding-top: 1rem;
-}
-
-.back-content {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  width: fit-content;
-  border-radius: 0.5rem;
-  padding: 5px;
-  margin-bottom: 16px;
-}
-
-.back-content button {
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-left: 0;
-  background-color: transparent;
-  color: var(--blue-500);
-  font-size: 1rem;
-}
-
-.back-content p {
-  color: var(--blue-500);
-  font-size: 1rem;
 }
 
 .back-content:hover {
