@@ -76,7 +76,15 @@ namespace LabReservation.Controllers
            
             return View("Views/LabManage/EditCancel.cshtml", labManageInfoProps);
         }
-
+        
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalAPI()
+        {
+            var temp = LAB.GetForAPI();
+            // Console.WriteLine(JsonConvert.SerializeObject(LAB.LabManageInfo(), Formatting.Indented));
+            return Ok(temp);
+        }
+        
         public IActionResult SubmitCancel(bool[] checkedList, int id)
         {
             // init Reserved for use with CancelList()

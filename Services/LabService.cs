@@ -23,6 +23,7 @@ namespace LabReservation.Services
         Return UnBlock(int userid);
         Return ForceBlock(int userid);
         Return GetEmailUser(int userid);
+        Return GetForAPI();
         Return EditLab(LabManageInfo data);
     }
     // Console.WriteLine(JsonConvert.SerializeObject(all, Formatting.Indented));
@@ -99,6 +100,68 @@ namespace LabReservation.Services
             {
                 Error = false,
                 Data = all.ToArray(),
+            };
+        }
+
+        public Return GetForAPI()
+        {
+            var dateNow = DateTime.Now;
+            List<dynamic> lab = new List<dynamic>();
+            
+            for (var i = 1; i <= 5; i++)
+            {
+                var labid = i;
+                var maxall = db.Equipment.Where(data => data.lab_id == labid).First().maximum;
+                var temp = db.Labinfo
+                    .Join(
+                        db.Reserveinfo,
+                        labinfo => labinfo.id,
+                        reserveinfo => reserveinfo.lab_id,
+                        (labinfo, reserveinfo) => new { labinfo, reserveinfo }
+                    ).Where(x =>
+                        (x.reserveinfo.start_time.Day - dateNow.Day) >= 0 &&
+                        (x.reserveinfo.start_time.Day - dateNow.Day) <= 6 &&
+                        x.labinfo.id == labid
+                    )
+                    .Join(
+                        db.Equipment,
+                        labres => labres.labinfo.id,
+                        equipment => equipment.lab_id,
+                        (labres, equipment) => new
+                        {
+                            lab_id = labres.labinfo.id,
+                            equipment = labres.labinfo.equip,
+                            reserve_time = labres.reserveinfo.start_time,
+                            reserve_by = labres.reserveinfo.reserve_by
+                        }
+                    ).OrderBy(arg => arg.reserve_time);
+
+                List<dynamic> each_day = new List<dynamic>();
+                for (int day = 0; day < 7; day++)
+                {
+                    var temp_data = from data in temp
+                        where data.reserve_time.Day - dateNow.Day == day select data;
+                    int[] count_resv = new int[]
+                    {
+                        maxall, maxall, maxall, maxall, maxall,
+                        maxall, maxall, maxall, maxall, maxall
+                    };
+                    foreach (var j in temp_data)
+                    {
+                        count_resv[time_slot.ToList().IndexOf(j.reserve_time.Hour)] -= 1;
+                        // // Console.WriteLine(time_slot.ToList().IndexOf(j.reserve_time.Hour));
+                        // Console.WriteLine(j.reserve_time.Day-dateNow.Day);
+                    }
+
+                    each_day.Add(count_resv);
+                }
+
+                lab.Add(new {lab_id=labid, max=maxall, slot=each_day});
+            }
+            return new Return
+            {
+                Error = false,
+                Data = lab
             };
         }
 
