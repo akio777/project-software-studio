@@ -112,6 +112,7 @@ namespace LabReservation.Services
             {
                 var labid = i;
                 var maxall = db.Equipment.Where(data => data.lab_id == labid).First().maximum;
+                var lab_info = db.Labinfo.Where(data => data.id == labid).First();
                 var temp = db.Labinfo
                     .Join(
                         db.Reserveinfo,
@@ -156,7 +157,7 @@ namespace LabReservation.Services
                     each_day.Add(count_resv);
                 }
 
-                lab.Add(new {lab_id=labid, max=maxall, slot=each_day});
+                lab.Add(new {lab_id=labid, name=lab_info.name, equip=lab_info.equip, max=maxall, slot=each_day});
             }
             return new Return
             {
