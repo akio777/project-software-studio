@@ -27,7 +27,8 @@
     </div>
     @if (@Model.status)
     {
-        <div class="animate__animated animate__bounceInUp toast" id="toast">
+        <div class="animate__animated toast @(Model.msg == "จองสำเร็จ" ? "success animate__bounceInUp":"failed animate__headShake")"
+        id="toast">
             <p>@Model.msg</p>
             <button>&times;</button>
         </div>

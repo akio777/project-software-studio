@@ -65,9 +65,9 @@
   position: fixed;
   bottom: 1rem;
   right: 2rem;
-  background-color: var(--blue-500);
+  background-color: var(--blue-400);
   color: white;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
   align-items: center;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -75,12 +75,22 @@
   font-weight: bolder;
 }
 
+.toast.success {
+  background-color: var(--success);
+}
+
+.toast.failed {
+  background-color: var(--danger);
+}
+
 .toast > button {
   margin-left: 2rem;
   background-color: rgba(255, 255, 255, 0.8);
-  /* color: var(--blue-500); */
-  border-radius: 5px;
-  font-size: 18px;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  font-size: 22px;
+  border-radius: 50%;
   transition: all ease-in-out 150ms;
 }
 
