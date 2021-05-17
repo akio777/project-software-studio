@@ -61,6 +61,7 @@
   font-size: large;
   background: none;
   border: none;
+  margin-left: 1rem;
 }
 
 .logout:hover {
