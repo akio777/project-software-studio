@@ -60,3 +60,30 @@
   font-weight: 500;
 }
 
+.toast {
+  display: flex;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  background-color: var(--blue-500);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.toast > button {
+  margin-left: 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  /* color: var(--blue-500); */
+  border-radius: 5px;
+  font-size: 18px;
+  transition: all ease-in-out 150ms;
+}
+
+.toast > button:hover {
+  background-color: white;
+}

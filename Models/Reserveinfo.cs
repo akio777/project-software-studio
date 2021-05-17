@@ -24,7 +24,11 @@ namespace LabReservation.Models
             reservedInput = new ReservedInput();
             reservePageList = _reservePageList;
             labinfo = _labinfo;
+            status = false;
+            msg = "";
         }
+        public bool status { get; set; }
+        public string msg { get; set; }
     }
     public class Reserve_page
     {
