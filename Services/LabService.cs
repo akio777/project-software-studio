@@ -19,7 +19,7 @@ namespace LabReservation.Services
         Return Cancel(CancelReserved[] data);
         Return LabManage(int labid);
         Return CancelList(Reserved data);
-        Return BlackListInfo();
+        Return BlackListInfo(int userid);
         Return UnBlock(int userid);
         Return ForceBlock(int userid);
         Return GetEmailUser(int userid);
@@ -107,7 +107,7 @@ namespace LabReservation.Services
         {
             var dateNow = DateTime.Now;
             List<dynamic> lab = new List<dynamic>();
-            
+
             for (var i = 1; i <= 5; i++)
             {
                 var labid = i;
@@ -141,7 +141,8 @@ namespace LabReservation.Services
                 for (int day = 0; day < 7; day++)
                 {
                     var temp_data = from data in temp
-                        where data.reserve_time.Day - dateNow.Day == day select data;
+                                    where data.reserve_time.Day - dateNow.Day == day
+                                    select data;
                     int[] count_resv = new int[]
                     {
                         maxall, maxall, maxall, maxall, maxall,
@@ -157,7 +158,7 @@ namespace LabReservation.Services
                     each_day.Add(count_resv);
                 }
 
-                lab.Add(new {lab_id=labid, name=lab_info.name, equip=lab_info.equip, max=maxall, slot=each_day});
+                lab.Add(new { lab_id = labid, name = lab_info.name, equip = lab_info.equip, max = maxall, slot = each_day });
             }
             return new Return
             {
@@ -418,10 +419,13 @@ namespace LabReservation.Services
             };
         }
 
-        public Return BlackListInfo()
+        public Return BlackListInfo(int userid)
         {
-            var notBlock = from user in db.Userinfo
-                           where db.Blacklist.Where(bl => bl.user_id == user.id).First() == null
+            var notMe = from user in db.Userinfo
+                        where user.id != userid
+                        select user;
+            var notBlock = from user in notMe
+                           where db.Blacklist.Where(bl => (bl.user_id == user.id)).First() == null
                            select new UserEmail { email = user.email, user_id = user.id };
             var wasBlock = from block_user in db.Blacklist
                            join user in db.Userinfo on block_user.user_id equals user.id
