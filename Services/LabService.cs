@@ -214,7 +214,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ไม่สามารถจองได้ บัญชีของคุณถูกระงับกรุณาติดต่อเจ้าหน้าที่"
+                    Data = "ไม่สามารถจองได้ บัญชีถูกระงับ กรุณาติดต่อเจ้าหน้าที่"
                 };
             }
             var dateNow = DateTime.Now;
