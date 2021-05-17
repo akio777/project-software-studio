@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,25 +9,77 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
+using LabReservation.Services;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace LabReservation.Controllers
 {
     public class ReserveinfoController : Controller
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILabService LAB;
         private readonly LabReservationContext _context;
 
-        public ReserveinfoController(LabReservationContext context)
+        public ReserveinfoController(ILabService labservice, LabReservationContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            LAB = labservice;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Reserveinfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ReserveinfoProps reserveinfoProps)
         {
-            return View(await _context.Reserveinfo.ToListAsync());
+            return View(reserveinfoProps);
+        }
+
+        public async Task<IActionResult> Lab(int id)
+        {
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var reservePageList = LAB.Read(id, userId);
+            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+            // Console.WriteLine(JsonConvert.SerializeObject(reservePageList, Formatting.Indented));
+
+            var reserveinfoProps = new ReserveinfoProps(reservePageList.Data, labinfo);
+            return View("Index", reserveinfoProps);
+        }
+
+        // [HttpPost]
+        public IActionResult Confirm(ReservedInput reservedInput, int id)
+        {
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var reservedList = new List<Reserved>();
+            var mapReservedInput = new List<dynamic>();
+            foreach (PropertyInfo propertyInfo in reservedInput.GetType().GetProperties())
+            {
+                mapReservedInput.Add(propertyInfo.GetValue(reservedInput, null));
+            }
+
+            for (var i = 0; i < mapReservedInput.Count(); i++)
+            {
+                for (var j = 0; j < mapReservedInput[i].Length; j++)
+                {
+                    if (mapReservedInput[i][j])
+                    {
+                        var reservedObject = new Reserved();
+                        reservedObject.day = j;
+                        reservedObject.time = i;
+                        reservedObject.lab_id = id;
+                        reservedList.Add(reservedObject);
+                    }
+                }
+            }
+            LAB.Confirm(reservedList.ToArray(), userId);
+
+            return RedirectToAction("Index", "Home");
+
+
         }
 
         // GET: Reserveinfo/Details/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +98,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Create
+        [Authorize(Roles = "0")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +107,7 @@ namespace LabReservation.Controllers
         // POST: Reserveinfo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
@@ -66,6 +122,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Edit/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,6 +141,7 @@ namespace LabReservation.Controllers
         // POST: Reserveinfo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "0")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,lab_id,reserve_by,start_time,end_time")] Reserveinfo reserveinfo)
@@ -117,6 +175,7 @@ namespace LabReservation.Controllers
         }
 
         // GET: Reserveinfo/Delete/5
+        [Authorize(Roles = "0")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +194,7 @@ namespace LabReservation.Controllers
         }
 
         // POST: Reserveinfo/Delete/5
+        [Authorize(Roles = "0")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -144,7 +204,8 @@ namespace LabReservation.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
+        [Authorize(Roles = "0")]
         private bool ReserveinfoExists(int id)
         {
             return _context.Reserveinfo.Any(e => e.id == id);

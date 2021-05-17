@@ -1,60 +1,28 @@
-@model IEnumerable<LabReservation.Models.Reserveinfo>
-
+@model LabReservation.Models.ReserveinfoProps
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @Model.labinfo.name;
 }
+<link rel="stylesheet" type="text/css" href="~/css/reserveLayout.css">
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.lab_id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.reserve_by)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.start_time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.end_time)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.lab_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.reserve_by)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.start_time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.end_time)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-
-<button id="myBtn">Open Modal</button>
-
-<div>
-    @await Component.InvokeAsync("CancelSelectedReserve")
+<div class="layout">
+    <div class="page-nav">
+        <a asp-controller="Home" asp-action="Index">
+            <button><i class="fa fa-chevron-left"></i>&ensp;Back</button>
+        </a>
+    </div>
+    <div class="layout-main">
+        <div class="header">
+            <h1>@Model.labinfo.name</h1>
+            <div class="info-wrapper">
+                <div class="info-box">
+                    <p class="head">Equipment</p>
+                    <p class="info">@Model.labinfo.equip</p>
+                </div>
+            </div>
+        </div>
+        <p>Select time slot to reserve the equipment.</p>
+        <div>
+            @await Component.InvokeAsync("ReservationTable", new { reserveinfoProps = @Model})
+        </div>
+    </div>
 </div>
-

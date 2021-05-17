@@ -1,0 +1,8 @@
+@model LabReservation.Models.UserEmail
+
+<link href="~/css/emailCard.css" rel="stylesheet" />
+
+<div class="email-card" title="@Model.email">
+    <div class="email-info">@Model.email</div>
+    @Html.ActionLink("", "AddToBlock", "Blacklist", new {userid = @Model.user_id}, new {@class="fas fa-ban", @title="Add to Blacklist"})
+</div>

@@ -1,0 +1,29 @@
+@model LabReservation.Models.MyReserveProps
+@{
+    ViewData["Title"] = "My Reservation";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/myreservation.css">
+
+<div class="layout">
+    <div class="layout-main">
+        <h1>My Reservation</h1>
+        <div class="equipment">
+            <h3>All Reservation : 7 hours</h3>
+        </div>
+        <div class="detail">
+            <p>Select time slot to cancel reservation</p>
+        </div>
+
+        <div>
+            @await Component.InvokeAsync("MyReservationTable", new { myReserveProps = @Model })
+        </div>
+    </div>
+</div>
+
+@if (@Model.modalOpen)
+{
+    <div>
+        @await Component.InvokeAsync("CancelSelectedReserve", new { MyReserveProps = @Model })
+    </div>
+}

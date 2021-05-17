@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace LabReservation.Models
 {
@@ -9,5 +10,21 @@ namespace LabReservation.Models
         public string name { get; set; }
         public string equip { get; set; }
 
+    }
+
+    public class LabCardInfo
+    {
+        public bool notAvailable { get; set; }
+        public string name { get; set; }
+        public string equip { get; set; }
+        public int lab_id { get; set; }
+    }
+
+    public class LabManageInfo
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string equip { get; set; }
+        public int amount { get; set; }
     }
 }

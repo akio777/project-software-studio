@@ -1,0 +1,282 @@
+@model LabReservation.Models.MyReserveProps
+
+@{
+    var currentDateTime = DateTime.Now;
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/site.css" />
+<link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
+<link rel="stylesheet" type="text/css" href="~/css/circularButtonX.css">
+
+<form id="myAnchor" asp-action="Confirm" method="post">
+    <div class="option">
+        <label for="filter">
+            Filter
+            <select name="filter" id="filter-reservation" onchange=filterList()>
+                <option value="0">All</option>
+                @foreach(var item in @Model.filterList) {
+                    <option value=@item.id >@item.name</option>
+                }
+            </select>
+        </label>
+        <button id="cancel-selected-btn" type="submit">
+            Cancel Selected Reservation
+        </button>
+    </div>
+    <table class="reservation-table-container">
+        <thead class="reservation-table-header">
+            <tr>
+                <th></th>
+                <th>
+                    <div>@currentDateTime.ToString("ddd")</div>
+                    <div>Today</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(1).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(2).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(2).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(3).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(3).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(4).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(4).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(5).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(5).ToString("d MMM")</div>
+                </th>
+                <th>
+                    <div>@currentDateTime.AddDays(6).ToString("ddd")</div>
+                    <div>@currentDateTime.AddDays(6).ToString("d MMM")</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="reservation-table-content">
+            <tr>
+                <td>08:00<br>-<br>09:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_0[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_0[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>09:00<br>-<br>10:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_1[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_1[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>10:00<br>-<br>11:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_2[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_2[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>11:00<br>-<br>12:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_3[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_3[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>12:00<br>-<br>13:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_4[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_4[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>13:00<br>-<br>14:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_5[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_5[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>14:00<br>-<br>15:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_6[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_6[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>15:00<br>-<br>16:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_7[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_7[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>16:00<br>-<br>17:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_8[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_8[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>17:00<br>-<br>18:00</td>
+                @for (int i = 0; i < 7; i++)
+                {
+
+                    <td>
+                        <div>
+
+                            <label class="circular-x-container" tabindex="0">
+                                <input asp-for="reservedInput.time_9[i]" type="checkbox">
+                                <span class="checkmark">
+                                    <p>@Model.cancelMyReservedInput.time_9[i]?.lab_name</p>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<script type="text/javascript">
+    let reserved_time = 0;
+    const currentDateTime = new Date();
+    const model = @Json.Serialize(@Model);
+    const allCheckBox = document.querySelectorAll(".circular-x-container")
+    const allCheckBoxData = Object.values(model.cancelMyReservedInput)
+
+    function filterList() {
+        const selectedFilter = document.getElementById("filter-reservation")
+        renderTable(parseInt(selectedFilter.value))
+    }
+
+    function renderTable(filter = 0) {
+        allCheckBox.forEach((cb, index) => {
+            const timeIndex = parseInt(index / 7);
+            const dayIndex = index % 7;
+            const currentLabId = Object.values(model.cancelMyReservedInput)[timeIndex][dayIndex].lab_id;
+            
+            if (filter !== 0) {
+                if (currentLabId !== filter) {
+                    cb.classList.add("hidden")
+                }
+                else {
+                    cb.classList.remove("hidden")
+                }
+            } else cb.classList.remove("hidden")
+            if (currentDateTime.getHours() >= 8 + timeIndex && dayIndex == 0) {
+                cb.classList.add("hidden")
+            }
+
+            if (allCheckBoxData[timeIndex][dayIndex].reserve_id == -1) {
+                cb.classList.add("hidden")
+            }
+        })
+    }
+
+    renderTable()
+
+</script>

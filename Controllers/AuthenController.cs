@@ -1,4 +1,4 @@
-﻿      
+﻿
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using LabReservation.Models;
 using LabReservation.Services;
+using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
@@ -23,29 +24,36 @@ namespace LabReservation.Controllers
             user_service = userService;
             _httpContextAccessor = httpContextAccessor;
         }
-        
-        
+
+
         [AllowAnonymous]
         [Route("")]
         public IActionResult Index()
         {
             return RedirectToAction("Login");
         }
-        
+
         [AllowAnonymous]
         [Route("[action]")]
-        public IActionResult Login()
+        public async Task<ActionResult> Login()
         {
-            if(User.Identity.IsAuthenticated) {
-                return RedirectToAction("Index", "Home");
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("0"))
+                {
+                    return RedirectToAction("Index", "LabManage");
+                }
+                    return RedirectToAction("Index", "Home");
             }
+
             return View();
         }
-        
+
         [Route("[action]")]
-        [HttpPost]  
-        public async Task<ActionResult> Login(AuthenModel data)
-        {   
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginModel data)
+        {
+
             var temp = user_service.CheckLogin(data);
             if (temp.Error)
             {
@@ -64,16 +72,16 @@ namespace LabReservation.Controllers
                     claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal ReClaims = new ClaimsPrincipal(claimsIdentity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, ReClaims);
-                if (temp.Data.role==0) return RedirectToAction("Index", "Labinfo");
-                else return RedirectToAction("Index", "Labinfo");
+                if (temp.Data.role == 0) return RedirectToAction("Index", "LabManage");
+                else return RedirectToAction("Index", "Home");
             }
         }
-        
+
         [AllowAnonymous]
         [Route("[action]")]
-        [HttpPost]  
+        [HttpPost]
         public ActionResult Register(RegisterModel data)
-        {   
+        {
             var temp = user_service.CheckRegister(data);
             if (temp.Error)
             {
@@ -82,26 +90,26 @@ namespace LabReservation.Controllers
             }
             else
             {
-                return RedirectToAction("Login","Authen");
+                return RedirectToAction("Login", "Authen");
             }
-            
+
         }
-        
+
         [Route("[action]")]
-        [HttpGet]  
-        public ActionResult Register()  
+        [HttpGet]
+        public ActionResult Register()
         {
-            return View();  
+            return View();
         }
-        
+
         [Route("[action]")]
-        [HttpGet]  
+        [HttpGet]
         public async Task<ActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
-        
+
         // [Authorize(Roles = "1")]
         // [AllowAnonymous]
         // [Route("")]

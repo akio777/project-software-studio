@@ -2,12 +2,15 @@
 @using System;
 @using System.Collections.Generic;
 @{
-    string[] hidenav = {"/authen", "/", "/login", "/register"};
+
+    string[] hidenav = { "/authen", "/", "/login", "/register" };
+
     bool isAdmin = Context.User.Clone().IsInRole("0");
 }
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,35 +20,44 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     @if (!hidenav.Contains(Context.Request.Path.ToString().ToLower()))
     {
-    <header>
-        <nav>
-            <div class="navbar">
-                <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
-                @if(isAdmin)
-                {
-                <div class="links">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Lab Management</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Blacklist</a>
+        <header>
+            <nav>
+                <div class="navbar">
+                    <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
+                    @if (isAdmin)
+                    {
+                        <div class="links">
+                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "LabManage" ? "nav-link active" : "nav-link")'
+                        asp-area="" asp-controller="LabManage" asp-action="Index">Lab Management</a>
+                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Blacklist" ? "nav-link active" : "nav-link")'
+                        asp-area="" asp-controller="Blacklist" asp-action="Index">Blacklist</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="links">
+                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-link active" : "nav-link")'
+                        asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
+                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "MyReserve" ? "nav-link active" : "nav-link")'
+                        asp-area="" asp-controller="MyReserve" asp-action="Index">My Reservation</a>
+                        </div>
+                    }
+                    <div class="user">
+                        <div>
+                            @await Component.InvokeAsync("NavUsername")
+                        </div>
+                        <img src='@Url.Content("~/Images/profilepic.jpg")' alt="profile-pic" class="profile-pic">
+                        <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout"><i
+                            class="fas fa-sign-out-alt"></i></a>
+                    </div>
                 </div>
-                }
-                else 
-                {
-                <div class="links">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">My Reservation</a>
-                </div>
-                }
-                <div class="user">
-                    <a href="">Admin Boi</a>
-                    <img src="https://cdn.discordapp.com/avatars/383645142843654147/c8623582ac80f15c5596a8c4c1d8bc29.png?size=256" alt="profile-pic" class="profile-pic">
-                    <a class="logout" asp-controller="Authen" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a>
-                </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
+
     }
     <div class="container">
         <main role="main" class="pb-3">
@@ -56,4 +68,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

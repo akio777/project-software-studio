@@ -1,15 +1,20 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using LabReservation.Models;
+@using LabReservation.Controllers;
+@model IEnumerable<LabReservation.Models.LabCardInfo>;
 @{
     ViewData["Title"] = "Home Page";
+    var listLabID = new List<int>() { 1, 2, 3, 4, 5 };
+}
+
+@section Scripts{
+<link href="~/css/home.css" rel="stylesheet" />
 }
 
 
-<div class="text-center">
-    @* <h2 class="display-4">LabReservation</h2> *@
-    @* <h1 class="home">show reserve queue</h1> *@
-    @* <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-primary" />
-    </div> *@
-
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    @foreach (var item in @Model)
+    {
+        @await Component.InvokeAsync("LabCard",new {lab = @item})
+    }
 </div>

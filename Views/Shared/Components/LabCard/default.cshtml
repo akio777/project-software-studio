@@ -1,0 +1,27 @@
+@model LabReservation.Models.LabCardInfo;
+
+<link rel="stylesheet" type="text/css" href="css/labCard.css" />
+
+<div class="card" tabindex="0">
+    <a asp-controller="Reserveinfo" asp-action="Lab" asp-route-id="@Model.lab_id">
+        <div class="card-name" title="@Model.name">
+            <div class="card-name-area">@Model.name</div>
+        </div>
+
+        <div class="card-status">
+            <div class="status">Status
+                @if (Model.notAvailable == false)
+                {
+                    <p>Available</p>
+                }
+                @if (Model.notAvailable == true)
+                {
+                    <p>Full</p>
+                }
+            </div>
+            <div class="equipment">Equipment
+                <p>@Model.equip</p>
+            </div>
+        </div>
+    </a>
+</div>

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabReservation.Data;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using LabReservation.Models;
 
 namespace LabReservation.ViewComponents
 {
@@ -16,23 +18,9 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int? id)
+        public async Task<IViewComponentResult> InvokeAsync(LabManageInfoProps labManageInfoProps)
         {
-            if (id == null)
-            {
-                string model = "<strong>some custom html</strong>";
-                return View("", model);
-            }
-
-            var reserveinfo = await _context.Reserveinfo
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (reserveinfo == null)
-            {
-                string model = "<strong>some custom html</strong>";
-                return View("", model);
-            }
-
-            return View(reserveinfo);
+            return View(labManageInfoProps);
         }
     }
 }

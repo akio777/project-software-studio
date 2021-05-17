@@ -1,34 +1,37 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LabReservation.Models;
+using LabReservation.Services;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILabService LAB;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(ILabService lab, IHttpContextAccessor httpContextAccessor)
         {
-            _logger = logger;
+            LAB = lab;
+            _httpContextAccessor = httpContextAccessor;
         }
-
         public IActionResult Index()
         {
             var token = Request.Headers["Cookie"];
-            
-            // Console.WriteLine("LOG : "+User.Identity.Name);
-            return View();
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var lab = LAB.LabInfo(userId);
+            return View(lab.Data);
         }
-
-        public IActionResult Privacy()
+        public IActionResult Test()
         {
-            return View();
+            // var token = Request.Headers["Cookie"];
+            // var temp = LAB.Read(1, 1);
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

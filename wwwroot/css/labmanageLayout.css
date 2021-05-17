@@ -1,0 +1,14 @@
+.h-lab-manage {
+  color: var(--blue-500);
+  width: calc(720px + 3rem);
+  padding-top: 2rem;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.lab-manage-card-container {
+  display: flex;
+  flex-flow: row wrap;
+  width: calc(720px + 3rem);
+  margin: auto;
+}

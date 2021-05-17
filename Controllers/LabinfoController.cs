@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
 using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
@@ -12,17 +11,17 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.Controllers
 {
-    
+    [Authorize(Roles = "0")]
     public class LabinfoController : Controller
     {
         private readonly LabReservationContext _context;
-        
+
         public LabinfoController(LabReservationContext context)
         {
             _context = context;
         }
-        
-        
+
+
         // GET: Labinfo
         [Authorize]
         public async Task<IActionResult> Index()
@@ -156,19 +155,19 @@ namespace LabReservation.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         [Authorize(Roles = "0")]
         private bool LabinfoExists(int id)
         {
             return _context.Labinfo.Any(e => e.id == id);
         }
-        
-        [Authorize(Roles = "1")]
-        [AllowAnonymous]
-        [Route("[action]")]
-        public IActionResult CatchAll()
-        {
-            return RedirectToAction("Index", "NoPermission");
-        }
+
+        // [Authorize(Roles = "1")]
+        // [AllowAnonymous]
+        // [Route("[action]")]
+        // public IActionResult CatchAll()
+        // {
+        //     return RedirectToAction("Index", "NoPermission");
+        // }
     }
 }
