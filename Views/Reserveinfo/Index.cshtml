@@ -25,4 +25,20 @@
             @await Component.InvokeAsync("ReservationTable", new { reserveinfoProps = @Model})
         </div>
     </div>
+    @if (@Model.status)
+    {
+        <div class="animate__animated toast @(Model.msg == "จองสำเร็จ" ? "success animate__bounceInUp":"failed animate__headShake")"
+        id="toast">
+            <p>@Model.msg</p>
+            <button>&times;</button>
+        </div>
+    }
 </div>
+
+<script>
+    var toast = document.getElementById("toast");
+    var btn = document.querySelector(".toast button");
+    btn.onclick = function () {
+        toast.style.display = "none";
+    }
+</script>

@@ -60,3 +60,40 @@
   font-weight: 500;
 }
 
+.toast {
+  display: flex;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  background-color: var(--blue-400);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.toast.success {
+  background-color: var(--success);
+}
+
+.toast.failed {
+  background-color: var(--danger);
+}
+
+.toast > button {
+  margin-left: 2rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  font-size: 22px;
+  border-radius: 50%;
+  transition: all ease-in-out 150ms;
+}
+
+.toast > button:hover {
+  background-color: white;
+}

@@ -36,7 +36,7 @@ namespace LabReservation.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Lab(int id)
+        public async Task<IActionResult> Lab(int id, string msg = "")
         {
             if (id == 0)
             {
@@ -48,7 +48,13 @@ namespace LabReservation.Controllers
                 var reservePageList = LAB.Read(id, userId);
                 var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
                 // Console.WriteLine(JsonConvert.SerializeObject(reservePageList, Formatting.Indented));
+
                 var reserveinfoProps = new ReserveinfoProps(reservePageList.Data, labinfo);
+                if (msg != "")
+                {
+                    reserveinfoProps.status = true;
+                    reserveinfoProps.msg = msg;
+                }
                 return View("Index", reserveinfoProps);
             }
         }
@@ -78,11 +84,10 @@ namespace LabReservation.Controllers
                     }
                 }
             }
-            LAB.Confirm(reservedList.ToArray(), userId);
-
-            return RedirectToAction("Index", "Home");
-
-
+            var str = LAB.Confirm(reservedList.ToArray(), userId).Data;
+            // LAB.Confirm(reservedList.ToArray(), userId);
+            // Console.WriteLine(LAB.Confirm(reservedList.ToArray(), userId).Data);
+            return RedirectToAction("Lab", "Reserveinfo", new { id = id, msg = str });
         }
 
         // GET: Reserveinfo/Details/5
@@ -211,13 +216,13 @@ namespace LabReservation.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+
         [Authorize(Roles = "0")]
         private bool ReserveinfoExists(int id)
         {
             return _context.Reserveinfo.Any(e => e.id == id);
         }
-        
+
         [AllowAnonymous]
         [Route("{*url:regex(^(?!api).*$)}", Order = 999)]
         public IActionResult CatchAll()
