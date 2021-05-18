@@ -130,7 +130,6 @@ namespace LabReservation.Controllers
             edited.name = name;
             edited.equip = equip;
             edited.id = id;
-            Console.WriteLine(JsonConvert.SerializeObject(edited, Formatting.Indented));
             LAB.EditLab(edited);
             return RedirectToAction("EditCancel", "LabManage", new { id = id });
         }
