@@ -26,36 +26,40 @@
     @if (!hidenav.Contains(Context.Request.Path.ToString().ToLower()))
     {
         <header>
-            <nav>
-                <div class="navbar">
-                    <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
-                    @if (isAdmin)
-                    {
-                        <div class="links">
-                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "LabManage" ? "nav-link active" : "nav-link")'
+            @if (User.Identity.IsAuthenticated)
+            {
+                <nav>
+                    <div class="navbar">
+                        <img src='@Url.Content("~/Images/Logo_Nav.svg")' alt="logo" class="logo">
+                        @if (isAdmin)
+                        {
+                            <div class="links">
+                                <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "LabManage" ? "nav-link active" : "nav-link")'
                         asp-area="" asp-controller="LabManage" asp-action="Index">Lab Management</a>
-                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Blacklist" ? "nav-link active" : "nav-link")'
+                                <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Blacklist" ? "nav-link active" : "nav-link")'
                         asp-area="" asp-controller="Blacklist" asp-action="Index">Blacklist</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="links">
-                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-link active" : "nav-link")'
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="links">
+                                <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "nav-link active" : "nav-link")'
                         asp-area="" asp-controller="Home" asp-action="Index">Laboratory</a>
-                            <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "MyReserve" ? "nav-link active" : "nav-link")'
+                                <a class='@(ViewContext.RouteData.Values["Controller"].ToString() == "MyReserve" ? "nav-link active" : "nav-link")'
                         asp-area="" asp-controller="MyReserve" asp-action="Index">My Reservation</a>
+                            </div>
+                        }
+                        <div class="user">
+                            <div>
+                                @await Component.InvokeAsync("NavUsername")
+                            </div>
+                            <img src='@Url.Content("~/Images/profilepic.jpg")' alt="profile-pic" class="profile-pic">
+                            <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i></a>
                         </div>
-                    }
-                    <div class="user">
-                        <div>
-                            @await Component.InvokeAsync("NavUsername")
-                        </div>
-                        <a class="logout" asp-controller="Authen" asp-action="Logout" title="Logout"><i
-                            class="fas fa-sign-out-alt"></i></a>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            }
         </header>
 
     }
