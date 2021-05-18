@@ -35,6 +35,10 @@ namespace LabReservation.Controllers
 
         public async Task<IActionResult> EditCancel(int id)
         {
+            if (id == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
             var reservePageList = LAB.LabManage(id);
@@ -73,10 +77,10 @@ namespace LabReservation.Controllers
 
             // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.cancelUserList, Formatting.Indented));
             // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.checkedList, Formatting.Indented));
-           
+
             return View("Views/LabManage/EditCancel.cshtml", labManageInfoProps);
         }
-        
+
         [AllowAnonymous]
         public async Task<IActionResult> ExternalAPI()
         {
@@ -84,16 +88,16 @@ namespace LabReservation.Controllers
             // Console.WriteLine(JsonConvert.SerializeObject(LAB.LabManageInfo(), Formatting.Indented));
             return Ok(temp);
         }
-        
+
         public IActionResult SubmitCancel(bool[] checkedList, int id)
         {
             // init Reserved for use with CancelList()
             var reservedObject = new Reserved();
-            reservedObject.lab_id = id/100;
+            reservedObject.lab_id = id / 100;
             reservedObject.time = (id % 100) / 10;
             reservedObject.day = (id % 100) % 10;
             // Console.WriteLine(JsonConvert.SerializeObject(reservedObject, Formatting.Indented));
-            
+
             var cancelUserList = LAB.CancelList(reservedObject);
             var userList = cancelUserList.Data.data;
             // Console.WriteLine(JsonConvert.SerializeObject(userList, Formatting.Indented));
@@ -101,8 +105,10 @@ namespace LabReservation.Controllers
 
             List<CancelReserved> cancelReserveds = new List<CancelReserved>();
             int i = 0;
-            foreach (var item in userList) {
-                if (checkedList[i]) {
+            foreach (var item in userList)
+            {
+                if (checkedList[i])
+                {
                     var tmp = new CancelReserved(item.reserved_id);
                     cancelReserveds.Add(tmp);
                 }
