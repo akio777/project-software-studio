@@ -18,9 +18,9 @@ namespace LabReservation.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(LabManageInfoProps labManageInfoProps)
+        public async Task<IViewComponentResult> InvokeAsync(LabManageInfo labManageInfo)
         {
-            return View(labManageInfoProps);
+            return View(labManageInfo);
         }
     }
 }

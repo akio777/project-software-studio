@@ -85,7 +85,8 @@
 
 .toast > button {
   margin-left: 2rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
   box-sizing: border-box;
   width: 2rem;
   height: 2rem;
@@ -95,5 +96,5 @@
 }
 
 .toast > button:hover {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.3);
 }

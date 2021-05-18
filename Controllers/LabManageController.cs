@@ -39,10 +39,12 @@ namespace LabReservation.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+            // var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
             var reservePageList = LAB.LabManage(id);
-            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);
+            var labManageInfo = LAB.LabManageInfo().Data[id - 1];
+            var labManageInfoProps = new LabManageInfoProps(labManageInfo, equipment, reservePageList.Data);
 
             return View(labManageInfoProps);
         }
@@ -54,7 +56,8 @@ namespace LabReservation.Controllers
             int time = cancelReservedInput[1] - '0';
             int day = cancelReservedInput[2] - '0';
 
-            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
+            // var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
+            var labManageInfo = LAB.LabManageInfo().Data[lab_id - 1];
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == lab_id);
             var reservePageList = LAB.LabManage(lab_id);
 
@@ -69,7 +72,7 @@ namespace LabReservation.Controllers
             bool[] checkList = new bool[cancelUserList.Data.data.Length];
             //Console.WriteLine(JsonConvert.SerializeObject(cancelUserList.Data, Formatting.Indented));
 
-            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data, true);
+            var labManageInfoProps = new LabManageInfoProps(labManageInfo, equipment, reservePageList.Data, true);
             labManageInfoProps.cancelUserList = cancelUserList.Data;
             labManageInfoProps.checkedList = checkList;
 
@@ -119,6 +122,17 @@ namespace LabReservation.Controllers
             // Console.WriteLine(JsonConvert.SerializeObject(cancelReserveds, Formatting.Indented));
             // Console.WriteLine(JsonConvert.SerializeObject(checkedList, Formatting.Indented));
             return RedirectToAction("Index", "LabManage");
+        }
+        public IActionResult EditLabSubmit(LabManageInfo labManageInfo, int id, string name, int amount, string equip = null)
+        {
+            LabManageInfo edited = new LabManageInfo();
+            edited.amount = amount;
+            edited.name = name;
+            edited.equip = equip;
+            edited.id = id;
+            Console.WriteLine(JsonConvert.SerializeObject(edited, Formatting.Indented));
+            LAB.EditLab(edited);
+            return RedirectToAction("EditCancel", "LabManage", new { id = id });
         }
     }
 }
