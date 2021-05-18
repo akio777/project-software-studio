@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="~/css/editLab.css" />
 
 <div id="modal-main" class="modal">
-    <form asp-action="EditLabSubmit" asp-route-id="1" method="POST">
+    <form asp-action="EditLabSubmit" asp-route-id="@Model.id" method="POST">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Edit Lab</h2>
@@ -15,7 +15,7 @@
                 <label>Lab Name</label>
                 <input type="text" asp-for="name">
                 <label>Amount</label>
-                <input type="number" asp-for="amount">
+                <input type="number" asp-for="amount" min="1">
                 @* <label>Equipment</label>
                 <input type="text" asp-for="equip"> *@
             </div>
