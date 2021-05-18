@@ -9,11 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
+    [Authorize]
     public class MyReserveController : Controller
     {
         private readonly LabReservationContext _context;
