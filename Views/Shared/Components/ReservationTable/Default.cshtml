@@ -224,17 +224,22 @@
     const currentDateTime = new Date();
     const model = @Json.Serialize(@Model);
     const allCheckBox = document.querySelectorAll(".circular-container")
+    const confirmBtn = document.querySelector(".btn-confirm-reserve")
+    confirmBtn.disabled = true
 
     function checkedHandler() {
         var checkboxes = document.querySelectorAll('.circular-container input:checked');
         if (checkboxes.length == 0) {
             document.querySelector("#count_select").innerHTML = 'Not selected'
+            confirmBtn.disabled = true
         }
         else if (checkboxes.length > 0 && checkboxes.length < 2) {
             document.querySelector("#count_select").innerHTML = checkboxes.length + ' hour'
+            confirmBtn.disabled = false
         }
         else {
             document.querySelector("#count_select").innerHTML = checkboxes.length + ' hours'
+            confirmBtn.disabled = false
         }
     }
 

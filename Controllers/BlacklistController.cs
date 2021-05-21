@@ -9,26 +9,30 @@ using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace LabReservation.Controllers
 {
     [Authorize(Roles = "0")]
     public class BlacklistController : Controller
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LabReservationContext _context;
 
         private readonly ILabService LAB;
 
-        public BlacklistController(LabReservationContext context, ILabService lab)
+        public BlacklistController(LabReservationContext context, ILabService lab, IHttpContextAccessor httpContextAccessor)
         {
             LAB = lab;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: Blacklist
         public async Task<IActionResult> Index()
         {
-            var blacklist = LAB.BlackListInfo();
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+            var blacklist = LAB.BlackListInfo(userId);
             return View(blacklist.Data);
         }
 
