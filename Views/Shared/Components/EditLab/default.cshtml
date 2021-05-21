@@ -1,42 +1,36 @@
-@model LabReservation.Models.LabManageInfoProps
-
-@{
-    var currentDate = DateTime.Now;
-}
+@model LabReservation.Models.LabManageInfo
 
 <link rel="stylesheet" type="text/css" href="~/css/editLab.css" />
 
 <div id="modal-main" class="modal">
-    <form asp-action="SubmitCancel" asp-route-id="@Model.id" method="POST">
+    <form asp-action="EditLabSubmit" asp-route-id="@Model.id" method="POST">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">Cancel Reservation</h2>
-                <button type="button" class="close">
+                <h2 class="modal-title">Edit Lab</h2>
+                <button type="button" class="close" onclick="closeModal();">
                     <span>×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Select user to cancel reservation in</p>
-                <p class="detail-reserve">@Model.labinfo.name (@Model.cancelUserList.day.ToShortDateString()
-                    @Model.cancelUserList.start_time:00 - @Model.cancelUserList.end_time:00)</p>
-                <div class="select-cancel">
-                    @for (int i = 0; i < @Model.cancelUserList.data.Length; i++)
-                    {
-                        <div>
-                            <input asp-for="checkedList[i]" type="checkbox"> @Model.cancelUserList.data[i].email<br>
-                        </div>
-                    }
-                </div>
+                <label>Lab Name</label>
+                <input type="text" asp-for="name">
+                <label>Amount</label>
+                <input type="number" asp-for="amount" min="1">
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer3">
                 <div>
-                    <button type="button" id="btn-selectall" class="btn btn-selectall">Select All</button>
-                </div>
-                <div>
-                    <button type="button" id="btn-cancel" class="btn btn-cancel">Cancel</button>
+                    <button type="button" id="btn-cancel" class="btn btn-cancel" onclick="closeModal();">Cancel</button>
                     <button type="submit" id="btn-confirm" class="btn btn-confirm">Confirm</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+<script>
+    var cancelBtn = document.getElementById("btn-cancel")
+    var modal = document.querySelector("#editModal")
+    function closeModal() {
+        modal.style.display = "none"
+    }
+</script>
