@@ -110,11 +110,18 @@ body {
   justify-content: center;
 }
 
+.field-validation-error {
+  color: rgb(255, 255, 255);
+}
+
 .validation-summary-errors ul {
+  padding: 10px 10px;
   list-style: none;
-  color: #dc3545;
+  background-color: var(--danger);
+  color: white;
   font-size: 0.8vw;
   font-weight: 700;
+  border-radius: 5px;
 }
 
 input {
