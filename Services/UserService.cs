@@ -28,7 +28,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data =  "กรุณากรอกข้อมูล"
+                    Data =  "กรุณากรอกข้อมูลให้ครบถ้วน"
                 };
             }
             var c_user = db.Userinfo.FirstOrDefault(userinfo => userinfo.email == data.email);
@@ -67,7 +67,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data =  "กรุณากรอกข้อมูล"
+                    Data =  "กรุณากรอกข้อมูลให้ครบถ้วน"
                 };
             }
             else if (data.Password.Length<6 || data.ConfirmPassword.Length<6)
@@ -92,7 +92,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ไม่สามารถใช้ Email นี้ได้, มี email อยู่ในระบบแล้ว"
+                    Data = "มี Email นี้ในระบบแล้ว"
                 };
             }
             else
