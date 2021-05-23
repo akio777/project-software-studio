@@ -92,7 +92,7 @@ namespace LabReservation.Services
                 return new Return
                 {
                     Error = true,
-                    Data = "ไม่สามารถใช้ Email นี้ได้"
+                    Data = "ไม่สามารถใช้ Email นี้ได้, มี email อยู่ในระบบแล้ว"
                 };
             }
             else

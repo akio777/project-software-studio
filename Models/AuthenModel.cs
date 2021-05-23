@@ -5,7 +5,9 @@ namespace LabReservation.Models
 {
     public class LoginModel
     {
-        [RegularExpression("^(.+@.+[.].+|[aA]dmin)$", ErrorMessage = "รูปแบบ email ไม่ถูกต้อง")]
+        [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                           + "@"
+                           + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "รูปแบบ email ไม่ถูกต้อง")]
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         public string email { get; set; }
 
@@ -18,7 +20,9 @@ namespace LabReservation.Models
     public class RegisterModel
     {
 
-        [RegularExpression("^(.+@.+[.].+|[aA]dmin)$", ErrorMessage = "รูปแบบ email ไม่ถูกต้อง")]
+        [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                           + "@"
+                           + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "รูปแบบ email ไม่ถูกต้อง")]
         [Required(ErrorMessage = "กรุณากรอกข้อมูล")]
         public string Email { get; set; }
 

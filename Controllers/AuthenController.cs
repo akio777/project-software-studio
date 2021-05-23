@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using LabReservation.Models;
 using LabReservation.Services;
 using Newtonsoft.Json;
@@ -82,15 +83,26 @@ namespace LabReservation.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel data)
         {
-            var temp = user_service.CheckRegister(data);
-            if (temp.Error)
+            bool isRexMatch = Regex.IsMatch(data.Email, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                                                        + "@"
+                                                        + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+            if (isRexMatch)
             {
-                ModelState.AddModelError(String.Empty, temp.Data);
-                return View(data);
+                var temp = user_service.CheckRegister(data);
+                if (temp.Error)
+                {
+                    ModelState.AddModelError(String.Empty, temp.Data);
+                    return View(data);
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Authen");
+                }
             }
             else
             {
-                return RedirectToAction("Login", "Authen");
+                ModelState.AddModelError(String.Empty, "รูปแบบ email ไม่ถูกต้อง, กรุณาตรวจสอบ");
+                return View(data);
             }
 
         }
