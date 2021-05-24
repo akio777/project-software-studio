@@ -12,7 +12,7 @@
 }
 
 <div class="ourlab-head">
-    <h1>Our Lab</h1>
+    <h1>Laboratories</h1>
     <div class="line"></div>
 </div>
 <div class="container-lab">
@@ -22,14 +22,13 @@
     }
 </div>
 <div class="partner-head">
-    <h1>Partner Lab</h1>
+    <h1>Partner Laboratories</h1>
     <div class="line"></div>
 </div>
 
 <div class="container-partner">
-    @foreach (var item in @ViewBag.ExternalLabs)
+		@for(var i = 0; i < @ViewBag.ExternalLabs.Count; i ++)
     {
-        @await Component.InvokeAsync("LabCardPartner",new {lab = @item})
+        @await Component.InvokeAsync("LabCardPartner",new {lab = @ViewBag.ExternalLabs[i], labIndex = i})
     }
-
 </div>

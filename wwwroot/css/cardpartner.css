@@ -22,24 +22,14 @@
   height: 80px;
   background-color: white;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+	padding: 0 28px;
+	align-items: center;
   align-self: flex-end;
-}
-
-.card-partner-status .partner-status {
-  font-weight: 500;
-  line-height: 24px;
 }
 
 .card-partner-status .partner-equipment {
   font-weight: 500;
   line-height: 24px;
-}
-
-.partner-status > p {
-  color: var(--success);
-  font-weight: normal;
 }
 
 .partner-equipment > p {

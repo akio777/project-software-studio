@@ -29,8 +29,6 @@ namespace LabReservation.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-
-
         // GET: 
         public async Task<IActionResult> Index()
         {

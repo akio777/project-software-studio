@@ -5,6 +5,7 @@ namespace LabReservation.Models
 {
     public class PartnerLab
     {
+				public int id {get; set;}
         public string toolName { get; set; }
         public int maxCount { get; set; }
         public string room { get; set; }
