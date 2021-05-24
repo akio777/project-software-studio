@@ -1,9 +1,12 @@
+@model LabReservation.Models.PartnerLab;
+
 <link rel="stylesheet" type="text/css" href="css/cardpartner.css" />
 
 <div class="cardpartner">
     <a asp-controller="LabPartner">
         <div class="partner-name">
-            <h4>Our Partner Lab</h4>
+            <h3>@Model.room</h3>
+            <h4>@Model.toolName</h4>
         </div>
         <div class="check-lab">
             Check Available

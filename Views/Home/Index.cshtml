@@ -12,10 +12,21 @@
 }
 
 
-<div class="container">
+<div class="container-lab">
     @foreach (var item in @Model)
     {
         @await Component.InvokeAsync("LabCard",new {lab = @item})
     }
-    @await Component.InvokeAsync("LabCardPartner")
+</div>
+<div class="partner-head">
+    <h1>Partner Lab</h1>
+    <div class="line"></div>
+</div>
+
+<div class="container-partner">
+    @foreach (var item in @ViewBag.ExternalLabs)
+    {
+        @await Component.InvokeAsync("LabCardPartner",new {lab = @item})
+    }
+
 </div>

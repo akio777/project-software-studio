@@ -7,6 +7,10 @@ using LabReservation.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Collections.Generic;
 
 namespace LabReservation.Controllers
 {
@@ -21,8 +25,25 @@ namespace LabReservation.Controllers
             LAB = lab;
             _httpContextAccessor = httpContextAccessor;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var json = await GetExternalLabs();
+            // if(json is String){
+            //     List<String> json = new List<String>();
+            // }
+            // Console.WriteLine(json);
+            try
+            {
+                var exLabs = Newtonsoft.Json.JsonConvert.DeserializeObject<List<PartnerLab>>(json);
+                ViewBag.ExternalLabs = exLabs;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                ViewBag.ExternalLabs = new List<PartnerLab>();
+            }
+
+
             var token = Request.Headers["Cookie"];
             var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
             var lab = LAB.LabInfo(userId);
@@ -40,6 +61,30 @@ namespace LabReservation.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        private async Task<string> GetExternalLabs()
+        {
+            string baseUrl = "http://f93391a0fa5f.ngrok.io/api/ExternalAPI";
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage res = await client.GetAsync(baseUrl))
+                    {
+                        using (HttpContent content = res.Content)
+                        {
+                            var data = await content.ReadAsStringAsync();
+                            if (data == null) return "[]";
+                            return data;
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+                return "[]";
+            }
         }
     }
 }
