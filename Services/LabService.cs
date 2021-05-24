@@ -169,7 +169,12 @@ namespace LabReservation.Services
 
         public Return LabInfo(int userid)
         {
-            List<bool> lab = new List<bool> { false, false, false, false, false };
+            List<bool> lab = new List<bool>{};
+            var amount_of_lab = from x in db.Labinfo select x;
+            for (var i = 0; i < amount_of_lab.Count(); i++)
+            {
+                lab.Add(false);
+            }
             for (var i = 0; i < 5; i++)
             {
                 var temp = Read(i + 1, userid);
