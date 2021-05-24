@@ -4,8 +4,13 @@
     ViewData["Title"] = "No Permission";
 }
 
-<h1>No Permission</h1>
+<link rel="stylesheet" type="text/css" href="~/css/noperm.css">
 
-<p>
-    No Permission
-</p>
+<div class="noperm-page">
+    <img src='@Url.Content("~/Images/denied.svg")' alt="denied" class="denied-pic">
+    <h1>OOPS</h1>
+    <p>
+        The requested url was not found or You don't have permission to view this page.
+    </p>
+    <a asp-controller="Home" class="home-btn">Back to Home</a>
+</div>
