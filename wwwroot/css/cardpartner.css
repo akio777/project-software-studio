@@ -1,10 +1,9 @@
-.cardpartner {
+.card-partner {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 240px;
   height: 240px;
-  /* background-color: #828282; */
   background-color: var(--success);
   border-radius: 5px;
   overflow: hidden;
@@ -13,42 +12,71 @@
   transition: 200ms;
 }
 
-.cardpartner:hover {
+.card-partner:hover {
   box-shadow: rgba(0, 0, 0, 0.25) 5px 5px 10px 0px;
   color: var(--dark);
 }
 
-.partner-name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 190px;
-  align-self: center;
-}
-
-.partner-name > h4 {
-  margin-top: 5px;
-  font-weight: lighter;
-  color: white;
-}
-
-.partner-name > h3 {
-  margin-top: 20px;
-  font-weight: lighter;
-  color: white;
-}
-
-.check-lab {
+.card-partner-status {
+  width: 240px;
+  height: 80px;
+  background-color: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 240px;
-  height: 50px;
-  background-color: white;
-  box-sizing: border-box;
+  align-self: flex-end;
 }
 
-.fa-chevron-circle-right {
-  color: var(--blue-500);
-  font-size: 17px;
+.card-partner-status .partner-status {
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.card-partner-status .partner-equipment {
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.partner-status > p {
+  color: var(--success);
+  font-weight: normal;
+}
+
+.partner-equipment > p {
+  color: #4f4f4f;
+  font-weight: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+.card-partner h1 {
+  flex: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: white;
+  padding: 1rem;
+  max-width: 110px;
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 60px;
+}
+
+.card-partner-name {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 160px;
+}
+
+.card-partner-name-area {
+  color: white;
+  font-size: 250%;
+  font-weight: 500;
+  max-height: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
