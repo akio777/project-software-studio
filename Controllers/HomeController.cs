@@ -64,7 +64,7 @@ namespace LabReservation.Controllers
         }
         private async Task<string> GetExternalLabs()
         {
-            string baseUrl = "http://f93391a0fa5f.ngrok.io/api/ExternalAPI";
+            string baseUrl = "https://software-studio-ce57.herokuapp.com/api/ExternalAPI";
             try
             {
                 using (HttpClient client = new HttpClient())
