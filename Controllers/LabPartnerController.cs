@@ -34,7 +34,7 @@ namespace LabReservation.Controllers{
 					}
 					catch (Exception exception)
 					{
-							Console.WriteLine(exception);
+							// Console.WriteLine(exception);
 							return View("Index", "NoPermission");
 					}
 				}
@@ -59,7 +59,7 @@ namespace LabReservation.Controllers{
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                // Console.WriteLine(exception);
                 return "[]";
             }
         }

@@ -136,7 +136,7 @@ namespace LabReservation.Controllers
         // [HttpPost]
         public IActionResult ConfirmCancel(CancelMap[] cancelReservedModalInput)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalInput, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalInput, Formatting.Indented));
             List<CancelReserved> reserveIdList = new List<CancelReserved>();
             for (int i = 0; i < cancelReservedModalInput.Length; i++)
             {
