@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/cardpartner.css" />
 
-<div class="cardpartner">
+@* <div class="cardpartner">
     <a href="https://software-studio-ce57.herokuapp.com/SelectEquipment/index/@Model.toolName">
         <div class="partner-name">
             <h3>@Model.room</h3>
@@ -11,6 +11,31 @@
         <div class="check-lab">
             Check Available
             <i class="fas fa-chevron-circle-right"></i>
+        </div>
+    </a>
+</div> *@
+
+<div class="card-partner" tabindex="0">
+    <a href="https://software-studio-ce57.herokuapp.com/SelectEquipment/index/@Model.toolName">
+        <div class="card-partner-name" title="@Model.room">
+            <div class="card-partner-name-area">@Model.room</div>
+        </div>
+
+        <div class="card-partner-status">
+            <div class="partner-status">Status
+                <p>Avaiable</p>
+                @* @if (Model.notAvailable == false)
+                {
+                    <p>Available</p>
+                }
+                @if (Model.notAvailable == true)
+                {
+                    <p>Full</p>
+                } *@
+            </div>
+            <div class="partner-equipment">Equipment
+                <p>@Model.toolName</p>
+            </div>
         </div>
     </a>
 </div>
