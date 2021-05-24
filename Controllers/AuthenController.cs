@@ -83,11 +83,17 @@ namespace LabReservation.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel data)
         {
-            if (data == null)
+            // Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            if (data.Email == null || data.Password == null || data.ConfirmPassword == null)
+            {
+                ModelState.AddModelError(String.Empty, "กรุณากรอกข้อมูลให้ครบถ้วน");
+                return View(data);
+            }
+            else
             {
                 bool isRexMatch = Regex.IsMatch(data.Email, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
-                                                                        + "@"
-                                                                        + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+                                                            + "@"
+                                                            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
                 if (isRexMatch)
                 {
                     var temp = user_service.CheckRegister(data);
@@ -103,14 +109,10 @@ namespace LabReservation.Controllers
                 }
                 else
                 {
+                    
                     ModelState.AddModelError(String.Empty, "รูปแบบ Email ไม่ถูกต้อง");
                     return View(data);
                 }
-            }
-            else
-            {
-                ModelState.AddModelError(String.Empty, "กรุณากรอกข้อมูลให้ครบถ้วน");
-                return View(data);
             }
         }
 
