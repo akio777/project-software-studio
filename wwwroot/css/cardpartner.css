@@ -45,6 +45,10 @@
 .partner-equipment > p {
   color: #4f4f4f;
   font-weight: normal;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 120px;
 }
 
 .card-partner h1 {
