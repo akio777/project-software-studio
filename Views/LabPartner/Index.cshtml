@@ -1,3 +1,61 @@
-<div>
-    <h1>Lab Parter</h1>
+
+@model LabReservation.Models.PartnerLab;
+@{
+    ViewData["Title"] = @Model.room;
+    var currentDateTime = DateTime.Now;
+} 
+<link rel="stylesheet" type="text/css" href="~/css/reserveLayout.css">
+<link rel="stylesheet" type="text/css" href="~/css/reservationTable.css">
+
+<div class="layout">
+    <div class="page-nav">
+        <a asp-controller="Home" asp-action="Index">
+            <button><i class="fa fa-chevron-left"></i>&ensp;Back</button>
+        </a>
+    </div>
+    <div class="layout-main">
+        <div class="header">
+            <h1 style="color: var(--success)">@Model.room</h1>
+            <div class="info-wrapper">
+                <div class="info-box" style="border-color: var(--success);">
+                    <p class="head" style="background-color: var(--success);">Equipment</p>
+                    <p class="info" style="color: black;">@Model.toolName</p>
+                </div>
+            </div>
+        </div>
+        <p>Here is today's available slot from our partner laboratory 
+					<a href="https://software-studio-ce57.herokuapp.com">
+						Reserve Now <i class="fas fa-external-link-alt"></i></a>
+				</p>
+				<br />
+				<table class="reservation-table-container">
+					<thead class="reservation-table-header" style="background-color: var(--success)">
+							<tr>
+									<th></th>
+									<th>09:30<br>-<br>10:30</th>
+									<th>10:30<br>-<br>11:30</th>
+									<th>11:30<br>-<br>12:30</th>
+									<th>12:30<br>-<br>13:30</th>
+									<th>13:30<br>-<br>14:30</th>
+									<th>14:30<br>-<br>15:30</th>
+									<th>15:30<br>-<br>16:30</th>
+							</tr>
+					</thead>
+					<tbody class="reservation-table-content">
+							<tr>
+								<td>
+										<div>@currentDateTime.AddDays(1).ToString("d MMM")</div>
+										<div>(Today)</div>
+								</td>
+								<td><div>@Model.slot1</div></td>
+								<td><div>@Model.slot2</div></td>
+								<td><div>@Model.slot3</div></td>
+								<td><div>-</div></td>
+								<td><div>@Model.slot4</div></td>
+								<td><div>@Model.slot5</div></td>
+								<td><div>@Model.slot6</div></td>
+							</tr>
+					</tbody>
+				</table>
+    </div>
 </div>

@@ -16,8 +16,9 @@ namespace LabReservation.ViewComponents
         {
             _context = context;
         }
-        public async Task<IViewComponentResult> InvokeAsync(PartnerLab? lab)
+        public async Task<IViewComponentResult> InvokeAsync(PartnerLab? lab, int labIndex)
         {
+						lab.id = labIndex + 1;
             return View(lab);
         }
     }
