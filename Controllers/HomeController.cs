@@ -39,7 +39,7 @@ namespace LabReservation.Controllers
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                // Console.WriteLine(exception);
                 ViewBag.ExternalLabs = new List<PartnerLab>();
             }
 
@@ -82,7 +82,7 @@ namespace LabReservation.Controllers
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                // Console.WriteLine(exception);
                 return "[]";
             }
         }
