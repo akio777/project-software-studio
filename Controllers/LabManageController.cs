@@ -94,6 +94,7 @@ namespace LabReservation.Controllers
 
         public IActionResult SubmitCancel(bool[] checkedList, int id)
         {
+						var refreshId = id / 100;
             // init Reserved for use with CancelList()
             var reservedObject = new Reserved();
             reservedObject.lab_id = id / 100;
@@ -121,7 +122,7 @@ namespace LabReservation.Controllers
             LAB.Cancel(cancelReserveds.ToArray());
             // Console.WriteLine(JsonConvert.SerializeObject(cancelReserveds, Formatting.Indented));
             // Console.WriteLine(JsonConvert.SerializeObject(checkedList, Formatting.Indented));
-            return RedirectToAction("Index", "LabManage");
+            return RedirectToAction("EditCancel", "LabManage", new { id = refreshId });
         }
         public IActionResult EditLabSubmit(LabManageInfo labManageInfo, int id, string name, int amount, string equip = null)
         {

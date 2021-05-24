@@ -24,7 +24,8 @@
           @for (int i = 0; i < @Model.cancelUserList.data.Length; i++)
           {
             <div>
-              <input asp-for="checkedList[i]" type="checkbox" id="cancelCheckbox"> @Model.cancelUserList.data[i].email<br>
+              <input asp-for="checkedList[i]" type="checkbox" id=@String.Format("cancelCheckbox{0}",i) class="cancelCheckbox" style="cursor: pointer;"> 
+							<label for=@String.Format("cancelCheckbox{0}",i) style="cursor: pointer;">@Model.cancelUserList.data[i].email</label><br>
             </div>
           }
         </div>
@@ -71,7 +72,7 @@
 
   select_all.onclick = function () {
     // get function from checkbox viewcomponent
-    document.querySelectorAll("#cancelCheckbox").forEach(ele => ele.checked = true)
+    document.querySelectorAll(".cancelCheckbox").forEach(ele => ele.checked = true)
   }
 
   window.onclick = function (event) {
