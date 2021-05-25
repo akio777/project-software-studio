@@ -68,7 +68,7 @@ namespace LabReservation.Models
                     );
                 }
 
-                Console.WriteLine("SEED DATA");
+                // Console.WriteLine("SEED DATA");
                 // for (var i = 0; i < 10; i++)
                 // {
                 //     var random = r.Next(8, 17);

@@ -47,21 +47,21 @@
   border-radius: 5px;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .info-box .head {
   background-color: var(--blue-500);
+  width: 100%;
   color: white;
   padding: 5px;
+  text-align: center;
 }
 
 .info-box .info {
   color: var(--blue-500);
   padding: 5px;
   font-weight: 500;
-}
-
-.detail {
 }
 
 .back-content:hover {

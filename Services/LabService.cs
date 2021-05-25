@@ -107,10 +107,11 @@ namespace LabReservation.Services
         {
             var dateNow = DateTime.Now;
             List<dynamic> lab = new List<dynamic>();
+            var amount_of_lab = from x in db.Labinfo select x;
 
-            for (var i = 1; i <= 5; i++)
+            foreach(var i in amount_of_lab)
             {
-                var labid = i;
+                var labid = i.id;
                 var maxall = db.Equipment.Where(data => data.lab_id == labid).First().maximum;
                 var lab_info = db.Labinfo.Where(data => data.id == labid).First();
                 var temp = db.Labinfo
@@ -169,21 +170,26 @@ namespace LabReservation.Services
 
         public Return LabInfo(int userid)
         {
-            List<bool> lab = new List<bool> { false, false, false, false, false };
-            for (var i = 0; i < 5; i++)
+            List<bool> lab = new List<bool>{};
+            var amount_of_lab = from x in db.Labinfo select x;
+            for (var i = 0; i < amount_of_lab.Count(); i++)
             {
-                var temp = Read(i + 1, userid);
+                lab.Add(false);
+            }
+            foreach(var i in amount_of_lab)
+            {
+                var temp = Read(i.id, userid);
                 foreach (Reserve_page data in temp.Data)
                 {
                     var check = data.timeslot.Contains(0);
                     if (check)
                     {
-                        lab[i] = true;
+                        lab[amount_of_lab.ToList().IndexOf(i)] = true;
                         break;
                     }
                 }
 
-                if (lab[i]) break;
+                if (lab[amount_of_lab.ToList().IndexOf(i)]) break;
             }
 
             var lab_info = db.Labinfo

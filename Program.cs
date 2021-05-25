@@ -31,7 +31,6 @@ namespace LabReservation
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-            
             host.Run();
         }
 
@@ -40,6 +39,7 @@ namespace LabReservation
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://localhost:25565");
                 });
     }
 }
