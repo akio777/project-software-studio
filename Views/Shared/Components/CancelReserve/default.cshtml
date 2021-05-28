@@ -18,13 +18,17 @@
       </div>
       <div class="modal-body">
         <p>Select user to cancel reservation in</p>
-        <p class="detail-reserve">@Model.labinfo.name (@Model.cancelUserList.day.ToShortDateString() @Model.cancelUserList.start_time:00 - @Model.cancelUserList.end_time:00)</p>
+        <p class="detail-reserve">@Model.labManageInfo.name (@Model.cancelUserList.day.ToShortDateString()
+          @Model.cancelUserList.start_time:00 - @Model.cancelUserList.end_time:00)</p>
         <div class="select-cancel">
           @for (int i = 0; i < @Model.cancelUserList.data.Length; i++)
           {
-            <div>
-              <input asp-for="checkedList[i]" type="checkbox"> @Model.cancelUserList.data[i].email<br>
-            </div>
+                <div>
+                  <input asp-for="checkedList[i]" type="checkbox" id=@String.Format("cancelCheckbox{0}",i)
+              class="cancelCheckbox" style="cursor: pointer;">
+                  <label for=@String.Format("cancelCheckbox{0}",i)
+              style="cursor: pointer;">@Model.cancelUserList.data[i].email</label><br>
+                </div>
           }
         </div>
       </div>
@@ -43,40 +47,55 @@
 
 
 <script>
-  var modal = document.getElementById("modal-main");
+  var cancelModal = document.querySelector("#modal-main");
 
   var span = document.getElementsByClassName("close")[0];
 
-  var cancel = document.getElementById("btn-cancel");
+  var cancel = document.querySelector("#btn-cancel");
 
   var confirm = document.getElementById("btn-confirm");
 
   var select_all = document.getElementById("btn-selectall");
 
+  let selected = false;
+
   span.onclick = function () {
-    modal.style.display = "none";
+    cancelModal.style.display = "none";
   }
 
   cancel.onclick = function () {
-    modal.style.display = "none";
+    cancelModal.style.display = "none";
   }
 
   confirm.onclick = function () {
     // get function from checkbox viewcomponent
     confirm_checkbox();
-    // submit and close modal
-    modal.style.display = "none";
+    // submit and close cancelModal
+    cancelModal.style.display = "none";
   };
 
   select_all.onclick = function () {
     // get function from checkbox viewcomponent
-    check_all();
+    toggleSelect()
+  }
+
+  function toggleSelect() {
+    if (selected) {
+      document.querySelectorAll(".cancelCheckbox").forEach(ele => ele.checked = false)
+      document.getElementById("btn-selectall").innerHTML = "Select All"
+      selected = false
+    }
+    else {
+      document.querySelectorAll(".cancelCheckbox").forEach(ele => ele.checked = true)
+      document.getElementById("btn-selectall").innerHTML = "Deselect All"
+      selected = true
+      }
   }
 
   window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+    if (event.target == cancelModal) {
+      cancelModal.style.display = "none";
     }
   }
-  
+
 </script>

@@ -5,6 +5,7 @@ using LabReservation.Services;
 using LabReservation.Models;
 using Microsoft.AspNetCore.Http;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LabReservation.ViewComponents
 {
@@ -20,13 +21,20 @@ namespace LabReservation.ViewComponents
             LAB = labservice;
             _httpContextAccessor = httpContextAccessor;
         }
-
+        
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
-            var username = LAB.GetEmailUser(userId);
-            var navbarProps = new NavBarProps(username.Data.email);
-            return View(navbarProps);
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.Clone().FindFirst("Id").Value);
+                var username = LAB.GetEmailUser(userId);
+                var navbarProps = new NavBarProps(username.Data.email);
+                return View(navbarProps);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

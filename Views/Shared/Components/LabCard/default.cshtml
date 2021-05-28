@@ -9,18 +9,18 @@
         </div>
 
         <div class="card-status">
+            <div class="equipment">Equipment
+                <p>@Model.equip</p>
+            </div>
             <div class="status">Status
                 @if (Model.notAvailable == false)
                 {
-                    <p>Available</p>
+                        <p>Available</p>
                 }
                 @if (Model.notAvailable == true)
                 {
-                    <p>Full</p>
+                        <p style="color: var(--danger);">Full</p>
                 }
-            </div>
-            <div class="equipment">Equipment
-                <p>@Model.equip</p>
             </div>
         </div>
     </a>

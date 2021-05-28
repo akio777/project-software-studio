@@ -1,5 +1,4 @@
 @model LabReservation.Models.RegisterModel
-
 @{
     ViewData["Title"] = "Sign Up";
 }
@@ -28,7 +27,7 @@
                 <span class="material-icons" style="margin: 0;">phone</span>
                 <span style="margin-left: 0.5rem;">Contact Us</span>
             </div>
-            <span class="sm-desc">08xxxxxxxx</span>
+            <span class="sm-desc">021-234-567</span>
             <span class="sm-desc">admin@labreserv.com</span>
         </div>
     </div>
@@ -63,5 +62,6 @@
                 <input type="submit" value="Register" class="btn register-btn" />
             </div>
         </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     </div>
 </div>

@@ -1,0 +1,17 @@
+@model LabReservation.Models.PartnerLab;
+
+<link rel="stylesheet" type="text/css" href="css/cardpartner.css" />
+
+<div class="card-partner" tabindex="0">
+    <a asp-controller="LabPartner" asp-action="Lab" asp-route-id="@Model.id" >
+        <div class="card-partner-name" title="@Model.room">
+            <div class="card-partner-name-area">@Model.room</div>
+        </div>
+
+        <div class="card-partner-status">
+					<div class="partner-equipment">Equipment
+							<p>@Model.toolName</p>
+					</div>
+        </div>
+    </a>
+</div>

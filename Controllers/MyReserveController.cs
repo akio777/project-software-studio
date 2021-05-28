@@ -9,11 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using LabReservation.Data;
 using LabReservation.Models;
 using LabReservation.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace LabReservation.Controllers
 {
+    [Authorize]
     public class MyReserveController : Controller
     {
         private readonly LabReservationContext _context;
@@ -26,8 +28,6 @@ namespace LabReservation.Controllers
             LAB = labservice;
             _httpContextAccessor = httpContextAccessor;
         }
-
-
 
         // GET: 
         public async Task<IActionResult> Index()
@@ -136,7 +136,7 @@ namespace LabReservation.Controllers
         // [HttpPost]
         public IActionResult ConfirmCancel(CancelMap[] cancelReservedModalInput)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalInput, Formatting.Indented));
+            // Console.WriteLine(JsonConvert.SerializeObject(cancelReservedModalInput, Formatting.Indented));
             List<CancelReserved> reserveIdList = new List<CancelReserved>();
             for (int i = 0; i < cancelReservedModalInput.Length; i++)
             {

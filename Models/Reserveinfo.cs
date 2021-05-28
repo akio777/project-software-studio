@@ -24,7 +24,11 @@ namespace LabReservation.Models
             reservedInput = new ReservedInput();
             reservePageList = _reservePageList;
             labinfo = _labinfo;
+            status = false;
+            msg = "";
         }
+        public bool status { get; set; }
+        public string msg { get; set; }
     }
     public class Reserve_page
     {
@@ -97,24 +101,21 @@ namespace LabReservation.Models
     public class LabManageInfoProps
     {
         public int id { get; set; }
-        public Labinfo labinfo { get; set; }
         public Equipment equipment { get; set; }
         public Reserve_page[] reservePageList { get; set; }
         public LabShowForCancel cancelUserList { get; set; }
         public bool[] checkedList { get; set; }
-
-
+        public LabManageInfo labManageInfo { get; set; }
         public bool modalOpen { get; set; }
         public ReservedInput reservedInput { get; set; }
 
-        public LabManageInfoProps(Labinfo _labinfo, Equipment _equipment, Reserve_page[] _reservePageList, bool open = false)
+        public LabManageInfoProps(LabManageInfo _labManageInfo, Equipment _equipment, Reserve_page[] _reservePageList, bool open = false)
         {
             reservedInput = new ReservedInput();
             modalOpen = open;
             equipment = _equipment;
-            labinfo = _labinfo;
+            labManageInfo = _labManageInfo;
             reservePageList = _reservePageList;
-
         }
     }
 

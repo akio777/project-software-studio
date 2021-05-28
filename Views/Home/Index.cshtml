@@ -11,10 +11,24 @@
 <link href="~/css/home.css" rel="stylesheet" />
 }
 
-
-<div class="container">
+<div class="ourlab-head">
+    <h1>Laboratories</h1>
+    <div class="line"></div>
+</div>
+<div class="container-lab">
     @foreach (var item in @Model)
     {
         @await Component.InvokeAsync("LabCard",new {lab = @item})
+    }
+</div>
+<div class="partner-head">
+    <h1>Partner Laboratories</h1>
+    <div class="line"></div>
+</div>
+
+<div class="container-partner">
+		@for(var i = 0; i < @ViewBag.ExternalLabs.Count; i ++)
+    {
+        @await Component.InvokeAsync("LabCardPartner",new {lab = @ViewBag.ExternalLabs[i], labIndex = i})
     }
 </div>

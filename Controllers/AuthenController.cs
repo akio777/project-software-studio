@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using LabReservation.Models;
 using LabReservation.Services;
 using Newtonsoft.Json;
@@ -43,7 +44,7 @@ namespace LabReservation.Controllers
                 {
                     return RedirectToAction("Index", "LabManage");
                 }
-                    return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
@@ -82,17 +83,37 @@ namespace LabReservation.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel data)
         {
-            var temp = user_service.CheckRegister(data);
-            if (temp.Error)
+            // Console.WriteLine(JsonConvert.SerializeObject(data, Formatting.Indented));
+            if (data.Email == null || data.Password == null || data.ConfirmPassword == null)
             {
-                ModelState.AddModelError(String.Empty, temp.Data);
+                ModelState.AddModelError(String.Empty, "กรุณากรอกข้อมูลให้ครบถ้วน");
                 return View(data);
             }
             else
             {
-                return RedirectToAction("Login", "Authen");
+                bool isRexMatch = Regex.IsMatch(data.Email, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+                                                            + "@"
+                                                            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+                if (isRexMatch)
+                {
+                    var temp = user_service.CheckRegister(data);
+                    if (temp.Error)
+                    {
+                        ModelState.AddModelError(String.Empty, temp.Data);
+                        return View(data);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Authen");
+                    }
+                }
+                else
+                {
+                    
+                    ModelState.AddModelError(String.Empty, "รูปแบบ Email ไม่ถูกต้อง");
+                    return View(data);
+                }
             }
-
         }
 
         [Route("[action]")]

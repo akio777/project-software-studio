@@ -35,10 +35,16 @@ namespace LabReservation.Controllers
 
         public async Task<IActionResult> EditCancel(int id)
         {
-            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+            if (id == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            // var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == id);
+
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == id);
             var reservePageList = LAB.LabManage(id);
-            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data);
+            var labManageInfo = LAB.LabManageInfo().Data[id - 1];
+            var labManageInfoProps = new LabManageInfoProps(labManageInfo, equipment, reservePageList.Data);
 
             return View(labManageInfoProps);
         }
@@ -50,7 +56,8 @@ namespace LabReservation.Controllers
             int time = cancelReservedInput[1] - '0';
             int day = cancelReservedInput[2] - '0';
 
-            var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
+            // var labinfo = await _context.Labinfo.FirstOrDefaultAsync(m => m.id == lab_id);
+            var labManageInfo = LAB.LabManageInfo().Data[lab_id - 1];
             var equipment = await _context.Equipment.FirstOrDefaultAsync(m => m.lab_id == lab_id);
             var reservePageList = LAB.LabManage(lab_id);
 
@@ -65,7 +72,7 @@ namespace LabReservation.Controllers
             bool[] checkList = new bool[cancelUserList.Data.data.Length];
             //Console.WriteLine(JsonConvert.SerializeObject(cancelUserList.Data, Formatting.Indented));
 
-            var labManageInfoProps = new LabManageInfoProps(labinfo, equipment, reservePageList.Data, true);
+            var labManageInfoProps = new LabManageInfoProps(labManageInfo, equipment, reservePageList.Data, true);
             labManageInfoProps.cancelUserList = cancelUserList.Data;
             labManageInfoProps.checkedList = checkList;
 
@@ -73,10 +80,10 @@ namespace LabReservation.Controllers
 
             // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.cancelUserList, Formatting.Indented));
             // Console.WriteLine(JsonConvert.SerializeObject(labManageInfoProps.labManageOutputProps.checkedList, Formatting.Indented));
-           
+
             return View("Views/LabManage/EditCancel.cshtml", labManageInfoProps);
         }
-        
+
         [AllowAnonymous]
         public async Task<IActionResult> ExternalAPI()
         {
@@ -84,16 +91,17 @@ namespace LabReservation.Controllers
             // Console.WriteLine(JsonConvert.SerializeObject(LAB.LabManageInfo(), Formatting.Indented));
             return Ok(temp);
         }
-        
+
         public IActionResult SubmitCancel(bool[] checkedList, int id)
         {
+						var refreshId = id / 100;
             // init Reserved for use with CancelList()
             var reservedObject = new Reserved();
-            reservedObject.lab_id = id/100;
+            reservedObject.lab_id = id / 100;
             reservedObject.time = (id % 100) / 10;
             reservedObject.day = (id % 100) % 10;
             // Console.WriteLine(JsonConvert.SerializeObject(reservedObject, Formatting.Indented));
-            
+
             var cancelUserList = LAB.CancelList(reservedObject);
             var userList = cancelUserList.Data.data;
             // Console.WriteLine(JsonConvert.SerializeObject(userList, Formatting.Indented));
@@ -101,8 +109,10 @@ namespace LabReservation.Controllers
 
             List<CancelReserved> cancelReserveds = new List<CancelReserved>();
             int i = 0;
-            foreach (var item in userList) {
-                if (checkedList[i]) {
+            foreach (var item in userList)
+            {
+                if (checkedList[i])
+                {
                     var tmp = new CancelReserved(item.reserved_id);
                     cancelReserveds.Add(tmp);
                 }
@@ -112,7 +122,17 @@ namespace LabReservation.Controllers
             LAB.Cancel(cancelReserveds.ToArray());
             // Console.WriteLine(JsonConvert.SerializeObject(cancelReserveds, Formatting.Indented));
             // Console.WriteLine(JsonConvert.SerializeObject(checkedList, Formatting.Indented));
-            return RedirectToAction("Index", "LabManage");
+            return RedirectToAction("EditCancel", "LabManage", new { id = refreshId });
+        }
+        public IActionResult EditLabSubmit(LabManageInfo labManageInfo, int id, string name, int amount, string equip = null)
+        {
+            LabManageInfo edited = new LabManageInfo();
+            edited.amount = amount;
+            edited.name = name;
+            edited.equip = equip;
+            edited.id = id;
+            LAB.EditLab(edited);
+            return RedirectToAction("EditCancel", "LabManage", new { id = id });
         }
     }
 }

@@ -1,0 +1,36 @@
+@model LabReservation.Models.LabManageInfo
+
+<link rel="stylesheet" type="text/css" href="~/css/editLab.css" />
+
+<div id="modal-main" class="modal">
+    <form asp-action="EditLabSubmit" asp-route-id="@Model.id" method="POST">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Lab</h2>
+                <button type="button" class="close" onclick="closeModal();">
+                    <span>×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>Lab Name</label>
+                <input type="text" asp-for="name">
+                <label>Amount</label>
+                <input type="number" asp-for="amount" min="1">
+            </div>
+            <div class="modal-footer3">
+                <div>
+                    <button type="button" id="btn-cancel" class="btn btn-cancel" onclick="closeModal();">Cancel</button>
+                    <button type="submit" id="btn-confirm" class="btn btn-confirm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var cancelBtn = document.getElementById("btn-cancel")
+    var modal = document.querySelector("#editModal")
+    function closeModal() {
+        modal.style.display = "none"
+    }
+</script>
